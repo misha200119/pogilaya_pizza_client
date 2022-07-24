@@ -1,4 +1,16 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
+import styled from 'styled-components';
+
+const LogoContainer = memo(styled.a`
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  font-size: 22px;
+  font-weight: 700;
+  color: ${(props) => props.theme.primary};
+  text-decoration: none;
+`);
 
 interface Props {
   size: string;
@@ -6,21 +18,25 @@ interface Props {
   linkHref: string;
 }
 
-const Logo: FC<Props> = ({
+const Logo: FC<Props> = memo(({
   size,
   imgUrl,
   linkHref,
+  children,
 }) => {
   return (
-    <a href={linkHref}>
+    <LogoContainer
+      href={linkHref}
+    >
       <img
         src={imgUrl}
         alt="Logo"
         width={size}
         height={size}
       />
-    </a>
+      {children}
+    </LogoContainer>
   );
-};
+});
 
 export default Logo;

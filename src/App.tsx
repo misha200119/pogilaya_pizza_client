@@ -3,18 +3,16 @@ import { ThemeProvider } from 'styled-components';
 import { Routes } from 'react-router-dom';
 import { Themes, themes } from './ui/themes';
 import Header from './ui/components/organisms/Header';
-import mappableRoutes, { mapRoutes, utilRoutes } from './utils/routes';
+import { mapRoutes, mappableUtilRoutes, mappableRoutes } from './utils/routes';
 
 export const App: React.FC<{}> = memo(() => {
   return (
     <ThemeProvider theme={themes[Themes.DARK]}>
-      <>
-        <Header />
-        <Routes>
-          {mapRoutes(mappableRoutes)}
-          {mapRoutes(utilRoutes)}
-        </Routes>
-      </>
+      <Header />
+      <Routes>
+        {mapRoutes(mappableRoutes)}
+        {mapRoutes(mappableUtilRoutes)}
+      </Routes>
     </ThemeProvider>
   );
 });

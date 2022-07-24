@@ -16,7 +16,7 @@ interface MappableRoute {
   describedComponent: JSX.Element;
 }
 
-const mappableRoutes: Array<MappableRoute> = [{
+export const mappableRoutes: Array<MappableRoute> = [{
   link: Routes.Home,
   linkText: 'HOME',
   describedComponent: <div>home route</div>,
@@ -33,7 +33,7 @@ const mappableRoutes: Array<MappableRoute> = [{
 },
 ];
 
-export const utilRoutes = [
+export const mappableUtilRoutes = [
   {
     link: Routes.Index,
     linkText: 'REDIRECT TO HOME',
@@ -55,5 +55,3 @@ export const mapRoutes = (routes: Array<MappableRoute>): Array<ReactElement> => 
     <Route path={route.link} element={route.describedComponent} key={route.link} />
   ));
 };
-
-export default mappableRoutes;
