@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 import Button from '../../athoms/Button';
 
 const CartContainer = memo(styled.div`
@@ -32,6 +33,13 @@ const CheckoutButton = memo(styled(Button)`
   background-color: red;
 `);
 
+const CartButtonContentContainer = memo(styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`);
+
 const Cart = memo(() => {
   return (
     <CartContainer>
@@ -40,7 +48,10 @@ const Cart = memo(() => {
         width="50px"
         height="50px"
       >
-        btn
+        <CartButtonContentContainer>
+          00
+          <AiOutlineShoppingCart />
+        </CartButtonContentContainer>
       </CartButton>
 
       <CartInfoPrice>1488.00 UAH</CartInfoPrice>

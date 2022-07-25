@@ -16,6 +16,8 @@ const Button = memo(styled.div<Props>`
   justify-content: center;
 
   border-radius: ${({ borderRadius }) => borderRadius};
+
+  cursor: pointer;
 `);
 
 export default Button;

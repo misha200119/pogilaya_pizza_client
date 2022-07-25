@@ -16,6 +16,7 @@ const logoImage = '/images/Logo.webp';
 const Container = memo(styled(ResponsiveContainer)`
   background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.primary};
+  margin-bottom: 20px;
 `);
 
 const Header: FC<{}> = memo(() => {
