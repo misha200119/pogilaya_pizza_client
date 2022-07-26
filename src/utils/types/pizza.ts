@@ -1,11 +1,11 @@
 /* eslint-disable no-shadow */
-enum Size {
+export enum Size {
   SMALL = 'small',
   MEDIUM = 'medium',
   BIG = 'big',
 }
 
-enum BoardSize {
+export enum BoardSize {
   THIN = 'thin',
   STANDART = 'standart',
   PHILADELPHY = 'philadelphy',

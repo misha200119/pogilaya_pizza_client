@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import { Navigate, Route } from 'react-router-dom';
+import { Catalog as CatalogPage } from '../../ui/pages/Catalog';
 
 // eslint-disable-next-line no-shadow
 export enum Routes {
@@ -24,7 +25,7 @@ export const mappableRoutes: Array<MappableRoute> = [{
 {
   link: Routes.Catalog,
   linkText: 'CATALOG',
-  describedComponent: <div>catalog route</div>,
+  describedComponent: <CatalogPage />,
 },
 {
   link: Routes.AboutUs,

@@ -49,8 +49,11 @@ const GlobalStyles = createGlobalStyle`
     border-spacing: 0;
   }
   html {
-    box-sizing: border-box;
     font-family: 'Roboto', sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
   }
 `;
 

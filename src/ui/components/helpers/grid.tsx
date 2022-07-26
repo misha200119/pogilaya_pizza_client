@@ -7,6 +7,9 @@ interface GridProps {
   mobileColumnsCount: string;
   tabletColumnsCount: string;
   desktopColumnsCount: string;
+  mobileColumnsSize: string;
+  tabletColumnsSize: string;
+  desktopColumnsSize: string;
   mobileGridGap: string;
   tabletGridGap: string;
   desktopGridGap: string;
@@ -16,21 +19,21 @@ export const Grid = memo(styled.div<GridProps>`
   display: grid;
   grid-template-rows: auto;
 
-  ${({ mobileColumnsCount, mobileGridGap }) => `
-    grid-template-columns: ${mobileColumnsCount === 'auto' ? mobileColumnsCount : `repeat(${mobileColumnsCount}, 1fr)`};
+  ${({ mobileColumnsCount, mobileGridGap, mobileColumnsSize }) => `
+    grid-template-columns: ${mobileColumnsCount === 'auto' ? mobileColumnsCount : `repeat(${mobileColumnsCount}, ${mobileColumnsSize || '1fr'})`};
     grid-gap: ${mobileGridGap};
   `}
   
-  ${({ tabletColumnsCount, tabletGridGap }) => `
+  ${({ tabletColumnsCount, tabletGridGap, tabletColumnsSize }) => `
     ${tabletMedia(`
-    grid-template-columns: ${tabletColumnsCount === 'auto' ? tabletColumnsCount : `repeat(${tabletColumnsCount}, 1fr)`};
+    grid-template-columns: ${tabletColumnsCount === 'auto' ? tabletColumnsCount : `repeat(${tabletColumnsCount}, ${tabletColumnsSize || '1fr'})`};
       grid-gap: ${tabletGridGap};
     `)}
   `}
 
-  ${({ desktopColumnsCount, desktopGridGap }) => `
+  ${({ desktopColumnsCount, desktopGridGap, desktopColumnsSize }) => `
     ${desktopMedia(`
-    grid-template-columns: ${desktopColumnsCount === 'auto' ? desktopColumnsCount : `repeat(${desktopColumnsCount}, 1fr)`};
+    grid-template-columns: ${desktopColumnsCount === 'auto' ? desktopColumnsCount : `repeat(${desktopColumnsCount}, ${desktopColumnsSize || '1fr'})`};
       grid-gap: ${desktopGridGap};
     `)}
   `}
@@ -50,13 +53,13 @@ interface GridItemProps {
 export const GridItem = memo(styled(Visible)<GridItemProps>`
   width: 100%;
   height: 100%;
-  grid-column: ${({ mobile }) => `${mobile.start} / ${mobile.end + 1};`}
+  ${({ mobile }) => mobile && `grid-column: ${mobile.start} / ${mobile.end + 1};`}
 
-  ${({ tablet }) => `${tabletMedia(`
+  ${({ tablet }) => tablet && `${tabletMedia(`
     grid-column: ${tablet.start} / ${tablet.end + 1};
   `)}`}
 
-  ${({ desktop }) => `${desktopMedia(`
+  ${({ desktop }) => desktop && `${desktopMedia(`
     grid-column: ${desktop.start} / ${desktop.end + 1};
   `)}`}
 `);
