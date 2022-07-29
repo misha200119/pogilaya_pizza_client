@@ -2,13 +2,18 @@ import React, { FC, memo } from 'react';
 import styled from 'styled-components';
 
 const ImageWrapper = memo(styled.div`
-  max-height: 176px
+  max-height: 300px;
+  
+  & img {
+    object-fit: cover;
+    border-radius: 15px;
+  }
 `);
 
 interface Props {
   image: string;
 }
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 export const Image: FC<Props> = memo(({
   image,
 }) => {
@@ -17,7 +22,8 @@ export const Image: FC<Props> = memo(({
       <img
         src={image}
         height="100%"
-        alt="Alt anme"
+        width="100%"
+        alt="Alt name"
       />
     </ImageWrapper>
   );

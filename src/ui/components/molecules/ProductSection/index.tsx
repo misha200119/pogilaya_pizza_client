@@ -10,6 +10,8 @@ const StyledTitle = memo(styled.h1`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  margin-bottom: 40px;
 `);
 
 interface Props {
@@ -39,6 +41,9 @@ export const ProductSection: FC<Props> = memo(({
           <GridItem key={v4()}>
             <ProductItem
               image={product.image}
+              name={product.name}
+              toppings={product.toppings}
+              boardSizes={product.boardSizes}
             />
           </GridItem>
         ))}

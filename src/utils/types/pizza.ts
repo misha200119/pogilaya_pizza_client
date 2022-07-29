@@ -15,9 +15,10 @@ export enum BoardSize {
 interface Pizza {
   image: string;
   sizes: Array<Size>;
-  boardSize: BoardSize;
+  boardSizes: Array<BoardSize>;
   cost: number;
   toppings: string;
+  name: string;
 }
 
 export default Pizza;
