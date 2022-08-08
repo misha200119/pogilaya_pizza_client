@@ -1,6 +1,6 @@
 import React, { memo, FC, useState } from 'react';
 import styled from 'styled-components';
-import { BoardSize } from '../../../../utils/types/pizza';
+import { BoardSize, Size } from '../../../../utils/types/pizza';
 import BoardSizes from '../BoardSizes';
 import { Image } from '../../athoms/Image';
 
@@ -28,6 +28,7 @@ const PizzaName = memo(styled.h2`
 `);
 
 const PizzaToppings = memo(styled.span`
+  display: block;
   margin-bottom: 15px;
 `);
 
@@ -36,6 +37,7 @@ interface Props {
   name: string;
   toppings: string;
   boardSizes: Array<BoardSize>;
+  sizes: Array<Size>;
 }
 
 export const ProductItem: FC<Props> = memo(({
@@ -45,6 +47,7 @@ export const ProductItem: FC<Props> = memo(({
   boardSizes,
 }) => {
   const [currentBoardSize, setCurrentBoardSize] = useState<BoardSize>(boardSizes[0]);
+  const [currentSize, setCurrentSize] = useState<Size>(sizes[0]);
 
   return (
     <ProductItemContainer>
