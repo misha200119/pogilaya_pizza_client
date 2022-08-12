@@ -1,6 +1,6 @@
 import React, { memo, FC, Dispatch } from 'react';
 import styled from 'styled-components';
-import { BoardSize } from '../../../../utils/types/pizza';
+import { PizzaSize } from '../../../../utils/types/pizza';
 
 const Container = memo(styled.div`
   display: flex;
@@ -12,17 +12,17 @@ const Container = memo(styled.div`
 // `);
 
 interface Props {
-  boardSizes: Array<BoardSize>;
-  currentBoardSize: BoardSize;
-  setCurrentBoardSize: Dispatch<React.SetStateAction<BoardSize>>;
+  boardSizes: Array<PizzaSize>;
+  currentBoardSize: PizzaSize;
+  setCurrentBoardSize: Dispatch<React.SetStateAction<PizzaSize>>;
 }
 
-const BoardSizes: FC<Props> = memo(() => {
+const PizzaSizes: FC<Props> = memo(() => {
   return (
     <Container>
-      BoardSizes
+      from container
     </Container>
   );
 });
 
-export default BoardSizes;
+export default PizzaSizes;

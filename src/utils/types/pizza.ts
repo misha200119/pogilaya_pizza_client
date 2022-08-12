@@ -5,7 +5,7 @@ export enum Size {
   BIG = 'big',
 }
 
-export enum BoardSize {
+export enum PizzaSize {
   THIN = 'thin',
   STANDART = 'standart',
   PHILADELPHY = 'philadelphy',
@@ -15,7 +15,7 @@ export enum BoardSize {
 interface Pizza {
   image: string;
   sizes: Array<Size>;
-  boardSizes: Array<BoardSize>;
+  pizzaSizes: Array<PizzaSize>;
   cost: number;
   toppings: string;
   name: string;

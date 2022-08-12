@@ -43,7 +43,8 @@ export const ProductSection: FC<Props> = memo(({
               image={product.image}
               name={product.name}
               toppings={product.toppings}
-              boardSizes={product.boardSizes}
+              boardSizes={product.pizzaSizes}
+              sizes={product.sizes}
             />
           </GridItem>
         ))}

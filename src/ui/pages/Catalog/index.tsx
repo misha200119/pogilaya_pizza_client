@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
 import { v4 } from 'uuid';
-import { BoardSize, Size } from '../../../utils/types/pizza';
+import { PizzaSize, Size } from '../../../utils/types/pizza';
 import { Section } from '../../../utils/types/section';
 import { ProductSection } from '../../components/molecules/ProductSection';
 import { SortOptions } from '../../components/molecules/SortOptions';
@@ -13,7 +13,7 @@ const mockDataAvaliblePizza: Array<Section> = [
       {
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
-        boardSizes: [BoardSize.BOARD_HOT_DOG, BoardSize.PHILADELPHY],
+        pizzaSizes: [PizzaSize.BOARD_HOT_DOG, PizzaSize.PHILADELPHY],
         cost: 1337,
         toppings: 'some toppings',
         name: 'Name',
@@ -21,7 +21,7 @@ const mockDataAvaliblePizza: Array<Section> = [
       {
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
-        boardSizes: [BoardSize.BOARD_HOT_DOG, BoardSize.PHILADELPHY],
+        pizzaSizes: [PizzaSize.BOARD_HOT_DOG, PizzaSize.PHILADELPHY],
         cost: 1337,
         toppings: 'some toppings',
         name: 'Name',
@@ -29,7 +29,7 @@ const mockDataAvaliblePizza: Array<Section> = [
       {
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
-        boardSizes: [BoardSize.BOARD_HOT_DOG, BoardSize.PHILADELPHY],
+        pizzaSizes: [PizzaSize.BOARD_HOT_DOG, PizzaSize.PHILADELPHY],
         cost: 1337,
         toppings: 'some toppings',
         name: 'Name',
@@ -37,7 +37,7 @@ const mockDataAvaliblePizza: Array<Section> = [
       {
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
-        boardSizes: [BoardSize.BOARD_HOT_DOG, BoardSize.PHILADELPHY],
+        pizzaSizes: [PizzaSize.BOARD_HOT_DOG, PizzaSize.PHILADELPHY],
         cost: 1337,
         toppings: 'some toppings',
         name: 'Name',
@@ -50,7 +50,7 @@ const mockDataAvaliblePizza: Array<Section> = [
       {
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
-        boardSizes: [BoardSize.BOARD_HOT_DOG, BoardSize.PHILADELPHY],
+        pizzaSizes: [PizzaSize.BOARD_HOT_DOG, PizzaSize.PHILADELPHY],
         cost: 1337,
         toppings: 'some toppings',
         name: 'Name',
@@ -58,7 +58,7 @@ const mockDataAvaliblePizza: Array<Section> = [
       {
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
-        boardSizes: [BoardSize.BOARD_HOT_DOG, BoardSize.PHILADELPHY],
+        pizzaSizes: [PizzaSize.BOARD_HOT_DOG, PizzaSize.PHILADELPHY],
         cost: 1337,
         toppings: 'some toppings',
         name: 'Name',
@@ -66,7 +66,7 @@ const mockDataAvaliblePizza: Array<Section> = [
       {
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
-        boardSizes: [BoardSize.BOARD_HOT_DOG, BoardSize.PHILADELPHY],
+        pizzaSizes: [PizzaSize.BOARD_HOT_DOG, PizzaSize.PHILADELPHY],
         cost: 1337,
         toppings: 'some toppings',
         name: 'Name',
@@ -74,7 +74,7 @@ const mockDataAvaliblePizza: Array<Section> = [
       {
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
-        boardSizes: [BoardSize.BOARD_HOT_DOG, BoardSize.PHILADELPHY],
+        pizzaSizes: [PizzaSize.BOARD_HOT_DOG, PizzaSize.PHILADELPHY],
         cost: 1337,
         toppings: 'some toppings',
         name: 'Name',
