@@ -1,8 +1,14 @@
-import React, { memo, FC, useState } from 'react';
+import React, {
+  memo, FC, useContext, useState,
+} from 'react';
 import styled from 'styled-components';
-import { PizzaSize, Size } from '../../../../utils/types/pizza';
-import BoardSizes from '../PizzaSizes';
+import { DoughSize, Size } from '../../../../utils/types/pizza';
+// import { PizzaSize } from '../../../../utils/types/pizza';
+import PizzaSizes from '../PizzaSizes';
 import { Image } from '../../athoms/Image';
+// eslint-disable-next-line import/no-cycle
+import { ProductItemContext } from '../ProductSection';
+import DoughtSizes from '../DoughtSizes';
 
 const ProductItemContainer = memo(styled.div`
   width: 100%;
@@ -32,22 +38,17 @@ const PizzaToppings = memo(styled.span`
   margin-bottom: 15px;
 `);
 
-interface Props {
-  image: string;
-  name: string;
-  toppings: string;
-  boardSizes: Array<PizzaSize>;
-  sizes: Array<Size>;
-}
-
-export const ProductItem: FC<Props> = memo(({
-  image,
-  name,
-  toppings,
-  boardSizes,
-}) => {
-  const [currentBoardSize, setCurrentBoardSize] = useState<PizzaSize>(boardSizes[0]);
-  // const [currentSize, setCurrentSize] = useState<Size>(sizes[0]);
+export const ProductItem: FC<{}> = memo(() => {
+  const { product } = useContext(ProductItemContext);
+  const {
+    image,
+    name,
+    toppings,
+    sizes,
+    doughSizes,
+  } = product;
+  const [currentPizzaSize, setCurrentPizzaSize] = useState<Size>(sizes[0]);
+  const [selectedDoughSizes, setSelectedDoughSizes] = useState<DoughSize>(doughSizes[0]);
 
   return (
     <ProductItemContainer>
@@ -62,10 +63,16 @@ export const ProductItem: FC<Props> = memo(({
           {toppings}
         </PizzaToppings>
 
-        <BoardSizes
-          boardSizes={boardSizes}
-          currentBoardSize={currentBoardSize}
-          setCurrentBoardSize={setCurrentBoardSize}
+        <PizzaSizes
+          currentSize={currentPizzaSize}
+          setCurrentSize={setCurrentPizzaSize}
+          sizes={sizes}
+        />
+
+        <DoughtSizes
+          sizes={doughSizes}
+          currentSize={selectedDoughSizes}
+          setCurrentSize={setSelectedDoughSizes}
         />
       </DescriptionContainer>
     </ProductItemContainer>

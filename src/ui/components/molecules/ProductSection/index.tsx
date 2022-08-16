@@ -1,10 +1,18 @@
-import React, { memo, FC } from 'react';
+import React, { memo, FC, createContext } from 'react';
 import styled from 'styled-components';
 import { v4 } from 'uuid';
 import Pizza from '../../../../utils/types/pizza';
 import Section from '../../athoms/Section';
 import { Grid, GridItem } from '../../helpers/grid';
+// eslint-disable-next-line import/no-cycle
 import { ProductItem } from '../ProductItem';
+
+interface ProductItemContextType {
+  product: Pizza;
+}
+
+// eslint-disable-next-line max-len
+export const ProductItemContext = createContext<ProductItemContextType>({} as ProductItemContextType);
 
 const StyledTitle = memo(styled.h1`
   display: flex;
@@ -39,13 +47,9 @@ export const ProductSection: FC<Props> = memo(({
       >
         {products.map((product) => (
           <GridItem key={v4()}>
-            <ProductItem
-              image={product.image}
-              name={product.name}
-              toppings={product.toppings}
-              boardSizes={product.pizzaSizes}
-              sizes={product.sizes}
-            />
+            <ProductItemContext.Provider value={{ product }}>
+              <ProductItem />
+            </ProductItemContext.Provider>
           </GridItem>
         ))}
       </Grid>

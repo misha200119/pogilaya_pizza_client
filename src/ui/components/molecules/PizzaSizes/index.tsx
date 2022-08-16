@@ -1,26 +1,35 @@
 import React, { memo, FC, Dispatch } from 'react';
 import styled from 'styled-components';
-import { PizzaSize } from '../../../../utils/types/pizza';
+import { Size } from '../../../../utils/types/pizza';
+import SwitchButtonSelector from '../SwitchButtonSelector';
 
 const Container = memo(styled.div`
   display: flex;
   margin-bottom: 15px;
 `);
 
-// const StyledBoardSizeButton = memo(styled(Button)`
-
-// `);
-
 interface Props {
-  boardSizes: Array<PizzaSize>;
-  currentBoardSize: PizzaSize;
-  setCurrentBoardSize: Dispatch<React.SetStateAction<PizzaSize>>;
+  currentSize: Size;
+  setCurrentSize: Dispatch<React.SetStateAction<Size>>;
+  sizes: Array<Size>;
 }
 
-const PizzaSizes: FC<Props> = memo(() => {
+const PizzaSizes: FC<Props> = memo(({
+  sizes,
+  currentSize,
+  setCurrentSize,
+}) => {
   return (
     <Container>
-      from container
+      <SwitchButtonSelector
+        display="flex"
+        flexDirection="row"
+        buttonsBorderRadius="20px"
+        gap="5px"
+        values={sizes}
+        currentValue={currentSize}
+        setCurrentValue={setCurrentSize}
+      />
     </Container>
   );
 });

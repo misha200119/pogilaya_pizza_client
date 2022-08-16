@@ -13,7 +13,7 @@ const Container = memo(styled(ResponsiveContainer)`
 
 export const App: React.FC<{}> = memo(() => {
   return (
-    <ThemeProvider theme={themes[Themes.DARK]}>
+    <ThemeProvider theme={themes[Themes.LIGHT]}>
       <Container>
         <Header />
         <Routes>
