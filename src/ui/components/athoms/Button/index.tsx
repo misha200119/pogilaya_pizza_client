@@ -7,7 +7,7 @@ interface Props {
   borderRadius: string;
 }
 
-const Button = memo(styled.div<Props>`
+const Button = memo(styled.button<Props>`
   width: ${({ width }) => width};
   height: ${({ height }) => height};
 
@@ -16,6 +16,7 @@ const Button = memo(styled.div<Props>`
   justify-content: center;
 
   border-radius: ${({ borderRadius }) => borderRadius};
+  outline: none;
 
   cursor: pointer;
 `);

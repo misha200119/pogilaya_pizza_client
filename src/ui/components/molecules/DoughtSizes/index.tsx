@@ -1,5 +1,12 @@
 import React, { memo, FC, Dispatch } from 'react';
+import styled from 'styled-components';
 import { DoughSize } from '../../../../utils/types/pizza';
+import SwitchButtonSelector from '../SwitchButtonSelector';
+
+const Container = memo(styled.div`
+  display: flex;
+  margin-bottom: 15px;
+`);
 
 interface Props {
   currentSize: DoughSize;
@@ -7,9 +14,23 @@ interface Props {
   sizes: Array<DoughSize>;
 }
 
-const DoughtSizes: FC<Props> = memo(() => {
+const DoughtSizes: FC<Props> = memo(({
+  sizes,
+  currentSize,
+  setCurrentSize,
+}) => {
   return (
-    <div>DoughtSizes</div>
+    <Container>
+      <SwitchButtonSelector
+        display="grid"
+        gridColumnsCount="2"
+        gap="10px"
+        values={sizes}
+        currentValue={currentSize}
+        setCurrentValue={setCurrentSize}
+        buttonsBorderRadius="20px"
+      />
+    </Container>
   );
 });
 

@@ -2,10 +2,12 @@ import React, {
   FC, memo,
 } from 'react';
 import styled from 'styled-components';
+import Button from '../../athoms/Button';
 
 interface SwitchButtonsSelectorContainerProps {
   display: string;
   flexDirection: string;
+  gridColumnsCount: string;
   gap: string;
   buttonsBorderRadius: string;
 }
@@ -15,6 +17,7 @@ const SwitchButtonsSelectorContainer = memo(styled.div<SwitchButtonsSelectorCont
   justify-content: space-between;
   align-items: center;
   flex-direction: ${({ flexDirection }) => flexDirection};
+  grid-template-columns: ${({ gridColumnsCount }) => `repeat(${gridColumnsCount}, 1fr)`};
   grid-gap: ${({ gap }) => gap};
   width: 100%;
   `);
@@ -25,7 +28,7 @@ interface SwitchButtonProps {
   borderRadius: string;
 }
 
-const SwitchButton = memo(styled.button<SwitchButtonProps>`
+const SwitchButton = memo(styled(Button)<SwitchButtonProps>`
   width: 100%;
 
   display: flex;
@@ -45,14 +48,17 @@ interface Props {
 
   display: 'flex' | 'grid';
 
-  flexDirection: 'row' | 'column';
+  flexDirection?: 'row' | 'column';
+  gridColumnsCount?: string;
+
   gap: string;
   buttonsBorderRadius: string;
 }
 
 const SwitchButtonSelector: FC<Props> = memo(({
   display,
-  flexDirection,
+  flexDirection = 'unset',
+  gridColumnsCount = '1',
   gap,
 
   values,
@@ -65,6 +71,7 @@ const SwitchButtonSelector: FC<Props> = memo(({
     <SwitchButtonsSelectorContainer
       display={display}
       flexDirection={flexDirection}
+      gridColumnsCount={gridColumnsCount}
       gap={gap}
     >
       {
