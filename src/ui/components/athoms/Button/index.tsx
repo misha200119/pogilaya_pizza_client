@@ -17,6 +17,7 @@ const Button = memo(styled.button<Props>`
 
   border-radius: ${({ borderRadius }) => borderRadius};
   outline: none;
+  border: none;
 
   cursor: pointer;
 `);

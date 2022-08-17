@@ -34,7 +34,6 @@ const SwitchButton = memo(styled(Button)<SwitchButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
-  border: ${({ border }) => border};
   padding: ${({ padding }) => padding};
   border-radius: ${({ borderRadius }) => borderRadius};
 
@@ -62,8 +61,8 @@ const SwitchButtonSelector: FC<Props> = memo(({
   gap,
 
   values,
-  /* currentValue,
-  setCurrentValue, */
+  currentValue,
+  setCurrentValue,
 
   buttonsBorderRadius,
 }) => {
@@ -77,9 +76,12 @@ const SwitchButtonSelector: FC<Props> = memo(({
       {
         values.map((value) => (
           <SwitchButton
+            disabled={value === currentValue}
             key={value}
-            border="1px solid yellow"
             borderRadius={buttonsBorderRadius}
+            onClick={() => {
+              setCurrentValue(value);
+            }}
           >
             {value}
           </SwitchButton>
