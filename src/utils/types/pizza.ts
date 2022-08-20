@@ -1,3 +1,5 @@
+import Good from './good';
+
 /* eslint-disable no-shadow */
 export enum Size {
   SMALL = 'small',
@@ -12,13 +14,12 @@ export enum DoughSize {
   BOARD_HOT_DOG = 'board hot dog',
 }
 
-interface Pizza {
+interface Pizza extends Good{
   image: string;
   sizes: Array<Size>;
   doughSizes: Array<DoughSize>;
   cost: number;
   toppings: string;
-  name: string;
 }
 
 export default Pizza;
