@@ -1,10 +1,11 @@
+/* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '..';
+import KeysOfLocalStorage from '../../utils/constants/keysOfLocalstorage';
 import Good from '../../utils/types/good';
-import Pizza from '../../utils/types/pizza';
 
 interface MapOfSelectedProducts {
-  [key: string]: Pizza;
+  [key: string]: number;
 }
 
 interface CartState {
@@ -20,15 +21,37 @@ export const cartSlice = createSlice({
   initialState,
   reducers: {
     addGood: (state, action: PayloadAction<Good>) => {
-      const prevState = state.mapOfProducts[action.payload.name];
-      if (isNaN(prevState)) {
+      const prevValue = state.mapOfProducts[action.payload.name];
 
+      if (Number.isNaN(prevValue)) {
+        state.mapOfProducts[action.payload.name] = 0;
       }
-    }
-  }
+
+      state.mapOfProducts[action.payload.name] += 1;
+
+      localStorage.setItem(
+        KeysOfLocalStorage.CART_MAP_OF_PRODUCTS,
+        JSON.stringify(state.mapOfProducts),
+      );
+    },
+    removeGood: (state, action: PayloadAction<Good>) => {
+      const prevValue = state.mapOfProducts[action.payload.name];
+
+      if (Number.isNaN(prevValue)) {
+        throw new Error('Can\'t remove count of item from unexist value');
+      }
+
+      state.mapOfProducts[action.payload.name] -= 1;
+
+      localStorage.setItem(
+        KeysOfLocalStorage.CART_MAP_OF_PRODUCTS,
+        JSON.stringify(state.mapOfProducts),
+      );
+    },
+  },
 });
 
-// export const  // thete should be a cart actions
+export const { addGood, removeGood } = cartSlice.actions;
 
 export const cartProducts = (state: RootState) => state.cart.mapOfProducts;
 

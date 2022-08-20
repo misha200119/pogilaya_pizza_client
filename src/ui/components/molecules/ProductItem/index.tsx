@@ -1,15 +1,17 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable import/no-cycle */
 import React, {
   memo, FC, useContext, useState,
 } from 'react';
 import styled from 'styled-components';
 import { DoughSize, Size } from '../../../../utils/types/pizza';
-// import { PizzaSize } from '../../../../utils/types/pizza';
 import PizzaSizes from '../PizzaSizes';
 import { Image } from '../../athoms/Image';
-// eslint-disable-next-line import/no-cycle
 import { ProductItemContext } from '../ProductSection';
 import DoughtSizes from '../DoughtSizes';
 import Button from '../../athoms/Button';
+import { useAppSelector, useAppDispatch } from '../../../../utils/hooks/reduxHooks';
+import { addGood, removeGood, cartProducts } from '../../../../store/slices/cartSlice';
 
 const ProductItemContainer = memo(styled.div`
   width: 100%;
@@ -65,8 +67,15 @@ export const ProductItem: FC<{}> = memo(() => {
     doughSizes,
     cost,
   } = product;
+
   const [currentPizzaSize, setCurrentPizzaSize] = useState<Size>(sizes[0]);
   const [selectedDoughSizes, setSelectedDoughSizes] = useState<DoughSize>(doughSizes[0]);
+
+  const cartProductsMap = useAppSelector(cartProducts);
+  const dispatch = useAppDispatch();
+
+  // eslint-disable-next-line no-console
+  console.log(cartProductsMap);
 
   return (
     <ProductItemContainer>
@@ -100,7 +109,11 @@ export const ProductItem: FC<{}> = memo(() => {
               UAH
             </p>
           </div>
-          <ToCartButton>
+          <ToCartButton
+            onClick={() => {
+              dispatch(addGood(product));
+            }}
+          >
             To Cart
           </ToCartButton>
         </PriceContainer>

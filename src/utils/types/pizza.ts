@@ -14,7 +14,7 @@ export enum DoughSize {
   BOARD_HOT_DOG = 'board hot dog',
 }
 
-interface Pizza extends Good{
+interface Pizza extends Good {
   image: string;
   sizes: Array<Size>;
   doughSizes: Array<DoughSize>;
