@@ -6,6 +6,7 @@ import { DoughSize, Size } from '../../../utils/types/pizza';
 import { Section } from '../../../utils/types/section';
 import { ProductSection } from '../../components/molecules/ProductSection';
 import { SortOptions } from '../../components/molecules/SortOptions';
+import { Container as ResponsiveContainer } from '../../components/helpers/responsive';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const mockDataAvaliblePizza: Array<Section> = [
@@ -86,22 +87,31 @@ const mockDataAvaliblePizza: Array<Section> = [
 ];
 
 const Container = memo(styled.main`
+`);
+
+const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
+  display: flex;
+  grid-gap: 100px;
+  flex-direction: column;
   /* background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.primary}; */
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 `);
 
 export const Catalog = memo(() => {
   return (
     <Container>
-      <SortOptions />
-      {mockDataAvaliblePizza.map(({ sectionName, products }) => (
-        <ProductSection
-          key={v4()}
-          sectionName={sectionName}
-          products={products}
-        />
-      ))}
+      <StyledResponsiveContainer>
+        <SortOptions />
+        {mockDataAvaliblePizza.map(({ sectionName, products }) => (
+          <ProductSection
+            key={v4()}
+            sectionName={sectionName}
+            products={products}
+          />
+        ))}
+        <p>* the weight of the freshly prepared product. Weight in delivery orders can be separated due to dehydration of the product.</p>
+      </StyledResponsiveContainer>
     </Container>
   );
 });

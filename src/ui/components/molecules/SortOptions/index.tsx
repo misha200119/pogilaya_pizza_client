@@ -2,8 +2,8 @@ import React, { memo } from 'react';
 import styled from 'styled-components';
 
 const OptionsContainer = memo(styled.div`
+width: 100%;
 background-color: orange;
-margin-bottom: 50px;
 `);
 
 export const SortOptions = memo(() => {
