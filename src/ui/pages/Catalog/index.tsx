@@ -13,6 +13,7 @@ const mockDataAvaliblePizza: Array<Section> = [
   {
     products: [
       {
+        id: '1',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
@@ -21,6 +22,7 @@ const mockDataAvaliblePizza: Array<Section> = [
         name: 'Name',
       },
       {
+        id: '2',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
@@ -29,6 +31,7 @@ const mockDataAvaliblePizza: Array<Section> = [
         name: 'Name2',
       },
       {
+        id: '3',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
@@ -37,6 +40,7 @@ const mockDataAvaliblePizza: Array<Section> = [
         name: 'Namefdfhwkhf',
       },
       {
+        id: '4',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
@@ -45,6 +49,7 @@ const mockDataAvaliblePizza: Array<Section> = [
         name: 'Nameasdhdsj',
       },
       {
+        id: '5',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
@@ -53,6 +58,7 @@ const mockDataAvaliblePizza: Array<Section> = [
         name: 'Namefdfhwkhf',
       },
       {
+        id: '7',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
@@ -66,6 +72,7 @@ const mockDataAvaliblePizza: Array<Section> = [
   {
     products: [
       {
+        id: '8',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
@@ -74,6 +81,7 @@ const mockDataAvaliblePizza: Array<Section> = [
         name: 'Name',
       },
       {
+        id: '9',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
@@ -82,6 +90,7 @@ const mockDataAvaliblePizza: Array<Section> = [
         name: 'Name',
       },
       {
+        id: '10',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
@@ -90,6 +99,7 @@ const mockDataAvaliblePizza: Array<Section> = [
         name: 'Name',
       },
       {
+        id: '11',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
@@ -98,6 +108,7 @@ const mockDataAvaliblePizza: Array<Section> = [
         name: 'Name',
       },
       {
+        id: '12',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
@@ -106,6 +117,7 @@ const mockDataAvaliblePizza: Array<Section> = [
         name: 'Namefdfhwkhf',
       },
       {
+        id: '13',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],

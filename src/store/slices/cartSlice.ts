@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '..';
 import KeysOfLocalStorage from '../../utils/constants/keysOfLocalstorage';
 import Good from '../../utils/types/good';
+import PizzaInCart from '../../utils/types/pizzaInCart';
 
 interface MapOfSelectedProducts {
   [key: string]: number;
@@ -12,22 +13,35 @@ interface CartState {
   mapOfProducts: MapOfSelectedProducts;
 }
 
-const initialState: CartState = {
-  mapOfProducts: {},
-};
+// eslint-disable-next-line max-len
+const cartMapFromLocalStorage = localStorage.getItem(KeysOfLocalStorage.CART_MAP_OF_PRODUCTS);
+
+let initialState: CartState;
+
+if (cartMapFromLocalStorage) {
+  initialState = {
+    mapOfProducts: JSON.parse(cartMapFromLocalStorage),
+  };
+} else {
+  initialState = {
+    mapOfProducts: {},
+  };
+}
 
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addGood: (state, action: PayloadAction<Good>) => {
-      const prevValue = state.mapOfProducts[action.payload.name];
+    addGood: (state, action: PayloadAction<Good | PizzaInCart>) => {
+      const goodAsString = JSON.stringify(action.payload);
+      const prevValueCatchedGood = state.mapOfProducts[goodAsString];
 
-      if (Number.isNaN(prevValue)) {
-        state.mapOfProducts[action.payload.name] = 0;
+      // eslint-disable-next-line no-restricted-globals
+      if (isNaN(prevValueCatchedGood)) {
+        state.mapOfProducts[goodAsString] = 0;
       }
 
-      state.mapOfProducts[action.payload.name] += 1;
+      state.mapOfProducts[goodAsString] += 1;
 
       localStorage.setItem(
         KeysOfLocalStorage.CART_MAP_OF_PRODUCTS,
@@ -35,13 +49,15 @@ export const cartSlice = createSlice({
       );
     },
     removeGood: (state, action: PayloadAction<Good>) => {
-      const prevValue = state.mapOfProducts[action.payload.name];
+      const goodAsString = JSON.stringify(action.payload);
+      const prevValueCatchedGood = state.mapOfProducts[goodAsString];
 
-      if (Number.isNaN(prevValue)) {
+      // eslint-disable-next-line no-restricted-globals
+      if (isNaN(prevValueCatchedGood)) {
         throw new Error('Can\'t remove count of item from unexist value');
       }
 
-      state.mapOfProducts[action.payload.name] -= 1;
+      state.mapOfProducts[goodAsString] -= 1;
 
       localStorage.setItem(
         KeysOfLocalStorage.CART_MAP_OF_PRODUCTS,

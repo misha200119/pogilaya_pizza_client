@@ -14,6 +14,7 @@ import DoughtSizes from '../DoughtSizes';
 import Button from '../../athoms/Button';
 import { useAppSelector, useAppDispatch } from '../../../../utils/hooks/reduxHooks';
 import { addGood, removeGood, cartProducts } from '../../../../store/slices/cartSlice';
+import PizzaInCart from '../../../../utils/types/pizzaInCart';
 
 const ProductItemContainer = memo(styled.div`
   width: 100%;
@@ -78,6 +79,7 @@ export const ProductItem: FC<{}> = memo(() => {
 
   const { product } = useContext(ProductItemContext);
   const {
+    id,
     image,
     name,
     toppings,
@@ -93,18 +95,24 @@ export const ProductItem: FC<{}> = memo(() => {
     return cost + SizeCost[currentPizzaSize] + DoughSizeCost[selectedDoughSizes];
   }, [currentPizzaSize, selectedDoughSizes]);
 
-  const currentPizzaBySelectedParams = useMemo(() => {
+  const currentPizzaBySelectedParams = useMemo<PizzaInCart>(() => {
     return (
       {
-
+        id,
+        image,
+        name,
+        toppings,
+        size: currentPizzaSize,
+        doughSize: selectedDoughSizes,
+        cost: calculatedPizzaCost,
       }
     );
-  }, []);
+  }, [currentPizzaSize, selectedDoughSizes, calculatedPizzaCost]);
 
   const cartProductsMap = useAppSelector(cartProducts);
 
   // eslint-disable-next-line no-console
-  console.log(cartProductsMap);
+  // console.log(cartProductsMap);
 
   return (
     <ProductItemContainer>
@@ -140,7 +148,7 @@ export const ProductItem: FC<{}> = memo(() => {
           </div>
           <ToCartButton
             onClick={() => {
-              dispatch(addGood(product));
+              dispatch(addGood(currentPizzaBySelectedParams));
             }}
           >
             To Cart
