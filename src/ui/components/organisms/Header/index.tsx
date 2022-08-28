@@ -22,8 +22,8 @@ const Container = memo(styled.header`
   top: 0;
   margin-bottom: 40px;
 
-  border: 1px solid ${(props) => props.theme.text};
-  border-radius: 10px;
+  /* border: 1px solid ${(props) => props.theme.text}; */
+  /* border-radius: 10px; */
 `);
 
 const Header: FC<{}> = memo(() => {
@@ -47,7 +47,7 @@ const Header: FC<{}> = memo(() => {
           <GridItemArea areaName="logo">
             <Logo size="50px" imgUrl={logoImage} linkHref="#">
               <Visible mobileVisible={false}>
-                <p>Pogilaya pizza</p>
+                <p>My pizza</p>
               </Visible>
             </Logo>
           </GridItemArea>

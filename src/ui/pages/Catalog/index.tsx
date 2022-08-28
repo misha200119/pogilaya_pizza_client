@@ -87,6 +87,7 @@ const mockDataAvaliblePizza: Array<Section> = [
 ];
 
 const Container = memo(styled.main`
+  margin-bottom: 30px;
 `);
 
 const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
@@ -95,7 +96,6 @@ const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
   flex-direction: column;
   /* background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.primary}; */
-  margin-bottom: 30px;
 `);
 
 export const Catalog = memo(() => {
