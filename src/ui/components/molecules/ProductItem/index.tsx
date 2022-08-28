@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable import/no-cycle */
 import React, {
-  memo, FC, useContext, useState,
+  memo, FC, useContext, useState, useMemo,
 } from 'react';
 import styled from 'styled-components';
-import { DoughSize, Size } from '../../../../utils/types/pizza';
+import {
+  DoughSize, Size, SizeCost, DoughSizeCost,
+} from '../../../../utils/types/pizza';
 import PizzaSizes from '../PizzaSizes';
 import { Image } from '../../athoms/Image';
 import { ProductItemContext } from '../ProductSection';
@@ -23,8 +25,22 @@ const ProductItemContainer = memo(styled.div`
   flex-direction: column;
   justify-content: center;
 
-  background-color: red;
+  background-color: ${(props) => props.theme.primary};
 
+  &:hover{
+    -webkit-box-shadow:0 0 15px rgba(0,0,0,.5);
+    box-shadow:0 0 15px rgba(0,0,0,.5);
+  }
+
+  &:hover img{
+    -webkit-transform:scale(1.01);
+    -ms-transform:scale(1.01);
+    transform:scale(1.01)
+  }
+
+  transition: all .3s ease;
+
+  border: 1px solid #e0e0e0;
   border-radius: 25px;
 `);
 
@@ -58,6 +74,8 @@ const ToCartButton = memo(styled(Button)`
 `);
 
 export const ProductItem: FC<{}> = memo(() => {
+  const dispatch = useAppDispatch();
+
   const { product } = useContext(ProductItemContext);
   const {
     image,
@@ -71,8 +89,19 @@ export const ProductItem: FC<{}> = memo(() => {
   const [currentPizzaSize, setCurrentPizzaSize] = useState<Size>(sizes[0]);
   const [selectedDoughSizes, setSelectedDoughSizes] = useState<DoughSize>(doughSizes[0]);
 
+  const calculatedPizzaCost = useMemo<number>(() => {
+    return cost + SizeCost[currentPizzaSize] + DoughSizeCost[selectedDoughSizes];
+  }, [currentPizzaSize, selectedDoughSizes]);
+
+  const currentPizzaBySelectedParams = useMemo(() => {
+    return (
+      {
+
+      }
+    );
+  }, []);
+
   const cartProductsMap = useAppSelector(cartProducts);
-  const dispatch = useAppDispatch();
 
   // eslint-disable-next-line no-console
   console.log(cartProductsMap);
@@ -105,7 +134,7 @@ export const ProductItem: FC<{}> = memo(() => {
         <PriceContainer>
           <div>
             <p>
-              {cost}
+              {calculatedPizzaCost}
               UAH
             </p>
           </div>

@@ -7,6 +7,7 @@ const ImageWrapper = memo(styled.div`
   & img {
     object-fit: cover;
     border-radius: 15px;
+    transition: all .3s ease;
   }
 `);
 

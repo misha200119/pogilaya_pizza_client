@@ -26,6 +26,7 @@ interface SwitchButtonProps {
   border: string;
   padding: string;
   borderRadius: string;
+  selected: boolean;
 }
 
 const SwitchButton = memo(styled(Button)<SwitchButtonProps>`
@@ -35,7 +36,19 @@ const SwitchButton = memo(styled(Button)<SwitchButtonProps>`
   align-items: center;
   justify-content: center;
   padding: ${({ padding }) => padding};
+
+  border: 1px solid #e0e0e0;
   border-radius: ${({ borderRadius }) => borderRadius};
+
+  color: ${({ selected }) => (selected ? '#fff' : '#000')};
+  background-color: ${({ selected }) => (selected ? '#4f4f4f' : '#f8f8f8')};
+
+  &:hover {
+    color: #fff;
+    background-color: #222;
+  }
+
+  transition: all 0.3s ease;
 
   cursor: pointer;
 `);
@@ -76,6 +89,7 @@ const SwitchButtonSelector: FC<Props> = memo(({
       {
         values.map((value) => (
           <SwitchButton
+            selected={value === currentValue}
             disabled={value === currentValue}
             key={value}
             borderRadius={buttonsBorderRadius}

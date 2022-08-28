@@ -15,15 +15,13 @@ import Nav from '../../molecules/Nav';
 const logoImage = '/images/Logo.webp';
 
 const Container = memo(styled.header`
-  background-color: ${(props) => props.theme.background};
+  background-color: #222;
   color: ${(props) => props.theme.primary};
 
   position: sticky;
   top: 0;
   margin-bottom: 40px;
-
-  /* border: 1px solid ${(props) => props.theme.text}; */
-  /* border-radius: 10px; */
+  z-index: 1;
 `);
 
 const Header: FC<{}> = memo(() => {

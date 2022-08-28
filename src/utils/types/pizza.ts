@@ -14,6 +14,19 @@ export enum DoughSize {
   BOARD_HOT_DOG = 'board hot dog',
 }
 
+export const SizeCost: {[key: string]: number} = {
+  [Size.SMALL]: 0,
+  [Size.MEDIUM]: 50,
+  [Size.BIG]: 100,
+};
+
+export const DoughSizeCost: {[key: string]: number} = {
+  [DoughSize.THIN]: 0,
+  [DoughSize.STANDART]: 50,
+  [DoughSize.PHILADELPHY]: 0,
+  [DoughSize.BOARD_HOT_DOG]: 150,
+};
+
 interface Pizza extends Good {
   image: string;
   sizes: Array<Size>;
