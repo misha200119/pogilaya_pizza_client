@@ -11,10 +11,10 @@ import PizzaSizes from '../PizzaSizes';
 import { Image } from '../../athoms/Image';
 import { ProductItemContext } from '../ProductSection';
 import DoughtSizes from '../DoughtSizes';
-import Button from '../../athoms/Button';
 import { useAppSelector, useAppDispatch } from '../../../../utils/hooks/reduxHooks';
-import { addGood, removeGood, cartProducts } from '../../../../store/slices/cartSlice';
+import { cartProducts } from '../../../../store/slices/cartSlice';
 import PizzaInCart from '../../../../utils/types/pizzaInCart';
+import { ToCartSmartButton } from '../ToCartSmartButton';
 
 const ProductItemContainer = memo(styled.div`
   width: 100%;
@@ -68,15 +68,7 @@ const PriceContainer = memo(styled.div`
   align-items: center;
 `);
 
-const ToCartButton = memo(styled(Button)`
-  height: 100%;
-  width: 100%;
-  border-radius: 30px;
-`);
-
 export const ProductItem: FC<{}> = memo(() => {
-  const dispatch = useAppDispatch();
-
   const { product } = useContext(ProductItemContext);
   const {
     id,
@@ -95,7 +87,7 @@ export const ProductItem: FC<{}> = memo(() => {
     return cost + SizeCost[currentPizzaSize] + DoughSizeCost[selectedDoughSizes];
   }, [currentPizzaSize, selectedDoughSizes]);
 
-  const currentPizzaBySelectedParams = useMemo<PizzaInCart>(() => {
+  const currentPizzaBySelectedParamsAsObject = useMemo<PizzaInCart>(() => {
     return (
       {
         id,
@@ -109,10 +101,11 @@ export const ProductItem: FC<{}> = memo(() => {
     );
   }, [currentPizzaSize, selectedDoughSizes, calculatedPizzaCost]);
 
-  const cartProductsMap = useAppSelector(cartProducts);
+  const currentPizzaBySelectedParamsAsString = useMemo(() => {
+    return JSON.stringify(currentPizzaBySelectedParamsAsObject);
+  }, [currentPizzaBySelectedParamsAsObject]);
 
-  // eslint-disable-next-line no-console
-  // console.log(cartProductsMap);
+  const cartProductsMap = useAppSelector(cartProducts);
 
   return (
     <ProductItemContainer>
@@ -146,13 +139,11 @@ export const ProductItem: FC<{}> = memo(() => {
               UAH
             </p>
           </div>
-          <ToCartButton
-            onClick={() => {
-              dispatch(addGood(currentPizzaBySelectedParams));
-            }}
-          >
-            To Cart
-          </ToCartButton>
+          <ToCartSmartButton
+            cartMap={cartProductsMap}
+            curentGoodBySelectedParamsAsString={currentPizzaBySelectedParamsAsString}
+            curentGoodBySelectedParamsAsObject={currentPizzaBySelectedParamsAsObject}
+          />
         </PriceContainer>
       </DescriptionContainer>
     </ProductItemContainer>

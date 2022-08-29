@@ -66,7 +66,7 @@ const Footer: FC<{}> = memo(() => {
           mobileColumnsCount="1"
           tabletColumnsCount="4"
           desktopColumnsCount="4"
-          mobileGridGap="10px"
+          mobileGridGap="60px"
           tabletGridGap="15px"
           desktopGridGap="20px"
         >

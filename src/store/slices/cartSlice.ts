@@ -59,6 +59,10 @@ export const cartSlice = createSlice({
 
       state.mapOfProducts[goodAsString] -= 1;
 
+      if (state.mapOfProducts[goodAsString] === 0) {
+        delete state.mapOfProducts[goodAsString];
+      }
+
       localStorage.setItem(
         KeysOfLocalStorage.CART_MAP_OF_PRODUCTS,
         JSON.stringify(state.mapOfProducts),

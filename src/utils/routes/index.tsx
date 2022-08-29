@@ -1,13 +1,14 @@
 import React, { ReactElement } from 'react';
 import { Navigate, Route } from 'react-router-dom';
 import { Catalog as CatalogPage } from '../../ui/pages/Catalog';
+import { Checkout as CheckoutPage } from '../../ui/pages/Checkout';
 
 // eslint-disable-next-line no-shadow
 export enum Routes {
   Index = '/',
-  Home = '/home',
   Catalog = '/catalog',
   AboutUs = '/about-us',
+  Checkout = '/checkout',
   Wrong = '*',
 }
 
@@ -17,28 +18,29 @@ interface MappableRoute {
   describedComponent: JSX.Element;
 }
 
-export const mappableRoutes: Array<MappableRoute> = [{
-  link: Routes.Home,
-  linkText: 'HOME',
-  describedComponent: <div>home route</div>,
-},
-{
-  link: Routes.Catalog,
-  linkText: 'CATALOG',
-  describedComponent: <CatalogPage />,
-},
-{
-  link: Routes.AboutUs,
-  linkText: 'ABOUT US',
-  describedComponent: <div>about us route</div>,
-},
+export const mappableRoutes: Array<MappableRoute> = [
+  {
+    link: Routes.Catalog,
+    linkText: 'CATALOG',
+    describedComponent: <CatalogPage />,
+  },
+  {
+    link: Routes.AboutUs,
+    linkText: 'ABOUT US',
+    describedComponent: <div>about us route</div>,
+  },
+  {
+    link: Routes.Checkout,
+    linkText: 'CHECKOUT',
+    describedComponent: <CheckoutPage />,
+  },
 ];
 
 export const mappableUtilRoutes = [
   {
     link: Routes.Index,
     linkText: 'REDIRECT TO HOME',
-    describedComponent: <Navigate to={Routes.Home} />,
+    describedComponent: <Navigate to={Routes.AboutUs} />,
   },
   {
     link: Routes.Wrong,
