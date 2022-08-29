@@ -1,27 +1,20 @@
-import React from 'react';
-import './App.scss';
+import React, { memo } from 'react';
+import { ThemeProvider } from 'styled-components';
+import { Routes } from 'react-router-dom';
+import { Themes, themes } from './ui/themes';
+import Header from './ui/components/organisms/Header';
+import { mapRoutes, mappableUtilRoutes, mappableRoutes } from './utils/routes';
+import Footer from './ui/components/organisms/Footer';
 
-interface Props {
-  onClick: () => void;
-}
-
-export const Provider: React.FC<Props> = React.memo(
-  ({ onClick, children }) => (
-    <button
-      type="button"
-      onClick={onClick}
-    >
-      {children}
-    </button>
-  ),
-);
-
-export const App: React.FC = () => {
+export const App: React.FC<{}> = memo(() => {
   return (
-    <div className="starter">
-      <Provider onClick={() => ({})}>
-        <TodoList />
-      </Provider>
-    </div>
+    <ThemeProvider theme={themes[Themes.DARK]}>
+      <Header />
+      <Routes>
+        {mapRoutes(mappableRoutes)}
+        {mapRoutes(mappableUtilRoutes)}
+      </Routes>
+      <Footer />
+    </ThemeProvider>
   );
-};
+});
