@@ -1,4 +1,6 @@
-import React, { memo, FC, Dispatch } from 'react';
+import React, {
+  memo, FC, Dispatch, useMemo,
+} from 'react';
 import styled from 'styled-components';
 import { DoughSize } from '../../../../utils/types/pizza';
 import SwitchButtonSelector from '../SwitchButtonSelector';
@@ -19,16 +21,26 @@ const DoughtSizes: FC<Props> = memo(({
   currentSize,
   setCurrentSize,
 }) => {
+  const mappedDought = useMemo(() => {
+    return sizes.map((value) => ({ value, displayed: <>{value}</> }));
+  }, [sizes]);
+
   return (
     <Container>
       <SwitchButtonSelector
         display="grid"
         gridColumnsCount="2"
         gap="10px"
-        values={sizes}
+        values={mappedDought}
         currentValue={currentSize}
         setCurrentValue={setCurrentSize}
         buttonsBorderRadius="20px"
+        color="#000"
+        backgroundColor="#f8f8f8"
+        colorOnSelected="#fff"
+        backgroundColorOnSelected="#4f4f4f"
+        colorOnHover="#fff"
+        backgroundColorOnHover="#1a1919"
       />
     </Container>
   );

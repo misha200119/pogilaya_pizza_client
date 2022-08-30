@@ -1,10 +1,12 @@
 import React, { memo, useMemo, FC } from 'react';
 import styled from 'styled-components';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../athoms/Button';
 import { useAppSelector } from '../../../../utils/hooks/reduxHooks';
 import { cartProducts } from '../../../../store/slices/cartSlice';
 import PizzaInCart from '../../../../utils/types/pizzaInCart';
+import { Routes } from '../../../../utils/routes';
 
 const CartContainer = memo(styled.div`
   padding: 1px;
@@ -59,6 +61,7 @@ const CartButtonContentContainer = memo(styled.div`
 
 const Cart: FC<{}> = memo(() => {
   const cartProductsMap = useAppSelector(cartProducts);
+  const navigate = useNavigate();
 
   const countGoodsInCartAndCost = useMemo(() => {
     let countGoods = 0;
@@ -96,6 +99,9 @@ const Cart: FC<{}> = memo(() => {
       <CheckoutButton
         borderRadius="25px"
         height="50px"
+        onClick={() => {
+          navigate(Routes.Checkout);
+        }}
       >
         Checkout
       </CheckoutButton>

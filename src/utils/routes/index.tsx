@@ -29,11 +29,6 @@ export const mappableRoutes: Array<MappableRoute> = [
     linkText: 'ABOUT US',
     describedComponent: <div>about us route</div>,
   },
-  {
-    link: Routes.Checkout,
-    linkText: 'CHECKOUT',
-    describedComponent: <CheckoutPage />,
-  },
 ];
 
 export const mappableUtilRoutes = [
@@ -46,6 +41,11 @@ export const mappableUtilRoutes = [
     link: Routes.Wrong,
     linkText: 'WRONG ADRESS',
     describedComponent: <div>error 404</div>,
+  },
+  {
+    link: Routes.Checkout,
+    linkText: 'CHECKOUT',
+    describedComponent: <CheckoutPage />,
   },
 ];
 
