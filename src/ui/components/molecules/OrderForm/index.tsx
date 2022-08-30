@@ -1,7 +1,17 @@
 import React, { memo, FC, useState } from 'react';
 import styled from 'styled-components';
-import { ControlledInput } from '../../athoms/ControlledInput';
-import { Grid, GridItem } from '../../helpers/grid';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import {
+  Autocomplete,
+  FormControl, Input, InputLabel, MenuItem, Select, TextField,
+} from '@mui/material';
+import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
+import moment from 'moment-timezone';
+import { AdapterMoment } from '@mui/x-date-pickers/AdapterMoment';
+import { LocalizationProvider, TimePicker } from '@mui/x-date-pickers';
+import {
+  Grid, GridItem, GridItemArea, GridWithTemplate,
+} from '../../helpers/grid';
 import SwitchButtonSelector from '../SwitchButtonSelector';
 
 const deliveryTypes = [
@@ -33,6 +43,18 @@ const deliveryTypes = [
   },
 ];
 
+const streets = [
+  { label: '123' },
+  { label: '321321' },
+  { label: 'dsfsad' },
+  { label: 'The Dark Knight' },
+  { label: '12 Angry Men' },
+  { label: "Schindler's List" },
+  { label: 'Pulp Fiction' },
+];
+
+const paymentTypes = ['Cash', 'Card online', 'Card to courier'];
+
 const OrderFormContainer = memo(styled.form`
   width: 100%;
 
@@ -56,86 +78,353 @@ export const OrderForm: FC<{}> = memo(() => {
   const [nameField, setNameField] = useState('');
   const [phoneNumberField, setPhoneNumberField] = useState('');
   const [email, setEmail] = useState('');
+  const [house, setHouse] = useState('');
+  const [flat, setFlat] = useState('');
+  const [entrance, setEntrance] = useState('');
+  const [intercomCode, setIntercomCode] = useState('');
+  const [floor, setFloor] = useState('');
+  const [comment, setComment] = useState('');
+  const [date, setDate] = useState(moment());
+  const [coupon, setCoupon] = useState('');
+  const [paymentType, setPaymentType] = useState('');
 
   return (
-    <OrderFormContainer>
-      <FormSection>
-        <h1
-          style={{
-            width: '100%',
-          }}
-        >
-          Placing an order
-        </h1>
-        <SwitchButtonSelector
-          buttonsHeight="50px"
-          display="grid"
-          gridColumnsCount="2"
-          gap="10px"
-          values={deliveryTypes}
-          currentValue={selectedDeliveryType}
-          setCurrentValue={setSelectedDeliveryType}
-          buttonsBorderRadius="20px"
-          buttonContentGap="20px"
-          color="red"
-          backgroundColor="#f8f8f8"
-          colorOnSelected="#fff"
-          backgroundColorOnSelected="#4f4f4f"
-          colorOnHover="#fff"
-          backgroundColorOnHover="#1a1919"
-        />
-      </FormSection>
-      <FormSection>
-        <FormSectionTitle>
-          Contacts
-        </FormSectionTitle>
-        <Grid
-          mobileColumnsCount="1"
-          tabletColumnsCount="3"
-          desktopColumnsCount="3"
-          mobileGridGap="10px"
-          tabletGridGap="10px"
-          desktopGridGap="10px"
-        >
-          <GridItem>
-            <ControlledInput
-              type="text"
-              height="40px"
-              border="1px solid rgba(79,79,79,.5)"
-              borderOnHover="1px solid #000"
-              borderRadius="15px"
-              placeholder="Name"
-              value={nameField}
-              setValue={setNameField}
-            />
-          </GridItem>
-          <GridItem>
-            <ControlledInput
-              type="tel"
-              height="40px"
-              border="1px solid rgba(79,79,79,.5)"
-              borderOnHover="1px solid #000"
-              borderRadius="15px"
-              placeholder="Phone number"
-              value={phoneNumberField}
-              setValue={setPhoneNumberField}
-              required
-            />
-          </GridItem>
-          <GridItem>
-            <ControlledInput
-              type="email"
-              height="40px"
-              border="1px solid rgba(79,79,79,.5)"
-              borderOnHover="1px solid #000"
-              borderRadius="15px"
-              placeholder="E-mail"
-              value={email}
-              setValue={setEmail}
-            />
-          </GridItem>
-        </Grid>
-      </FormSection>
-    </OrderFormContainer>
+    <LocalizationProvider dateAdapter={AdapterMoment}>
+      <OrderFormContainer>
+        <FormSection>
+          <FormSectionTitle>
+            Placing an order
+          </FormSectionTitle>
+          <SwitchButtonSelector
+            buttonsHeight="50px"
+            display="grid"
+            gridColumnsCount="2"
+            gap="10px"
+            values={deliveryTypes}
+            currentValue={selectedDeliveryType}
+            setCurrentValue={setSelectedDeliveryType}
+            buttonsBorderRadius="20px"
+            buttonContentGap="20px"
+            color="red"
+            backgroundColor="#f8f8f8"
+            colorOnSelected="#fff"
+            backgroundColorOnSelected="#4f4f4f"
+            colorOnHover="#fff"
+            backgroundColorOnHover="#1a1919"
+          />
+        </FormSection>
+        <FormSection>
+          <FormSectionTitle>
+            Contacts
+          </FormSectionTitle>
+          <Grid
+            mobileColumnsCount="1"
+            tabletColumnsCount="3"
+            desktopColumnsCount="3"
+            mobileGridGap="10px"
+            tabletGridGap="10px"
+            desktopGridGap="10px"
+          >
+            <GridItem>
+              <FormControl
+                variant="standard"
+                fullWidth
+              >
+                <InputLabel htmlFor="name-field">Name</InputLabel>
+                <Input
+                  id="name-field"
+                  value={nameField}
+                  onChange={({ target }) => {
+                    setNameField(target.value);
+                  }}
+                />
+              </FormControl>
+            </GridItem>
+            <GridItem>
+              <FormControl
+                variant="standard"
+                fullWidth
+              >
+                <InputLabel htmlFor="phone-number-field">Phone number</InputLabel>
+                <Input
+                  id="phone-number-field"
+                  value={phoneNumberField}
+                  onChange={({ target }) => {
+                    setPhoneNumberField(target.value);
+                  }}
+                />
+              </FormControl>
+            </GridItem>
+            <GridItem>
+              <FormControl
+                variant="standard"
+                fullWidth
+              >
+                <InputLabel htmlFor="email-field">E-mail</InputLabel>
+                <Input
+                  id="email-field"
+                  value={email}
+                  onChange={({ target }) => {
+                    setEmail(target.value);
+                  }}
+                />
+              </FormControl>
+            </GridItem>
+          </Grid>
+        </FormSection>
+        <FormSection>
+          <FormSectionTitle>
+            Adress
+          </FormSectionTitle>
+          <GridWithTemplate
+            mobileColumnsCount="2"
+            tabletColumnsCount="3"
+            desktopColumnsCount="3"
+            mobileGridGap="20px 10px"
+            tabletGridGap="20px 10px"
+            desktopGridGap="20px 10px"
+            templateAreasMobile={'"location location" "street street" "house flat" "front-door intercom-code" "floor floor" "comment comment"'}
+            templateAreasTablet={'"logo cart" "nav nav"'}
+            templateAreasDesktop={'"logo nav cart"'}
+          >
+            <GridItemArea
+              areaName="location"
+            >
+              <LocationOnIcon />
+              location
+            </GridItemArea>
+            <GridItemArea
+              areaName="street"
+            >
+              {/* in future will need async request to get streets of city https://mui.com/material-ui/react-autocomplete/ */}
+              <Autocomplete
+                disablePortal
+                options={streets}
+                fullWidth
+                renderInput={(params) => <TextField {...params} label="Street" />}
+                id="blur-on-select"
+              />
+            </GridItemArea>
+            <GridItemArea
+              areaName="house"
+            >
+              <FormControl
+                variant="standard"
+                fullWidth
+              >
+                <InputLabel htmlFor="house-number-field">House №</InputLabel>
+                <Input
+                  id="house-number-field"
+                  value={house}
+                  onChange={({ target }) => {
+                    setHouse(target.value);
+                  }}
+                />
+              </FormControl>
+            </GridItemArea>
+            <GridItemArea
+              areaName="flat"
+            >
+              <FormControl
+                variant="standard"
+                fullWidth
+              >
+                <InputLabel htmlFor="flat-number-field">Flat №</InputLabel>
+                <Input
+                  id="flat-number-field"
+                  value={flat}
+                  onChange={({ target }) => {
+                    setFlat(target.value);
+                  }}
+                />
+              </FormControl>
+            </GridItemArea>
+            <GridItemArea
+              areaName="front-door"
+            >
+              <FormControl
+                variant="standard"
+                fullWidth
+              >
+                <InputLabel htmlFor="entrance-number-field">Entrance №</InputLabel>
+                <Input
+                  id="entrance-number-field"
+                  value={entrance}
+                  onChange={({ target }) => {
+                    setEntrance(target.value);
+                  }}
+                />
+              </FormControl>
+            </GridItemArea>
+            <GridItemArea
+              areaName="intercom-code"
+            >
+              <FormControl
+                variant="standard"
+                fullWidth
+              >
+                <InputLabel htmlFor="intercom-code-field">Intercom code</InputLabel>
+                <Input
+                  id="intercom-code-field"
+                  value={intercomCode}
+                  onChange={({ target }) => {
+                    setIntercomCode(target.value);
+                  }}
+                />
+              </FormControl>
+            </GridItemArea>
+            <GridItemArea
+              areaName="floor"
+            >
+              <FormControl
+                variant="standard"
+                fullWidth
+              >
+                <InputLabel htmlFor="floor-field">Floor №</InputLabel>
+                <Input
+                  id="floor-field"
+                  value={floor}
+                  onChange={({ target }) => {
+                    setFloor(target.value);
+                  }}
+                />
+              </FormControl>
+            </GridItemArea>
+            <GridItemArea
+              areaName="comment"
+            >
+              <FormControl
+                variant="standard"
+                fullWidth
+              >
+                <TextField
+                  label="Comment"
+                  value={comment}
+                  onChange={({ target }) => {
+                    setComment(target.value);
+                  }}
+                  multiline
+                  maxRows={2}
+                />
+              </FormControl>
+            </GridItemArea>
+          </GridWithTemplate>
+        </FormSection>
+        <FormSection>
+          <FormSectionTitle>
+            Date and time
+          </FormSectionTitle>
+          <GridWithTemplate
+            mobileColumnsCount="2"
+            tabletColumnsCount="3"
+            desktopColumnsCount="3"
+            mobileGridGap="20px 10px"
+            tabletGridGap="20px 10px"
+            desktopGridGap="20px 10px"
+            templateAreasMobile={'"date time"'}
+            templateAreasTablet={'"logo cart" "nav nav"'}
+            templateAreasDesktop={'"logo nav cart"'}
+          >
+            <GridItemArea
+              areaName="date"
+            >
+              <DesktopDatePicker
+                label="Date"
+                inputFormat="DD/MM/YYYY"
+                value={date}
+                onChange={(selectedDate) => {
+                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                  setDate(selectedDate!);
+                }}
+                renderInput={(params) => <TextField {...params} />}
+                disablePast
+              />
+            </GridItemArea>
+            <GridItemArea
+              areaName="time"
+            >
+              <TimePicker
+                label="Time"
+                value={date}
+                onChange={(selectedTime) => {
+                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                  setDate(selectedTime!);
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </GridItemArea>
+          </GridWithTemplate>
+        </FormSection>
+        <FormSection>
+          <FormSectionTitle>
+            Payment
+          </FormSectionTitle>
+          <GridWithTemplate
+            mobileColumnsCount="2"
+            tabletColumnsCount="3"
+            desktopColumnsCount="3"
+            mobileGridGap="20px 10px"
+            tabletGridGap="20px 10px"
+            desktopGridGap="20px 10px"
+            templateAreasMobile={'"coupon coupon"'}
+            templateAreasTablet={'"logo cart" "nav nav"'}
+            templateAreasDesktop={'"logo nav cart"'}
+          >
+            <GridItemArea
+              areaName="coupon"
+            >
+              <FormControl
+                variant="standard"
+                fullWidth
+              >
+                <InputLabel id="coupon-field">Coupon</InputLabel>
+                <Select
+                  labelId="coupon-field"
+                  value={coupon}
+                  onChange={({ target }) => {
+                    setCoupon(target.value);
+                  }}
+                  label="Coupon"
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </Select>
+              </FormControl>
+            </GridItemArea>
+            <GridItemArea
+              areaName="payment-type"
+            >
+              <FormControl
+                variant="standard"
+                fullWidth
+              >
+                <InputLabel id="payment-type-field">Payment type</InputLabel>
+                <Select
+                  labelId="payment-type-field"
+                  value={coupon}
+                  onChange={({ target }) => {
+                    setCoupon(target.value);
+                  }}
+                  label="Payment type"
+                >
+                  {paymentTypes.map((type) => (
+                    <MenuItem
+                      key={type}
+                      value={type}
+                    >
+                      {type}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </GridItemArea>
+          </GridWithTemplate>
+        </FormSection>
+      </OrderFormContainer>
+    </LocalizationProvider>
   );
 });
