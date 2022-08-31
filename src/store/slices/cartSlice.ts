@@ -4,6 +4,7 @@ import type { RootState } from '..';
 import KeysOfLocalStorage from '../../utils/constants/keysOfLocalstorage';
 import Good from '../../utils/types/good';
 import PizzaInCart from '../../utils/types/pizzaInCart';
+import { writeToLocalStorage } from '../../utils/helpers/localStorageHelper';
 
 interface MapOfSelectedProducts {
   [key: string]: number;
@@ -43,7 +44,7 @@ export const cartSlice = createSlice({
 
       state.mapOfProducts[goodAsString] += 1;
 
-      localStorage.setItem(
+      writeToLocalStorage(
         KeysOfLocalStorage.CART_MAP_OF_PRODUCTS,
         JSON.stringify(state.mapOfProducts),
       );
@@ -63,7 +64,17 @@ export const cartSlice = createSlice({
         delete state.mapOfProducts[goodAsString];
       }
 
-      localStorage.setItem(
+      writeToLocalStorage(
+        KeysOfLocalStorage.CART_MAP_OF_PRODUCTS,
+        JSON.stringify(state.mapOfProducts),
+      );
+    },
+    removeFullyGood: (state, action: PayloadAction<Good>) => {
+      const goodAsString = JSON.stringify(action.payload);
+
+      delete state.mapOfProducts[goodAsString];
+
+      writeToLocalStorage(
         KeysOfLocalStorage.CART_MAP_OF_PRODUCTS,
         JSON.stringify(state.mapOfProducts),
       );
@@ -71,7 +82,7 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { addGood, removeGood } = cartSlice.actions;
+export const { addGood, removeGood, removeFullyGood } = cartSlice.actions;
 
 export const cartProducts = (state: RootState) => state.cart.mapOfProducts;
 

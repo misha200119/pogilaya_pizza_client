@@ -8,7 +8,19 @@ const OrderGoodsListContainer = memo(styled.ul`
   max-height: 420px;
   width: 100%;
   overflow-y: auto;
-  z-index: 1;
+  z-index: 0;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.08);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #fff;
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    border-radius: 15px;
+  }
 `);
 
 export const OrderGoodsList: FC<{}> = memo(() => {

@@ -20,6 +20,9 @@ const OrderListWrapper = memo(styled.div`
   width: 100%;
   border: 1px solid rgba(0,0,0,.08);
   border-radius: 25px;
+
+  z-index: 1;
+  overflow: auto;
 `);
 
 const OrderListTitle = memo(styled.h1`
