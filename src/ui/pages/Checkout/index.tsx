@@ -10,8 +10,6 @@ const Container = memo(styled.main`
 `);
 
 const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
-  position: relative;
-
   background-color: ${(props) => props.theme.primary};
   color: ${(props) => props.theme.background};
 `);
@@ -27,9 +25,9 @@ export const Checkout: FC<{}> = memo(() => {
           templateAreasMobile={'"your-order" "placing-an-order" '}
           templateAreasTablet={'"placing-an-order your-order"'}
           templateAreasDesktop={'"placing-an-order your-order"'}
-          mobileGridGap="10px"
-          tabletGridGap="10px"
-          desktopGridGap="10px"
+          mobileGridGap="50px"
+          tabletGridGap="50px"
+          desktopGridGap="50px"
         >
           <GridItemArea
             areaName="placing-an-order"

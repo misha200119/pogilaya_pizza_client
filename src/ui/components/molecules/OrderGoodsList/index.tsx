@@ -5,7 +5,10 @@ import { useAppSelector } from '../../../../utils/hooks/reduxHooks';
 import { OrderGoodsListItem } from '../OrderGoodsListItem';
 
 const OrderGoodsListContainer = memo(styled.ul`
-
+  max-height: 420px;
+  width: 100%;
+  overflow-y: auto;
+  z-index: 1;
 `);
 
 export const OrderGoodsList: FC<{}> = memo(() => {

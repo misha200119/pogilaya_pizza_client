@@ -1,5 +1,5 @@
 import React, {
-  memo, FC, useState, useMemo,
+  memo, FC, useState,
 } from 'react';
 import styled from 'styled-components';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -16,8 +16,7 @@ import {
 } from '../../helpers/grid';
 import SwitchButtonSelector from '../SwitchButtonSelector';
 import { useAppSelector } from '../../../../utils/hooks/reduxHooks';
-import { cartProducts } from '../../../../store/slices/cartSlice';
-import PizzaInCart from '../../../../utils/types/pizzaInCart';
+import { countGoodsInCartAndCost } from '../../../../store/slices/cartSlice';
 import Button from '../../athoms/Button';
 
 const deliveryTypes = [
@@ -114,20 +113,8 @@ export const OrderForm: FC<{}> = memo(() => {
   const [coupon, setCoupon] = useState('');
   const [paymentType, setPaymentType] = useState('');
 
-  const cartProductsMap = useAppSelector(cartProducts);
-
-  const countGoodsInCartAndCost = useMemo(() => {
-    let countGoods = 0;
-    let totalCost = 0;
-
-    // eslint-disable-next-line no-restricted-syntax
-    for (const key of Object.keys(cartProductsMap)) {
-      countGoods += cartProductsMap[key];
-      totalCost += (JSON.parse(key) as PizzaInCart).cost * cartProductsMap[key];
-    }
-
-    return { countGoods, totalCost: (totalCost.toFixed(2)) };
-  }, [cartProductsMap]);
+  // eslint-disable-next-line no-underscore-dangle
+  const _countGoodsInCartAndCost = useAppSelector(countGoodsInCartAndCost);
 
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -470,7 +457,7 @@ export const OrderForm: FC<{}> = memo(() => {
             Total
           </FormSectionTitle>
           <p>
-            {countGoodsInCartAndCost.totalCost}
+            {_countGoodsInCartAndCost.totalCost}
             UAH
           </p>
           <ToCartButton>

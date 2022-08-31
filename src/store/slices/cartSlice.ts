@@ -75,4 +75,19 @@ export const { addGood, removeGood } = cartSlice.actions;
 
 export const cartProducts = (state: RootState) => state.cart.mapOfProducts;
 
+export const countGoodsInCartAndCost = (state: RootState) => {
+  const { mapOfProducts: cartProductsMap } = state.cart;
+
+  let countGoods = 0;
+  let totalCost = 0;
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const key of Object.keys(cartProductsMap)) {
+    countGoods += cartProductsMap[key];
+    totalCost += (JSON.parse(key) as PizzaInCart).cost * cartProductsMap[key];
+  }
+
+  return { countGoods, totalCost: (totalCost.toFixed(2)) };
+};
+
 export default cartSlice.reducer;
