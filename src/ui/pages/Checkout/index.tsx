@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { GridWithTemplate, GridItemArea } from '../../components/helpers/grid';
 import { Container as ResponsiveContainer } from '../../components/helpers/responsive';
 import { OrderForm } from '../../components/molecules/OrderForm';
-import { OrderLIst } from '../../components/molecules/OrderList';
+import { OrderList } from '../../components/molecules/OrderList';
 
 const Container = memo(styled.main`
   margin-bottom: 30px;
@@ -39,7 +39,7 @@ export const Checkout: FC<{}> = memo(() => {
           <GridItemArea
             areaName="your-order"
           >
-            <OrderLIst />
+            <OrderList />
           </GridItemArea>
         </GridWithTemplate>
       </StyledResponsiveContainer>
