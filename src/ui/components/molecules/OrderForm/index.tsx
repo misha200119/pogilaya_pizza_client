@@ -1,4 +1,6 @@
-import React, { memo, FC, useState } from 'react';
+import React, {
+  memo, FC, useState, useMemo,
+} from 'react';
 import styled from 'styled-components';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import {
@@ -13,6 +15,10 @@ import {
   Grid, GridItem, GridItemArea, GridWithTemplate,
 } from '../../helpers/grid';
 import SwitchButtonSelector from '../SwitchButtonSelector';
+import { useAppSelector } from '../../../../utils/hooks/reduxHooks';
+import { cartProducts } from '../../../../store/slices/cartSlice';
+import PizzaInCart from '../../../../utils/types/pizzaInCart';
+import Button from '../../athoms/Button';
 
 const deliveryTypes = [
   {
@@ -70,7 +76,27 @@ const FormSection = memo(styled.section`
   grid-gap: 30px;
 `);
 
+const SubmitFormSection = memo(styled(FormSection)`
+  justify-content: center;
+  align-items: center;
+`);
+
 const FormSectionTitle = memo(styled.h2`
+`);
+
+const ToCartButton = memo(styled(Button)`
+  height: 50px;
+  width: 214px;
+  border-radius: 15px;
+
+  color: #fff;
+  background-color: #e31837;
+  
+  &:hover {
+    background-color: #a31228;
+  }
+
+  transition: all 0.3s ease;
 `);
 
 export const OrderForm: FC<{}> = memo(() => {
@@ -87,6 +113,21 @@ export const OrderForm: FC<{}> = memo(() => {
   const [date, setDate] = useState(moment());
   const [coupon, setCoupon] = useState('');
   const [paymentType, setPaymentType] = useState('');
+
+  const cartProductsMap = useAppSelector(cartProducts);
+
+  const countGoodsInCartAndCost = useMemo(() => {
+    let countGoods = 0;
+    let totalCost = 0;
+
+    // eslint-disable-next-line no-restricted-syntax
+    for (const key of Object.keys(cartProductsMap)) {
+      countGoods += cartProductsMap[key];
+      totalCost += (JSON.parse(key) as PizzaInCart).cost * cartProductsMap[key];
+    }
+
+    return { countGoods, totalCost: (totalCost.toFixed(2)) };
+  }, [cartProductsMap]);
 
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -183,9 +224,9 @@ export const OrderForm: FC<{}> = memo(() => {
             mobileGridGap="20px 10px"
             tabletGridGap="20px 10px"
             desktopGridGap="20px 10px"
-            templateAreasMobile={'"location location" "street street" "house flat" "front-door intercom-code" "floor floor" "comment comment"'}
-            templateAreasTablet={'"logo cart" "nav nav"'}
-            templateAreasDesktop={'"logo nav cart"'}
+            templateAreasMobile={'"location location" "street street" "house flat" "front-door intercom-code" "floor ." "comment comment"'}
+            templateAreasTablet={'"location street street" "house flat front-door" "intercom-code floor ." "comment comment ."'}
+            templateAreasDesktop={'"location street street" "house flat front-door" "intercom-code floor ." "comment comment ."'}
           >
             <GridItemArea
               areaName="location"
@@ -322,8 +363,8 @@ export const OrderForm: FC<{}> = memo(() => {
             tabletGridGap="20px 10px"
             desktopGridGap="20px 10px"
             templateAreasMobile={'"date time"'}
-            templateAreasTablet={'"logo cart" "nav nav"'}
-            templateAreasDesktop={'"logo nav cart"'}
+            templateAreasTablet={'"date time ."'}
+            templateAreasDesktop={'"date time ."'}
           >
             <GridItemArea
               areaName="date"
@@ -366,9 +407,9 @@ export const OrderForm: FC<{}> = memo(() => {
             mobileGridGap="20px 10px"
             tabletGridGap="20px 10px"
             desktopGridGap="20px 10px"
-            templateAreasMobile={'"coupon coupon"'}
-            templateAreasTablet={'"logo cart" "nav nav"'}
-            templateAreasDesktop={'"logo nav cart"'}
+            templateAreasMobile={'"coupon coupon" "payment-type payment-type"'}
+            templateAreasTablet={'"coupon coupon coupon" "payment-type payment-type payment-type"'}
+            templateAreasDesktop={'"coupon coupon coupon" "payment-type payment-type payment-type"'}
           >
             <GridItemArea
               areaName="coupon"
@@ -405,9 +446,9 @@ export const OrderForm: FC<{}> = memo(() => {
                 <InputLabel id="payment-type-field">Payment type</InputLabel>
                 <Select
                   labelId="payment-type-field"
-                  value={coupon}
+                  value={paymentType}
                   onChange={({ target }) => {
-                    setCoupon(target.value);
+                    setPaymentType(target.value);
                   }}
                   label="Payment type"
                 >
@@ -424,6 +465,18 @@ export const OrderForm: FC<{}> = memo(() => {
             </GridItemArea>
           </GridWithTemplate>
         </FormSection>
+        <SubmitFormSection>
+          <FormSectionTitle>
+            Total
+          </FormSectionTitle>
+          <p>
+            {countGoodsInCartAndCost.totalCost}
+            UAH
+          </p>
+          <ToCartButton>
+            Order
+          </ToCartButton>
+        </SubmitFormSection>
       </OrderFormContainer>
     </LocalizationProvider>
   );
