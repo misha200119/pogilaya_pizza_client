@@ -111,6 +111,7 @@ export const ProductItem: FC<{}> = memo(() => {
     <ProductItemContainer>
       <Image
         image={image}
+        maxHeight="300px"
       />
       <DescriptionContainer>
         <PizzaName>

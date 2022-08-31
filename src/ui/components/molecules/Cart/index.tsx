@@ -1,10 +1,11 @@
-import React, { memo, useMemo, FC } from 'react';
+import React, { memo, FC } from 'react';
 import styled from 'styled-components';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
+import { useNavigate } from 'react-router-dom';
 import Button from '../../athoms/Button';
 import { useAppSelector } from '../../../../utils/hooks/reduxHooks';
-import { cartProducts } from '../../../../store/slices/cartSlice';
-import PizzaInCart from '../../../../utils/types/pizzaInCart';
+import { countGoodsInCartAndCost } from '../../../../store/slices/cartSlice';
+import { Routes } from '../../../../utils/routes';
 
 const CartContainer = memo(styled.div`
   padding: 1px;
@@ -58,20 +59,10 @@ const CartButtonContentContainer = memo(styled.div`
 `);
 
 const Cart: FC<{}> = memo(() => {
-  const cartProductsMap = useAppSelector(cartProducts);
+  const navigate = useNavigate();
 
-  const countGoodsInCartAndCost = useMemo(() => {
-    let countGoods = 0;
-    let totalCost = 0;
-
-    // eslint-disable-next-line no-restricted-syntax
-    for (const key of Object.keys(cartProductsMap)) {
-      countGoods += cartProductsMap[key];
-      totalCost += (JSON.parse(key) as PizzaInCart).cost * cartProductsMap[key];
-    }
-
-    return { countGoods, totalCost: (totalCost.toFixed(2)) };
-  }, [cartProductsMap]);
+  // eslint-disable-next-line no-underscore-dangle
+  const _countGoodsInCartAndCost = useAppSelector(countGoodsInCartAndCost);
 
   return (
     <CartContainer>
@@ -82,20 +73,23 @@ const Cart: FC<{}> = memo(() => {
       >
         <CartButtonContentContainer>
           <span>
-            {countGoodsInCartAndCost.countGoods}
+            {_countGoodsInCartAndCost.countGoods}
           </span>
           <AiOutlineShoppingCart />
         </CartButtonContentContainer>
       </CartButton>
 
       <CartInfoPrice>
-        {countGoodsInCartAndCost.totalCost}
+        {_countGoodsInCartAndCost.totalCost}
         UAH
       </CartInfoPrice>
 
       <CheckoutButton
         borderRadius="25px"
         height="50px"
+        onClick={() => {
+          navigate(Routes.Checkout);
+        }}
       >
         Checkout
       </CheckoutButton>

@@ -23,29 +23,46 @@ const SwitchButtonsSelectorContainer = memo(styled.div<SwitchButtonsSelectorCont
   `);
 
 interface SwitchButtonProps {
+  height: string;
   border: string;
   padding: string;
   borderRadius: string;
+  color: string;
+  backgroundColor: string;
   selected: boolean;
+  colorOnSelected: string;
+  backgroundColorOnSelected: string;
+  colorOnHover: string;
+  backgroundColorOnHover: string;
+  buttonContentGap?: string;
 }
 
 const SwitchButton = memo(styled(Button)<SwitchButtonProps>`
   width: 100%;
+  height: ${({ height }) => height || 'auto'};
 
   display: flex;
   align-items: center;
   justify-content: center;
+  grid-gap: ${({ buttonContentGap }) => buttonContentGap || '0'};
   padding: ${({ padding }) => padding};
 
   border: 1px solid #e0e0e0;
   border-radius: ${({ borderRadius }) => borderRadius};
 
-  color: ${({ selected }) => (selected ? '#fff' : '#000')};
-  background-color: ${({ selected }) => (selected ? '#4f4f4f' : '#f8f8f8')};
+  color: ${({ selected, colorOnSelected, color }) => (selected ? colorOnSelected : color)};
+  background-color: ${({ selected, backgroundColorOnSelected, backgroundColor }) => (selected ? backgroundColorOnSelected : backgroundColor)};
+
+  & svg {
+    fill: ${({ selected, colorOnSelected, color }) => (selected ? colorOnSelected : color)};
+  }
 
   &:hover {
-    color: #fff;
-    background-color: #222;
+    & svg {
+    fill: ${({ colorOnHover }) => colorOnHover};
+    }
+    color: ${({ colorOnHover }) => colorOnHover};
+    background-color: ${({ backgroundColorOnHover }) => backgroundColorOnHover};
   }
 
   transition: all 0.3s ease;
@@ -53,8 +70,10 @@ const SwitchButton = memo(styled(Button)<SwitchButtonProps>`
   cursor: pointer;
 `);
 
+type Values = Array<{value: any, displayed: JSX.Element}>;
+
 interface Props {
-  values: Array<any>;
+  values: Values;
   currentValue: any;
   setCurrentValue: any;
 
@@ -65,6 +84,15 @@ interface Props {
 
   gap: string;
   buttonsBorderRadius: string;
+  buttonsHeight?: string;
+  buttonContentGap?: string;
+
+  color: string;
+  backgroundColor: string;
+  colorOnSelected: string;
+  backgroundColorOnSelected: string;
+  colorOnHover: string;
+  backgroundColorOnHover: string;
 }
 
 const SwitchButtonSelector: FC<Props> = memo(({
@@ -78,6 +106,15 @@ const SwitchButtonSelector: FC<Props> = memo(({
   setCurrentValue,
 
   buttonsBorderRadius,
+  buttonsHeight,
+  buttonContentGap,
+
+  color,
+  backgroundColor,
+  colorOnSelected,
+  backgroundColorOnSelected,
+  colorOnHover,
+  backgroundColorOnHover,
 }) => {
   return (
     <SwitchButtonsSelectorContainer
@@ -87,17 +124,25 @@ const SwitchButtonSelector: FC<Props> = memo(({
       gap={gap}
     >
       {
-        values.map((value) => (
+        values.map(({ value, displayed }) => (
           <SwitchButton
             selected={value === currentValue}
             disabled={value === currentValue}
             key={value}
             borderRadius={buttonsBorderRadius}
+            buttonContentGap={buttonContentGap}
             onClick={() => {
               setCurrentValue(value);
             }}
+            height={buttonsHeight}
+            color={color}
+            backgroundColor={backgroundColor}
+            colorOnSelected={colorOnSelected}
+            backgroundColorOnSelected={backgroundColorOnSelected}
+            colorOnHover={colorOnHover}
+            backgroundColorOnHover={backgroundColorOnHover}
           >
-            {value}
+            {displayed}
           </SwitchButton>
         ))
       }
