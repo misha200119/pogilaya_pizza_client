@@ -1,5 +1,5 @@
 import React, {
-  memo, FC, useState,
+  memo, FC, useState, useCallback,
 } from 'react';
 import styled from 'styled-components';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -15,7 +15,7 @@ import {
   Grid, GridItem, GridItemArea, GridWithTemplate,
 } from '../../helpers/grid';
 import SwitchButtonSelector from '../SwitchButtonSelector';
-import { useAppSelector } from '../../../../utils/hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../../../../utils/hooks/reduxHooks';
 import { countGoodsInCartAndCost } from '../../../../store/slices/cartSlice';
 import Button from '../../athoms/Button';
 
@@ -115,14 +115,27 @@ export const OrderForm: FC<{}> = memo(() => {
 
   // eslint-disable-next-line no-underscore-dangle
   const _countGoodsInCartAndCost = useAppSelector(countGoodsInCartAndCost);
+  const dispatch = useAppDispatch();
+  const confirmOrder = useCallback(async () => {
+    // dispatch(doOrder({ lol: 'sosi gopu' }));
+
+    await fetch('http://localhost:1488/order', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ lol: 'sosi gopu' }),
+    });
+
+    // eslint-disable-next-line no-console
+    console.log('123');
+  }, [dispatch]);
 
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
       <OrderFormContainer>
         <FormSection>
-          <FormSectionTitle>
-            Placing an order
-          </FormSectionTitle>
+          <FormSectionTitle>Placing an order</FormSectionTitle>
           <SwitchButtonSelector
             buttonsHeight="50px"
             display="grid"
@@ -142,9 +155,7 @@ export const OrderForm: FC<{}> = memo(() => {
           />
         </FormSection>
         <FormSection>
-          <FormSectionTitle>
-            Contacts
-          </FormSectionTitle>
+          <FormSectionTitle>Contacts</FormSectionTitle>
           <Grid
             mobileColumnsCount="1"
             tabletColumnsCount="3"
@@ -154,10 +165,7 @@ export const OrderForm: FC<{}> = memo(() => {
             desktopGridGap="10px"
           >
             <GridItem>
-              <FormControl
-                variant="standard"
-                fullWidth
-              >
+              <FormControl variant="standard" fullWidth>
                 <InputLabel htmlFor="name-field">Name</InputLabel>
                 <Input
                   id="name-field"
@@ -169,11 +177,10 @@ export const OrderForm: FC<{}> = memo(() => {
               </FormControl>
             </GridItem>
             <GridItem>
-              <FormControl
-                variant="standard"
-                fullWidth
-              >
-                <InputLabel htmlFor="phone-number-field">Phone number</InputLabel>
+              <FormControl variant="standard" fullWidth>
+                <InputLabel htmlFor="phone-number-field">
+                  Phone number
+                </InputLabel>
                 <Input
                   id="phone-number-field"
                   value={phoneNumberField}
@@ -184,10 +191,7 @@ export const OrderForm: FC<{}> = memo(() => {
               </FormControl>
             </GridItem>
             <GridItem>
-              <FormControl
-                variant="standard"
-                fullWidth
-              >
+              <FormControl variant="standard" fullWidth>
                 <InputLabel htmlFor="email-field">E-mail</InputLabel>
                 <Input
                   id="email-field"
@@ -201,9 +205,7 @@ export const OrderForm: FC<{}> = memo(() => {
           </Grid>
         </FormSection>
         <FormSection>
-          <FormSectionTitle>
-            Adress
-          </FormSectionTitle>
+          <FormSectionTitle>Adress</FormSectionTitle>
           <GridWithTemplate
             mobileColumnsCount="2"
             tabletColumnsCount="3"
@@ -211,35 +213,34 @@ export const OrderForm: FC<{}> = memo(() => {
             mobileGridGap="20px 10px"
             tabletGridGap="20px 10px"
             desktopGridGap="20px 10px"
-            templateAreasMobile={'"location location" "street street" "house flat" "front-door intercom-code" "floor ." "comment comment"'}
-            templateAreasTablet={'"location street street" "house flat front-door" "intercom-code floor ." "comment comment ."'}
-            templateAreasDesktop={'"location street street" "house flat front-door" "intercom-code floor ." "comment comment ."'}
+            templateAreasMobile={
+              '"location location" "street street" "house flat" "front-door intercom-code" "floor ." "comment comment"'
+            }
+            templateAreasTablet={
+              '"location street street" "house flat front-door" "intercom-code floor ." "comment comment ."'
+            }
+            templateAreasDesktop={
+              '"location street street" "house flat front-door" "intercom-code floor ." "comment comment ."'
+            }
           >
-            <GridItemArea
-              areaName="location"
-            >
+            <GridItemArea areaName="location">
               <LocationOnIcon />
               location
             </GridItemArea>
-            <GridItemArea
-              areaName="street"
-            >
+            <GridItemArea areaName="street">
               {/* in future will need async request to get streets of city https://mui.com/material-ui/react-autocomplete/ */}
               <Autocomplete
                 disablePortal
                 options={streets}
                 fullWidth
-                renderInput={(params) => <TextField {...params} label="Street" />}
+                renderInput={(params) => (
+                  <TextField {...params} label="Street" />
+                )}
                 id="blur-on-select"
               />
             </GridItemArea>
-            <GridItemArea
-              areaName="house"
-            >
-              <FormControl
-                variant="standard"
-                fullWidth
-              >
+            <GridItemArea areaName="house">
+              <FormControl variant="standard" fullWidth>
                 <InputLabel htmlFor="house-number-field">House №</InputLabel>
                 <Input
                   id="house-number-field"
@@ -250,13 +251,8 @@ export const OrderForm: FC<{}> = memo(() => {
                 />
               </FormControl>
             </GridItemArea>
-            <GridItemArea
-              areaName="flat"
-            >
-              <FormControl
-                variant="standard"
-                fullWidth
-              >
+            <GridItemArea areaName="flat">
+              <FormControl variant="standard" fullWidth>
                 <InputLabel htmlFor="flat-number-field">Flat №</InputLabel>
                 <Input
                   id="flat-number-field"
@@ -267,14 +263,11 @@ export const OrderForm: FC<{}> = memo(() => {
                 />
               </FormControl>
             </GridItemArea>
-            <GridItemArea
-              areaName="front-door"
-            >
-              <FormControl
-                variant="standard"
-                fullWidth
-              >
-                <InputLabel htmlFor="entrance-number-field">Entrance №</InputLabel>
+            <GridItemArea areaName="front-door">
+              <FormControl variant="standard" fullWidth>
+                <InputLabel htmlFor="entrance-number-field">
+                  Entrance №
+                </InputLabel>
                 <Input
                   id="entrance-number-field"
                   value={entrance}
@@ -284,14 +277,11 @@ export const OrderForm: FC<{}> = memo(() => {
                 />
               </FormControl>
             </GridItemArea>
-            <GridItemArea
-              areaName="intercom-code"
-            >
-              <FormControl
-                variant="standard"
-                fullWidth
-              >
-                <InputLabel htmlFor="intercom-code-field">Intercom code</InputLabel>
+            <GridItemArea areaName="intercom-code">
+              <FormControl variant="standard" fullWidth>
+                <InputLabel htmlFor="intercom-code-field">
+                  Intercom code
+                </InputLabel>
                 <Input
                   id="intercom-code-field"
                   value={intercomCode}
@@ -301,13 +291,8 @@ export const OrderForm: FC<{}> = memo(() => {
                 />
               </FormControl>
             </GridItemArea>
-            <GridItemArea
-              areaName="floor"
-            >
-              <FormControl
-                variant="standard"
-                fullWidth
-              >
+            <GridItemArea areaName="floor">
+              <FormControl variant="standard" fullWidth>
                 <InputLabel htmlFor="floor-field">Floor №</InputLabel>
                 <Input
                   id="floor-field"
@@ -318,13 +303,8 @@ export const OrderForm: FC<{}> = memo(() => {
                 />
               </FormControl>
             </GridItemArea>
-            <GridItemArea
-              areaName="comment"
-            >
-              <FormControl
-                variant="standard"
-                fullWidth
-              >
+            <GridItemArea areaName="comment">
+              <FormControl variant="standard" fullWidth>
                 <TextField
                   label="Comment"
                   value={comment}
@@ -339,9 +319,7 @@ export const OrderForm: FC<{}> = memo(() => {
           </GridWithTemplate>
         </FormSection>
         <FormSection>
-          <FormSectionTitle>
-            Date and time
-          </FormSectionTitle>
+          <FormSectionTitle>Date and time</FormSectionTitle>
           <GridWithTemplate
             mobileColumnsCount="2"
             tabletColumnsCount="3"
@@ -353,9 +331,7 @@ export const OrderForm: FC<{}> = memo(() => {
             templateAreasTablet={'"date time ."'}
             templateAreasDesktop={'"date time ."'}
           >
-            <GridItemArea
-              areaName="date"
-            >
+            <GridItemArea areaName="date">
               <DesktopDatePicker
                 label="Date"
                 inputFormat="DD/MM/YYYY"
@@ -368,9 +344,7 @@ export const OrderForm: FC<{}> = memo(() => {
                 disablePast
               />
             </GridItemArea>
-            <GridItemArea
-              areaName="time"
-            >
+            <GridItemArea areaName="time">
               <TimePicker
                 label="Time"
                 value={date}
@@ -384,9 +358,7 @@ export const OrderForm: FC<{}> = memo(() => {
           </GridWithTemplate>
         </FormSection>
         <FormSection>
-          <FormSectionTitle>
-            Payment
-          </FormSectionTitle>
+          <FormSectionTitle>Payment</FormSectionTitle>
           <GridWithTemplate
             mobileColumnsCount="2"
             tabletColumnsCount="3"
@@ -395,16 +367,15 @@ export const OrderForm: FC<{}> = memo(() => {
             tabletGridGap="20px 10px"
             desktopGridGap="20px 10px"
             templateAreasMobile={'"coupon coupon" "payment-type payment-type"'}
-            templateAreasTablet={'"coupon coupon coupon" "payment-type payment-type payment-type"'}
-            templateAreasDesktop={'"coupon coupon coupon" "payment-type payment-type payment-type"'}
+            templateAreasTablet={
+              '"coupon coupon coupon" "payment-type payment-type payment-type"'
+            }
+            templateAreasDesktop={
+              '"coupon coupon coupon" "payment-type payment-type payment-type"'
+            }
           >
-            <GridItemArea
-              areaName="coupon"
-            >
-              <FormControl
-                variant="standard"
-                fullWidth
-              >
+            <GridItemArea areaName="coupon">
+              <FormControl variant="standard" fullWidth>
                 <InputLabel id="coupon-field">Coupon</InputLabel>
                 <Select
                   labelId="coupon-field"
@@ -423,13 +394,8 @@ export const OrderForm: FC<{}> = memo(() => {
                 </Select>
               </FormControl>
             </GridItemArea>
-            <GridItemArea
-              areaName="payment-type"
-            >
-              <FormControl
-                variant="standard"
-                fullWidth
-              >
+            <GridItemArea areaName="payment-type">
+              <FormControl variant="standard" fullWidth>
                 <InputLabel id="payment-type-field">Payment type</InputLabel>
                 <Select
                   labelId="payment-type-field"
@@ -440,10 +406,7 @@ export const OrderForm: FC<{}> = memo(() => {
                   label="Payment type"
                 >
                   {paymentTypes.map((type) => (
-                    <MenuItem
-                      key={type}
-                      value={type}
-                    >
+                    <MenuItem key={type} value={type}>
                       {type}
                     </MenuItem>
                   ))}
@@ -453,16 +416,12 @@ export const OrderForm: FC<{}> = memo(() => {
           </GridWithTemplate>
         </FormSection>
         <SubmitFormSection>
-          <FormSectionTitle>
-            Total
-          </FormSectionTitle>
+          <FormSectionTitle>Total</FormSectionTitle>
           <p>
             {_countGoodsInCartAndCost.totalCost}
             UAH
           </p>
-          <ToCartButton>
-            Order
-          </ToCartButton>
+          <ToCartButton onClick={confirmOrder}>Order</ToCartButton>
         </SubmitFormSection>
       </OrderFormContainer>
     </LocalizationProvider>

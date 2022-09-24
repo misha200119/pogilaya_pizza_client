@@ -1,10 +1,11 @@
 /* eslint-disable no-param-reassign */
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '..';
 import KeysOfLocalStorage from '../../utils/constants/keysOfLocalstorage';
 import Good from '../../utils/types/good';
 import PizzaInCart from '../../utils/types/pizzaInCart';
 import { writeToLocalStorage } from '../../utils/helpers/localStorageHelper';
+import { Order } from '../../utils/api/index';
 
 interface MapOfSelectedProducts {
   [key: string]: number;
@@ -83,6 +84,19 @@ export const cartSlice = createSlice({
 });
 
 export const { addGood, removeGood, removeFullyGood } = cartSlice.actions;
+
+export const doOrder = createAsyncThunk(
+  'cart/doOrder',
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async (data: Object, _thunkAPI) => {
+    try {
+      await Order.newOrder(data);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error);
+    }
+  },
+);
 
 export const cartProducts = (state: RootState) => state.cart.mapOfProducts;
 
