@@ -2,6 +2,8 @@
 /* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
 import type { RootState } from '..';
 import KeysOfLocalStorage from '../../utils/constants/keysOfLocalstorage';
 import Good from '../../utils/types/good';
@@ -73,8 +75,14 @@ export const doOrder = createAsyncThunk(
           orderDetails: { ...orderDetails, totalCost },
         },
       });
+
+      return _thunkAPI.fulfillWithValue(response);
     } catch (error) {
-      // eslint-disable-next-line no-console
+      const typedError = error as AxiosError;
+
+      return _thunkAPI.rejectWithValue(
+        `CODE: ${typedError.code} ${typedError.message}`,
+      );
     }
   },
 );
@@ -136,9 +144,11 @@ export const cartSlice = createSlice({
     });
     builder.addCase(doOrder.rejected, (state, _action) => {
       state.isLoadingOrderRequest = false;
+      toast.error(_action.payload as string);
     });
     builder.addCase(doOrder.fulfilled, (state, _action) => {
       state.isLoadingOrderRequest = false;
+      toast.success('Order successful!');
     });
   },
 });

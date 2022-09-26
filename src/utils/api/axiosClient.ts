@@ -17,15 +17,21 @@ if (!isProd) {
   client.interceptors.response.use(
     async (response) => {
       console.log('Request successful!', response);
+
+      return response;
     },
     async (error) => {
       console.error(error, 'error');
+
+      return Promise.reject(error);
     },
   );
 }
 
 const request = async (options: AxiosRequestConfig) => {
-  return client(options);
+  const response = await client(options);
+
+  return response;
 };
 
 const getRequest = async (path: string, urlData = '', config?: AxiosRequestConfig) => {
@@ -40,7 +46,7 @@ const getRequest = async (path: string, urlData = '', config?: AxiosRequestConfi
 };
 
 const postRequest = async (path: string, data?: Object, urlData = '', config?: AxiosRequestConfig) => {
-  const response = request({
+  const response = await request({
     url: path + urlData,
     method: 'POST',
     data,

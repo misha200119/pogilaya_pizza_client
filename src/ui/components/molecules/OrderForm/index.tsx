@@ -123,7 +123,7 @@ export const OrderForm: FC<{}> = memo(() => {
 
   const dispatch = useAppDispatch();
   const confirmOrder = useCallback(async () => {
-    dispatch(
+    await dispatch(
       doOrder({
         selectedDeliveryType,
         nameField,
@@ -448,7 +448,11 @@ export const OrderForm: FC<{}> = memo(() => {
             UAH
           </p>
           <ToCartButton onClick={confirmOrder}>
-            {_isLoadingOrderRequest ? <CircularProgress disableShrink /> : 'Order'}
+            {_isLoadingOrderRequest ? (
+              <CircularProgress disableShrink color="inherit" size="30px" />
+            ) : (
+              'Order'
+            )}
           </ToCartButton>
         </SubmitFormSection>
       </OrderFormContainer>
