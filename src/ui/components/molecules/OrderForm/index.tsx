@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable no-underscore-dangle */
 import React, {
   memo, FC, useState, useCallback,
 } from 'react';
@@ -5,6 +7,7 @@ import styled from 'styled-components';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import {
   Autocomplete,
+  CircularProgress,
   FormControl, Input, InputLabel, MenuItem, Select, TextField,
 } from '@mui/material';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
@@ -16,7 +19,9 @@ import {
 } from '../../helpers/grid';
 import SwitchButtonSelector from '../SwitchButtonSelector';
 import { useAppDispatch, useAppSelector } from '../../../../utils/hooks/reduxHooks';
-import { countGoodsInCartAndCost } from '../../../../store/slices/cartSlice';
+import {
+  countGoodsInCartAndCost, doOrder, isLoadingOrderRequest,
+} from '../../../../store/slices/cartSlice';
 import Button from '../../athoms/Button';
 
 const deliveryTypes = [
@@ -113,23 +118,44 @@ export const OrderForm: FC<{}> = memo(() => {
   const [coupon, setCoupon] = useState('');
   const [paymentType, setPaymentType] = useState('');
 
-  // eslint-disable-next-line no-underscore-dangle
   const _countGoodsInCartAndCost = useAppSelector(countGoodsInCartAndCost);
+  const _isLoadingOrderRequest = useAppSelector(isLoadingOrderRequest);
+
   const dispatch = useAppDispatch();
   const confirmOrder = useCallback(async () => {
-    // dispatch(doOrder({ lol: 'sosi gopu' }));
-
-    await fetch('http://localhost:1488/order', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ lol: 'sosi gopu' }),
-    });
-
-    // eslint-disable-next-line no-console
-    console.log('123');
-  }, [dispatch]);
+    dispatch(
+      doOrder({
+        selectedDeliveryType,
+        nameField,
+        phoneNumberField,
+        email,
+        house,
+        flat,
+        entrance,
+        intercomCode,
+        floor,
+        comment,
+        date,
+        coupon,
+        paymentType,
+      }),
+    );
+  }, [
+    dispatch,
+    selectedDeliveryType,
+    nameField,
+    phoneNumberField,
+    email,
+    house,
+    flat,
+    entrance,
+    intercomCode,
+    floor,
+    comment,
+    date,
+    coupon,
+    paymentType,
+  ]);
 
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>
@@ -421,7 +447,9 @@ export const OrderForm: FC<{}> = memo(() => {
             {_countGoodsInCartAndCost.totalCost}
             UAH
           </p>
-          <ToCartButton onClick={confirmOrder}>Order</ToCartButton>
+          <ToCartButton onClick={confirmOrder}>
+            {_isLoadingOrderRequest ? <CircularProgress disableShrink /> : 'Order'}
+          </ToCartButton>
         </SubmitFormSection>
       </OrderFormContainer>
     </LocalizationProvider>

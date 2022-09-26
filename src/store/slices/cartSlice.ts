@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '..';
@@ -6,6 +8,7 @@ import Good from '../../utils/types/good';
 import PizzaInCart from '../../utils/types/pizzaInCart';
 import { writeToLocalStorage } from '../../utils/helpers/localStorageHelper';
 import { Order } from '../../utils/api/index';
+import OrderDetails from '../../utils/types/orderDetails';
 
 interface MapOfSelectedProducts {
   [key: string]: number;
@@ -13,22 +16,68 @@ interface MapOfSelectedProducts {
 
 interface CartState {
   mapOfProducts: MapOfSelectedProducts;
+  isLoadingOrderRequest: boolean;
 }
 
 // eslint-disable-next-line max-len
 const cartMapFromLocalStorage = localStorage.getItem(KeysOfLocalStorage.CART_MAP_OF_PRODUCTS);
 
-let initialState: CartState;
+let initialState: CartState = {
+  isLoadingOrderRequest: false,
+  mapOfProducts: {},
+};
 
 if (cartMapFromLocalStorage) {
   initialState = {
+    ...initialState,
     mapOfProducts: JSON.parse(cartMapFromLocalStorage),
   };
 } else {
   initialState = {
+    ...initialState,
     mapOfProducts: {},
   };
 }
+
+export const cartProducts = (state: RootState) => state.cart.mapOfProducts;
+
+export const isLoadingOrderRequest = (state: RootState) => state.cart.isLoadingOrderRequest;
+
+export const countGoodsInCartAndCost = (state: RootState) => {
+  const { mapOfProducts: cartProductsMap } = state.cart;
+
+  let countGoods = 0;
+  let totalCost = 0;
+
+  // eslint-disable-next-line no-restricted-syntax
+  for (const key of Object.keys(cartProductsMap)) {
+    countGoods += cartProductsMap[key];
+    totalCost += (JSON.parse(key) as PizzaInCart).cost * cartProductsMap[key];
+  }
+
+  return { countGoods, totalCost: (totalCost.toFixed(2)) };
+};
+
+export const doOrder = createAsyncThunk(
+  'cart/doOrder',
+  async (orderDetails: OrderDetails, _thunkAPI) => {
+    try {
+      const rootState = _thunkAPI.getState() as RootState;
+      const { cart } = rootState;
+
+      const { totalCost } = countGoodsInCartAndCost(rootState);
+
+      const response = await Order.newOrder({
+        data: {
+          cart: cart.mapOfProducts,
+          orderDetails: { ...orderDetails, totalCost },
+        },
+      });
+    } catch (error) {
+      // eslint-disable-next-line no-console
+    }
+  },
+);
 
 export const cartSlice = createSlice({
   name: 'cart',
@@ -81,38 +130,21 @@ export const cartSlice = createSlice({
       );
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(doOrder.pending, (state, _action) => {
+      state.isLoadingOrderRequest = true;
+    });
+    builder.addCase(doOrder.rejected, (state, _action) => {
+      state.isLoadingOrderRequest = false;
+    });
+    builder.addCase(doOrder.fulfilled, (state, _action) => {
+      state.isLoadingOrderRequest = false;
+    });
+  },
 });
 
-export const { addGood, removeGood, removeFullyGood } = cartSlice.actions;
-
-export const doOrder = createAsyncThunk(
-  'cart/doOrder',
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async (data: Object, _thunkAPI) => {
-    try {
-      await Order.newOrder(data);
-    } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error);
-    }
-  },
-);
-
-export const cartProducts = (state: RootState) => state.cart.mapOfProducts;
-
-export const countGoodsInCartAndCost = (state: RootState) => {
-  const { mapOfProducts: cartProductsMap } = state.cart;
-
-  let countGoods = 0;
-  let totalCost = 0;
-
-  // eslint-disable-next-line no-restricted-syntax
-  for (const key of Object.keys(cartProductsMap)) {
-    countGoods += cartProductsMap[key];
-    totalCost += (JSON.parse(key) as PizzaInCart).cost * cartProductsMap[key];
-  }
-
-  return { countGoods, totalCost: (totalCost.toFixed(2)) };
-};
+export const {
+  addGood, removeGood, removeFullyGood,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

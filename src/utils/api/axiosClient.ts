@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import axios, { AxiosRequestConfig } from 'axios';
-// import { REACT_APP_API_DOMAIN } from '../constants/dotenv';
+import { isProd, REACT_APP_API_DEV_DOMAIN, REACT_APP_API_PORT } from '../constants/dotenv';
 
 const baseContentType = 'application/json';
 
@@ -10,25 +10,25 @@ const baseHeaders = {
 };
 
 const client = axios.create({
-  baseURL: 'http://localhost:1488',
+  baseURL: `${REACT_APP_API_DEV_DOMAIN}${REACT_APP_API_PORT}`,
 });
 
-client.interceptors.response.use(
-  async (response) => {
-    console.log('Request successful!', response);
-  },
-  async (error) => {
-    console.error(error, 'error');
-  },
-);
+if (!isProd) {
+  client.interceptors.response.use(
+    async (response) => {
+      console.log('Request successful!', response);
+    },
+    async (error) => {
+      console.error(error, 'error');
+    },
+  );
+}
 
-const request = async (options: AxiosRequestConfig<any>) => {
-  console.log(client, 'client');
-
+const request = async (options: AxiosRequestConfig) => {
   return client(options);
 };
 
-const getRequest = async (path: string, urlData = '', config?: AxiosRequestConfig<any>) => {
+const getRequest = async (path: string, urlData = '', config?: AxiosRequestConfig) => {
   const response = request({
     url: path + urlData,
     method: 'GET',
@@ -39,7 +39,7 @@ const getRequest = async (path: string, urlData = '', config?: AxiosRequestConfi
   return response;
 };
 
-const postRequest = async (path: string, data?: Object, urlData = '', config?: AxiosRequestConfig<any>) => {
+const postRequest = async (path: string, data?: Object, urlData = '', config?: AxiosRequestConfig) => {
   const response = request({
     url: path + urlData,
     method: 'POST',
@@ -50,7 +50,7 @@ const postRequest = async (path: string, data?: Object, urlData = '', config?: A
   return response;
 };
 
-const patchRequest = async (path: string, data?: Object, urlData = '', config?: AxiosRequestConfig<any>) => {
+const patchRequest = async (path: string, data?: Object, urlData = '', config?: AxiosRequestConfig) => {
   const response = request({
     url: path + urlData,
     method: 'PATCH',
@@ -65,7 +65,7 @@ const deleteRequest = async (
   path: string,
   data?: Object,
   urlData = '',
-  config?: AxiosRequestConfig<any>,
+  config?: AxiosRequestConfig,
 ) => {
   const response = request({
     url: path + urlData,
