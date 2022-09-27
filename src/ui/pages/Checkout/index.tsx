@@ -6,7 +6,7 @@ import { OrderForm } from '../../components/molecules/OrderForm';
 import { OrderList } from '../../components/molecules/OrderList';
 
 const Container = memo(styled.main`
-  margin-bottom: 30px;
+  padding: 30px 0 30px 0;
 `);
 
 const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
@@ -16,8 +16,8 @@ const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
 
 export const Checkout: FC<{}> = memo(() => {
   return (
-    <Container>
-      <StyledResponsiveContainer>
+    <StyledResponsiveContainer>
+      <Container>
         <GridWithTemplate
           mobileColumnsCount="1"
           tabletColumnsCount="2"
@@ -29,18 +29,14 @@ export const Checkout: FC<{}> = memo(() => {
           tabletGridGap="50px"
           desktopGridGap="50px"
         >
-          <GridItemArea
-            areaName="placing-an-order"
-          >
+          <GridItemArea areaName="placing-an-order">
             <OrderForm />
           </GridItemArea>
-          <GridItemArea
-            areaName="your-order"
-          >
+          <GridItemArea areaName="your-order">
             <OrderList />
           </GridItemArea>
         </GridWithTemplate>
-      </StyledResponsiveContainer>
-    </Container>
+      </Container>
+    </StyledResponsiveContainer>
   );
 });

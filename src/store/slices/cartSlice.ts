@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable no-console */
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
@@ -8,7 +6,7 @@ import type { RootState } from '..';
 import KeysOfLocalStorage from '../../utils/constants/keysOfLocalstorage';
 import Good from '../../utils/types/good';
 import PizzaInCart from '../../utils/types/pizzaInCart';
-import { writeToLocalStorage } from '../../utils/helpers/localStorageHelper';
+import { writeToLocalStorage, readFromLocalStorage } from '../../utils/helpers/localStorageHelper';
 import { Order } from '../../utils/api/index';
 import OrderDetails from '../../utils/types/orderDetails';
 
@@ -21,8 +19,7 @@ interface CartState {
   isLoadingOrderRequest: boolean;
 }
 
-// eslint-disable-next-line max-len
-const cartMapFromLocalStorage = localStorage.getItem(KeysOfLocalStorage.CART_MAP_OF_PRODUCTS);
+const cartMapFromLocalStorage = readFromLocalStorage(KeysOfLocalStorage.CART_MAP_OF_PRODUCTS);
 
 let initialState: CartState = {
   isLoadingOrderRequest: false,
@@ -87,14 +84,14 @@ export const doOrder = createAsyncThunk(
         return _thunkAPI.rejectWithValue(`Firstly fill that fields: [${emptyFields.join(', ')}]`);
       }
 
-      const response = await Order.newOrder({
+      await Order.newOrder({
         data: {
           cart: cart.mapOfProducts,
           orderDetails: { ...orderDetails, totalCost },
         },
       });
 
-      return _thunkAPI.fulfillWithValue(response);
+      return _thunkAPI.fulfillWithValue(true);
     } catch (error) {
       const typedError = error as AxiosError;
 
@@ -157,14 +154,14 @@ export const cartSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(doOrder.pending, (state, _action) => {
+    builder.addCase(doOrder.pending, (state) => {
       state.isLoadingOrderRequest = true;
     });
     builder.addCase(doOrder.rejected, (state, _action) => {
       state.isLoadingOrderRequest = false;
       toast.error(_action.payload as string);
     });
-    builder.addCase(doOrder.fulfilled, (state, _action) => {
+    builder.addCase(doOrder.fulfilled, (state) => {
       state.isLoadingOrderRequest = false;
       toast.success('Order successful!');
     });

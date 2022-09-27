@@ -131,21 +131,22 @@ const mockDataAvaliblePizza: Array<Section> = [
 ];
 
 const Container = memo(styled.main`
-  margin-bottom: 30px;
-`);
-
-const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
+  padding: 30px 0 30px 0;
   display: flex;
   grid-gap: 100px;
   flex-direction: column;
+`);
+
+const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
+
   background-color: ${(props) => props.theme.primary};
   color: ${(props) => props.theme.background};
 `);
 
 export const Catalog = memo(() => {
   return (
-    <Container>
-      <StyledResponsiveContainer>
+    <StyledResponsiveContainer>
+      <Container>
         {/* <SortOptions /> */}
         {mockDataAvaliblePizza.map(({ sectionName, products }) => (
           <ProductSection
@@ -154,8 +155,11 @@ export const Catalog = memo(() => {
             products={products}
           />
         ))}
-        <p>* the weight of the freshly prepared product. Weight in delivery orders can be separated due to dehydration of the product.</p>
-      </StyledResponsiveContainer>
-    </Container>
+        <p>
+          * the weight of the freshly prepared product. Weight in delivery
+          orders can be separated due to dehydration of the product.
+        </p>
+      </Container>
+    </StyledResponsiveContainer>
   );
 });

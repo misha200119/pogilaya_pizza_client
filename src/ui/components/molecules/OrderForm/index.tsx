@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 import React, {
-  memo, FC, useState, useCallback,
+  memo, FC, useState, useCallback, useMemo,
 } from 'react';
 import styled from 'styled-components';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -108,6 +108,8 @@ export const OrderForm: FC<{}> = memo(() => {
   const [nameField, setNameField] = useState('');
   const [phoneNumberField, setPhoneNumberField] = useState('');
   const [email, setEmail] = useState('');
+  const [_street, _setStreet] = useState({ label: '' });
+  const street = useMemo(() => _street.label, [_street]);
   const [house, setHouse] = useState('');
   const [flat, setFlat] = useState('');
   const [entrance, setEntrance] = useState('');
@@ -129,6 +131,7 @@ export const OrderForm: FC<{}> = memo(() => {
         nameField,
         phoneNumberField,
         email,
+        street,
         house,
         flat,
         entrance,
@@ -263,6 +266,11 @@ export const OrderForm: FC<{}> = memo(() => {
                   <TextField {...params} label="Street" />
                 )}
                 id="blur-on-select"
+                value={_street}
+                onChange={(_, value) => {
+                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                  _setStreet(value!);
+                }}
               />
             </GridItemArea>
             <GridItemArea areaName="house">
@@ -414,9 +422,9 @@ export const OrderForm: FC<{}> = memo(() => {
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  <MenuItem value="10">Ten</MenuItem>
+                  <MenuItem value="20">Twenty</MenuItem>
+                  <MenuItem value="30">Thirty</MenuItem>
                 </Select>
               </FormControl>
             </GridItemArea>

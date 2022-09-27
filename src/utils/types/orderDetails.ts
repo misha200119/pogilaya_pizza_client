@@ -4,6 +4,7 @@ interface OrderDetails {
   selectedDeliveryType: string;
   nameField: string;
   phoneNumberField: string;
+  street: string;
   email: string;
   house: string;
   flat: string;
