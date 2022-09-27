@@ -69,6 +69,24 @@ export const doOrder = createAsyncThunk(
 
       const { totalCost } = countGoodsInCartAndCost(rootState);
 
+      if (Object.keys(cart.mapOfProducts).length === 0) {
+        return _thunkAPI.rejectWithValue('Cart is empty');
+      }
+
+      const emptyFields = [];
+      const fields = Object.keys(orderDetails);
+
+      // eslint-disable-next-line no-restricted-syntax
+      for (const key of fields) {
+        if (!orderDetails[key as keyof OrderDetails]) {
+          emptyFields.push(key);
+        }
+      }
+
+      if (emptyFields.length) {
+        return _thunkAPI.rejectWithValue(`Firstly fill that fields: [${emptyFields.join(', ')}]`);
+      }
+
       const response = await Order.newOrder({
         data: {
           cart: cart.mapOfProducts,
