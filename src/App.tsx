@@ -2,9 +2,7 @@ import React, { memo } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import Header from './ui/components/organisms/Header';
 import { mapRoutes, mappableUtilRoutes, mappableRoutes } from './utils/routes';
-import Footer from './ui/components/organisms/Footer';
 import { useAppSelector } from './utils/hooks/reduxHooks';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,12 +16,10 @@ export const App: React.FC<{}> = memo(() => {
   return (
     <>
       <ThemeProvider theme={currentTheme}>
-        <Header />
         <Routes>
           {mapRoutes(mappableRoutes)}
           {mapRoutes(mappableUtilRoutes)}
         </Routes>
-        <Footer />
       </ThemeProvider>
       <ToastContainer
         position="bottom-right"

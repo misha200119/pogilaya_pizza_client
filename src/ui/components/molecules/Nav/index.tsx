@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+// eslint-disable-next-line import/no-cycle
 import { mappableRoutes } from '../../../../utils/routes';
 
 const NavContainer = memo(styled.nav`

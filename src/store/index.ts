@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from './slices/cartSlice';
+// eslint-disable-next-line import/no-cycle
 import themeReducer from './slices/themeSlice';
 
 export const store = configureStore({

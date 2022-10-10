@@ -7,7 +7,6 @@ import KeysOfLocalStorage from '../../utils/constants/keysOfLocalstorage';
 import Good from '../../utils/types/good';
 import PizzaInCart from '../../utils/types/pizzaInCart';
 import { writeToLocalStorage, readFromLocalStorage } from '../../utils/helpers/localStorageHelper';
-import { Order } from '../../utils/api/index';
 import OrderDetails from '../../utils/types/orderDetails';
 
 interface MapOfSelectedProducts {
@@ -64,6 +63,7 @@ export const doOrder = createAsyncThunk(
       const rootState = _thunkAPI.getState() as RootState;
       const { cart } = rootState;
 
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { totalCost } = countGoodsInCartAndCost(rootState);
 
       if (Object.keys(cart.mapOfProducts).length === 0) {
@@ -84,12 +84,12 @@ export const doOrder = createAsyncThunk(
         return _thunkAPI.rejectWithValue(`Firstly fill that fields: [${emptyFields.join(', ')}]`);
       }
 
-      await Order.newOrder({
-        data: {
-          cart: cart.mapOfProducts,
-          orderDetails: { ...orderDetails, totalCost },
-        },
-      });
+      // await Order.newOrder({
+      //   data: {
+      //     cart: cart.mapOfProducts,
+      //     orderDetails: { ...orderDetails, totalCost },
+      //   },
+      // });
 
       return _thunkAPI.fulfillWithValue(true);
     } catch (error) {

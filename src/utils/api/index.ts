@@ -99,16 +99,3 @@ const RequestTypes = {
 };
 
 export default RequestTypes;
-
-/// ///////////////////////////////////////////////////////
-// import APIEndpoints from '../constants/APIEndpoints';
-
-// const newOrder = async (data: Object) => {
-//   const response = await RequestTypes.postRequest(APIEndpoints.ORDER, data);
-
-//   return response;
-// };
-
-// export const Order = {
-//   newOrder,
-// };
