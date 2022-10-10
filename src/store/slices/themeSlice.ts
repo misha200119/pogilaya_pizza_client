@@ -14,9 +14,6 @@ const isCurrentSystemThemeDark = window.matchMedia('(prefers-color-scheme: dark)
 // eslint-disable-next-line max-len
 const initialTheme = themes[readFromLocalStorage(KeysOfLocalStorage.THEME) || isCurrentSystemThemeDark ? Themes.DARK : Themes.LIGHT];
 
-// eslint-disable-next-line no-console
-console.log(initialTheme);
-
 const initialState: ThemeState = {
   currentTheme: initialTheme,
 };
