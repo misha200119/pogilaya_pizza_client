@@ -1,12 +1,14 @@
+/* eslint-disable import/no-cycle */
 import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from './slices/cartSlice';
-// eslint-disable-next-line import/no-cycle
 import themeReducer from './slices/themeSlice';
+import authReducer from './slices/userAuthSlice';
 
 export const store = configureStore({
   reducer: {
     cart: cartReducer,
     theme: themeReducer,
+    auth: authReducer,
   },
 });
 

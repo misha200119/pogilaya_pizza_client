@@ -8,7 +8,9 @@ export default class AuthService {
   }
 
   static async login(login: string, password: string) {
-    return api.postRequest<AuthResponse>(APIEndpoints.LOGIN, { login, password });
+    return api.postRequest<AuthResponse>(APIEndpoints.LOGIN, {
+      auth: { login, password },
+    });
   }
 
   static async logout() {

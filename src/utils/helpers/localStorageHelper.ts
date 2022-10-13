@@ -12,3 +12,7 @@ export const writeToLocalStorage = (key: KeysOfLocalStorage, value: Object | str
 export const readFromLocalStorage = (key: KeysOfLocalStorage) => {
   return localStorage.getItem(key) || null;
 };
+
+export const removeFromLocalStorage = (key: KeysOfLocalStorage) => {
+  localStorage.removeItem(key);
+};

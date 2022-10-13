@@ -14,7 +14,7 @@ const baseHeaders = {
 
 const client = axios.create({
   baseURL,
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 if (!isProd) {
@@ -57,6 +57,9 @@ const getRequest = async <T>(path: string, urlData = '', config?: AxiosRequestCo
 };
 
 const postRequest = async <T>(path: string, data?: Object, urlData = '', config?: AxiosRequestConfig) => {
+  // eslint-disable-next-line no-console
+  console.log('it has calls');
+
   const response = await request<T>({
     ...config,
     url: path + urlData,
