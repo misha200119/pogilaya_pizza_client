@@ -1,6 +1,11 @@
 import React, { ReactElement } from 'react';
 import { Navigate, Route } from 'react-router-dom';
+// eslint-disable-next-line import/no-cycle
+import Header from '../../ui/components/organisms/Header';
+import { AdminPage } from '../../ui/pages/Admin';
+// eslint-disable-next-line import/no-cycle
 import { Catalog as CatalogPage } from '../../ui/pages/Catalog';
+// eslint-disable-next-line import/no-cycle
 import { Checkout as CheckoutPage } from '../../ui/pages/Checkout';
 
 // eslint-disable-next-line no-shadow
@@ -9,6 +14,9 @@ export enum Routes {
   Catalog = '/catalog',
   AboutUs = '/about-us',
   Checkout = '/checkout',
+
+  ADMIN = '/admin',
+
   Wrong = '*',
 }
 
@@ -27,7 +35,12 @@ export const mappableRoutes: Array<MappableRoute> = [
   {
     link: Routes.AboutUs,
     linkText: 'ABOUT US',
-    describedComponent: <div>about us route</div>,
+    describedComponent: (
+      <>
+        <Header />
+        <div>about us route</div>
+      </>
+    ),
   },
 ];
 
@@ -40,12 +53,22 @@ export const mappableUtilRoutes = [
   {
     link: Routes.Wrong,
     linkText: 'WRONG ADRESS',
-    describedComponent: <div>error 404</div>,
+    describedComponent: (
+      <>
+        <Header />
+        <div>error 404</div>
+      </>
+    ),
   },
   {
     link: Routes.Checkout,
     linkText: 'CHECKOUT',
     describedComponent: <CheckoutPage />,
+  },
+  {
+    link: Routes.ADMIN,
+    linkText: 'ADMIN',
+    describedComponent: <AdminPage />,
   },
 ];
 

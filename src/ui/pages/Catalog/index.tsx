@@ -7,6 +7,9 @@ import { Section } from '../../../utils/types/section';
 import { ProductSection } from '../../components/molecules/ProductSection';
 // import { SortOptions } from '../../components/molecules/SortOptions';
 import { Container as ResponsiveContainer } from '../../components/helpers/responsive';
+// eslint-disable-next-line import/no-cycle
+import Header from '../../components/organisms/Header';
+import Footer from '../../components/organisms/Footer';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const mockDataAvaliblePizza: Array<Section> = [
@@ -131,31 +134,39 @@ const mockDataAvaliblePizza: Array<Section> = [
 ];
 
 const Container = memo(styled.main`
-  margin-bottom: 30px;
-`);
-
-const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
+  padding: 30px 0 30px 0;
   display: flex;
   grid-gap: 100px;
   flex-direction: column;
+`);
+
+const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
+
   background-color: ${(props) => props.theme.primary};
   color: ${(props) => props.theme.background};
 `);
 
 export const Catalog = memo(() => {
   return (
-    <Container>
+    <>
+      <Header />
       <StyledResponsiveContainer>
-        {/* <SortOptions /> */}
-        {mockDataAvaliblePizza.map(({ sectionName, products }) => (
-          <ProductSection
-            key={v4()}
-            sectionName={sectionName}
-            products={products}
-          />
-        ))}
-        <p>* the weight of the freshly prepared product. Weight in delivery orders can be separated due to dehydration of the product.</p>
+        <Container>
+          {/* <SortOptions /> */}
+          {mockDataAvaliblePizza.map(({ sectionName, products }) => (
+            <ProductSection
+              key={v4()}
+              sectionName={sectionName}
+              products={products}
+            />
+          ))}
+          <p>
+            * the weight of the freshly prepared product. Weight in delivery
+            orders can be separated due to dehydration of the product.
+          </p>
+        </Container>
       </StyledResponsiveContainer>
-    </Container>
+      <Footer />
+    </>
   );
 });

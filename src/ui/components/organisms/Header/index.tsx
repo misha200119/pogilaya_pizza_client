@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable max-len */
 import React, { FC, memo } from 'react';
 import styled from 'styled-components';
@@ -11,6 +12,7 @@ import { Container as ResponsiveContainer } from '../../helpers/responsive';
 
 import Cart from '../../molecules/Cart';
 import Nav from '../../molecules/Nav';
+import ThemeSwitcher from '../../molecules/ThemeSwitcher';
 
 const logoImage = '/images/Logo.webp';
 
@@ -20,7 +22,6 @@ const Container = memo(styled.header`
 
   position: sticky;
   top: 0;
-  margin-bottom: 40px;
   z-index: 1;
 `);
 
@@ -58,6 +59,7 @@ const Header: FC<{}> = memo(() => {
               alignItems: 'center',
             }}
           >
+            <ThemeSwitcher sx={{ m: 1 }} />
             <Cart />
           </GridItemArea>
 
