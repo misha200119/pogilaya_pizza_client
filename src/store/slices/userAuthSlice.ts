@@ -8,7 +8,7 @@ import { RootState } from '..';
 import { IUser } from '../../utils/models/user/IUser';
 import { LoginCredentials } from '../../utils/types/loginCredentials';
 import AuthService from '../../utils/services/auth';
-import { removeFromLocalStorage, writeToLocalStorage } from '../../utils/helpers/localStorageHelper';
+import { readFromLocalStorage, removeFromLocalStorage, writeToLocalStorage } from '../../utils/helpers/localStorageHelper';
 import KeysOfLocalStorage from '../../utils/constants/keysOfLocalstorage';
 import { AuthResponse } from '../../utils/models/auth/authResponse';
 
@@ -65,6 +65,12 @@ export const register = createAsyncThunk('userAuth/register', async (payload: Lo
 
 export const checkAuth = createAsyncThunk('userAuth/checkAuth', async (_: undefined, _thunkAPI) => {
   try {
+    const accesToken = readFromLocalStorage(KeysOfLocalStorage.ACCESS_TOKEN);
+
+    if (!accesToken) {
+      return _thunkAPI.rejectWithValue(null);
+    }
+
     const response = await AuthService.checkAuth();
 
     return _thunkAPI.fulfillWithValue(response.data);
@@ -148,8 +154,7 @@ const userAuthSlice = createSlice({
       const { userDTO, accessToken, refreshToken } = _action.payload as unknown as AuthResponse;
 
       writeToLocalStorage(KeysOfLocalStorage.ACCESS_TOKEN, accessToken);
-      // eslint-disable-next-line no-console
-      console.log(_action.payload);
+      state.user = userDTO;
     });
   },
 });
