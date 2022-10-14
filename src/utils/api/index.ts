@@ -7,15 +7,17 @@ import { readFromLocalStorage } from '../helpers/localStorageHelper';
 
 const baseContentType = 'application/json';
 
-const baseHeaders = {
+export const baseHeaders = {
   'Content-Type': baseContentType,
   Accept: baseContentType,
 };
 
-const client = axios.create({
+export const baseRequestConfig: AxiosRequestConfig = {
   baseURL,
-  // withCredentials: true,
-});
+  withCredentials: true,
+};
+
+const client = axios.create(baseRequestConfig);
 
 if (!isProd) {
   client.interceptors.response.use(
@@ -46,20 +48,23 @@ const request = async <T>(options: AxiosRequestConfig): Promise<AxiosResponse<T>
 };
 
 const getRequest = async <T>(path: string, urlData = '', config?: AxiosRequestConfig) => {
+  if (config && config.headers) {
+    const { headers } = config;
+
+    // eslint-disable-next-line no-param-reassign
+    config.headers = { ...baseHeaders, ...headers };
+  }
+
   const response = request<T>({
     ...config,
     url: path + urlData,
     method: 'GET',
-    headers: baseHeaders,
   });
 
   return response;
 };
 
 const postRequest = async <T>(path: string, data?: Object, urlData = '', config?: AxiosRequestConfig) => {
-  // eslint-disable-next-line no-console
-  console.log('it has calls');
-
   const response = await request<T>({
     ...config,
     url: path + urlData,

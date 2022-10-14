@@ -6,7 +6,7 @@ import React, {
 import styled from 'styled-components';
 import { Container as ResponsiveContainer } from '../../helpers/responsive';
 import { isTryingLogin, login as _login } from '../../../../store/slices/userAuthSlice';
-import { useAppDispatch } from '../../../../utils/hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../../../../utils/hooks/reduxHooks';
 
 const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
   background-color: ${(props) => props.theme.primary};
@@ -19,7 +19,7 @@ export const LoginForm: FC<{}> = memo(() => {
   const [password, setPassword] = useState('');
 
   const onSubmit = useCallback(async () => {
-    dispatch(_login({ login, password }));
+    await dispatch(_login({ login, password }));
   }, [login, password]);
 
   return (
