@@ -163,5 +163,6 @@ export const isAuth = (state: RootState) => !!(state.auth.user);
 export const user = (state: RootState) => state.auth.user;
 export const isTryingLogin = (state: RootState) => state.auth.isTryingLogin;
 export const isTryingLogout = (state: RootState) => state.auth.isTryingLogout;
+export const isCheckingAuth = (state: RootState) => state.auth.isCheckingAuth;
 
 export default userAuthSlice.reducer;
