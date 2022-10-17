@@ -2,6 +2,7 @@
 import React, { ReactElement } from 'react';
 import { Navigate, Route } from 'react-router-dom';
 import Header from '../../ui/components/organisms/Header';
+import { LoginForm } from '../../ui/components/organisms/LoginForm';
 import { PrivateRoute } from '../../ui/components/utils/privateRoute';
 import { AdminPage } from '../../ui/pages/Admin';
 import { Catalog as CatalogPage } from '../../ui/pages/Catalog';
@@ -16,6 +17,7 @@ export enum Routes {
   Checkout = '/checkout',
 
   LOGIN = '/login',
+  ADMIN = '/admin',
   ADMIN_DASHBOARD = '/admin/dashboard',
 
   Wrong = '*',
@@ -75,14 +77,14 @@ export const mappableUtilRoutes: Array<MappableRoute> = [
   },
   {
     link: Routes.LOGIN,
-    linkText: 'ADMIN',
-    describedComponent: <AdminPage />,
+    linkText: 'LOGIN',
+    describedComponent: <LoginForm />,
     isPrivate: false,
   },
   {
-    link: Routes.ADMIN_DASHBOARD,
-    linkText: 'ADMIN DASHBOARD',
-    describedComponent: <div>admin dashboard</div>,
+    link: Routes.ADMIN,
+    linkText: 'ADMIN',
+    describedComponent: <AdminPage />,
     isPrivate: true,
     onlyFor: Roles.ADMIN,
   },

@@ -12,6 +12,6 @@ const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
 
 export const AdminPage: FC<{}> = memo(() => {
   return (
-    <LoginForm />
+    <div>dsadsadsadas</div>
   );
 });
