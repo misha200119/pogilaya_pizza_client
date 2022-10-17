@@ -1,19 +1,30 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { mapRoutes, mappableUtilRoutes, mappableRoutes } from './utils/routes';
-import { useAppSelector } from './utils/hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from './utils/hooks/reduxHooks';
+import { isCheckingAuth as _isCheckingAuth, checkAuth } from './store/slices/userAuthSlice';
 
 import 'react-toastify/dist/ReactToastify.css';
 import { currentTheme as _currentTheme } from './store/slices/themeSlice';
+import { Loading } from './ui/pages/Loading';
+
 // minified version is also included
 // import 'react-toastify/dist/ReactToastify.min.css';
 
 export const App: React.FC<{}> = memo(() => {
+  const dispatch = useAppDispatch();
   const currentTheme = useAppSelector(_currentTheme);
+  const isCheckingAuth = useAppSelector(_isCheckingAuth);
 
-  return (
+  useEffect(() => {
+    dispatch(checkAuth());
+  }, []);
+
+  return isCheckingAuth ? (
+    <Loading />
+  ) : (
     <>
       <ThemeProvider theme={currentTheme}>
         <Routes>

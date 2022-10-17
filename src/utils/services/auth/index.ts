@@ -1,4 +1,5 @@
-import api from '../../api';
+import axios from 'axios';
+import api, { baseRequestConfig } from '../../api';
 import { AuthResponse } from '../../models/auth/authResponse';
 import APIEndpoints from '../../constants/APIEndpoints';
 
@@ -15,5 +16,9 @@ export default class AuthService {
 
   static async logout() {
     return api.postRequest<void>(APIEndpoints.LOGOUT);
+  }
+
+  static async checkAuth() {
+    return axios.get<AuthResponse>(APIEndpoints.REFRESH, baseRequestConfig);
   }
 }

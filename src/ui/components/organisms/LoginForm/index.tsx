@@ -1,12 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, {
-  FC, memo, useCallback, useState,
+  FC, memo, useCallback, useState, useEffect,
 } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import { Container as ResponsiveContainer } from '../../helpers/responsive';
 import { isTryingLogin, login as _login } from '../../../../store/slices/userAuthSlice';
 import { useAppDispatch } from '../../../../utils/hooks/reduxHooks';
+import { useAuth } from '../../../../utils/hooks/auth/useAuth';
 
 const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
   background-color: ${(props) => props.theme.primary};
@@ -17,10 +19,21 @@ export const LoginForm: FC<{}> = memo(() => {
   const dispatch = useAppDispatch();
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const auth = useAuth();
+  const navigate = useNavigate();
+  const [isFirstRender, setFirstRender] = useState(true);
 
   const onSubmit = useCallback(async () => {
-    dispatch(_login({ login, password }));
+    await dispatch(_login({ login, password }));
   }, [login, password]);
+
+  useEffect(() => {
+    if (!isFirstRender && auth.isAuth && auth.user) {
+      navigate(-1);
+    }
+
+    setFirstRender(false);
+  }, [auth]);
 
   return (
     <StyledResponsiveContainer>
