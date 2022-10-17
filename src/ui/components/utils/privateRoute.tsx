@@ -16,9 +16,12 @@ export const PrivateRoute: FC<Props> = memo(({
 }) => {
   const auth = useAuth();
 
+  // eslint-disable-next-line no-console
+  console.log(auth, 'auth');
+
   if (auth.isAuth && onlyFor === auth.user?.role) {
     return element;
   }
 
-  return (<Navigate to={Routes.ADMIN} replace />);
+  return (<Navigate to={Routes.LOGIN} replace />);
 });

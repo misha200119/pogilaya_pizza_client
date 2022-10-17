@@ -15,7 +15,7 @@ export enum Routes {
   AboutUs = '/about-us',
   Checkout = '/checkout',
 
-  ADMIN = '/admin',
+  LOGIN = '/login',
   ADMIN_DASHBOARD = '/admin/dashboard',
 
   Wrong = '*',
@@ -74,7 +74,7 @@ export const mappableUtilRoutes: Array<MappableRoute> = [
     isPrivate: false,
   },
   {
-    link: Routes.ADMIN,
+    link: Routes.LOGIN,
     linkText: 'ADMIN',
     describedComponent: <AdminPage />,
     isPrivate: false,
