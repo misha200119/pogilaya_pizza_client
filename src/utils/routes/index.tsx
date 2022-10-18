@@ -77,6 +77,23 @@ export const mappableUtilRoutes: Array<MappableRoute> = [
   },
 ];
 
+export const adminDashboardRoutes = [
+  {
+    link: Routes.ADMIN_DASHBOARD,
+    linkText: 'DASHBOARD',
+    describedComponent: <div>admin dashboard</div>,
+    isPrivate: true,
+    onlyFor: Roles.ADMIN,
+  },
+  {
+    link: Routes.ADMIN_ORDERS,
+    linkText: 'ORDERS',
+    describedComponent: <div>orders</div>,
+    isPrivate: true,
+    onlyFor: Roles.USER,
+  },
+];
+
 /**
  * @param routes array of mappable objects that describes routes
  * @returns array of react elements (Routes)
