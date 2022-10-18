@@ -5,8 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../athoms/Button';
 import { useAppSelector } from '../../../../utils/hooks/reduxHooks';
 import { countGoodsInCartAndCost } from '../../../../store/slices/cartSlice';
-// eslint-disable-next-line import/no-cycle
-import { Routes } from '../../../../utils/routes';
+import { Routes } from '../../../../utils/constants/routes';
 
 const CartContainer = memo(styled.div`
   padding: 1px;

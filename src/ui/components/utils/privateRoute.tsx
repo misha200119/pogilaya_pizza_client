@@ -1,8 +1,8 @@
 /* eslint-disable import/no-cycle */
 import React, { memo, FC } from 'react';
 import { Navigate } from 'react-router-dom';
+import { Routes } from '../../../utils/constants/routes';
 import { useAuth } from '../../../utils/hooks/auth/useAuth';
-import { Routes } from '../../../utils/routes';
 import Roles from '../../../utils/types/roles';
 
 interface Props {

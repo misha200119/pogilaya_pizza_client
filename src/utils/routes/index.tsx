@@ -7,21 +7,8 @@ import { PrivateRoute } from '../../ui/components/utils/privateRoute';
 import { AdminPage } from '../../ui/pages/Admin';
 import { Catalog as CatalogPage } from '../../ui/pages/Catalog';
 import { Checkout as CheckoutPage } from '../../ui/pages/Checkout';
+import { Routes } from '../constants/routes';
 import Roles from '../types/roles';
-
-// eslint-disable-next-line no-shadow
-export enum Routes {
-  Index = '/',
-  Catalog = '/catalog',
-  AboutUs = '/about-us',
-  Checkout = '/checkout',
-
-  LOGIN = '/login',
-  ADMIN = '/admin',
-  ADMIN_DASHBOARD = '/admin/dashboard',
-
-  Wrong = '*',
-}
 
 interface MappableRoute {
   link: Routes;
