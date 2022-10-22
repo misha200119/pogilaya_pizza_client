@@ -1,6 +1,7 @@
 /* eslint-disable import/no-cycle */
 import React, { ReactElement } from 'react';
 import { Navigate, Route } from 'react-router-dom';
+import { DashBoardGraphic } from '../../ui/components/molecules/DashBoardGraphic';
 import Header from '../../ui/components/organisms/Header';
 import { LoginForm } from '../../ui/components/organisms/LoginForm';
 import { PrivateRoute } from '../../ui/components/utils/privateRoute';
@@ -81,7 +82,7 @@ export const adminDashboardRoutes = [
   {
     link: Routes.ADMIN_DASHBOARD,
     linkText: 'DASHBOARD',
-    describedComponent: <div>admin dashboard</div>,
+    describedComponent: <DashBoardGraphic />,
     isPrivate: true,
     onlyFor: Roles.ADMIN,
   },
@@ -90,7 +91,7 @@ export const adminDashboardRoutes = [
     linkText: 'ORDERS',
     describedComponent: <div>orders</div>,
     isPrivate: true,
-    onlyFor: Roles.USER,
+    onlyFor: Roles.ADMIN,
   },
 ];
 
@@ -99,7 +100,7 @@ export const adminDashboardRoutes = [
  * @returns array of react elements (Routes)
  */
 // eslint-disable-next-line max-len
-export const mapRoutes = (routes: Array<MappableRoute>): Array<ReactElement | null> => routes.map((route) => {
+export const mapRoutes = (routes: Array<MappableRoute>): Array<ReactElement> => routes.map((route) => {
   const isPrivateRoute = route.isPrivate && route.onlyFor;
 
   return (

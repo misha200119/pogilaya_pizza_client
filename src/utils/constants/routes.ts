@@ -8,9 +8,9 @@ export enum Routes {
   LOGIN = '/login',
 
   // private admin routes
-  ADMIN = '/admin',
-  ADMIN_DASHBOARD = '/admin/dashboard',
-  ADMIN_ORDERS = '/admin/orders',
+  ADMIN = '/admin/*',
+  ADMIN_DASHBOARD = 'dasboard',
+  ADMIN_ORDERS = 'orders',
 
   // dafauld case if addres not found
   Wrong = '*',

@@ -3,7 +3,9 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { baseURL } from '../constants/APIEndpoints';
 import { isProd } from '../constants/dotenv';
 import KeysOfLocalStorage from '../constants/keysOfLocalstorage';
-import { readFromLocalStorage } from '../helpers/localStorageHelper';
+import { readFromLocalStorage, writeToLocalStorage } from '../helpers/localStorageHelper';
+// eslint-disable-next-line import/no-cycle
+import AuthService from '../services/auth';
 
 const baseContentType = 'application/json';
 
@@ -39,6 +41,31 @@ client.interceptors.request.use(async (config) => {
   config!.headers!.Authorization = `Bearer ${readFromLocalStorage(KeysOfLocalStorage.ACCESS_TOKEN)}`;
 
   return config;
+});
+
+client.interceptors.response.use(async (config) => {
+  return config;
+}, async (error) => {
+  const originalRequest = error.config;
+
+  // eslint-disable-next-line no-underscore-dangle
+  if (error.response.status === 401 && error.config && !error.config._isRetry) {
+    // eslint-disable-next-line no-underscore-dangle
+    originalRequest._isRetry = true;
+
+    try {
+      const response = await AuthService.checkAuth();
+      const { accessToken } = response.data;
+
+      writeToLocalStorage(KeysOfLocalStorage.ACCESS_TOKEN, accessToken);
+
+      return client.request(originalRequest);
+    } catch (e) {
+      return null;
+    }
+  }
+
+  throw error;
 });
 
 const request = async <T>(options: AxiosRequestConfig): Promise<AxiosResponse<T>> => {

@@ -9,12 +9,17 @@ import {
 /* eslint-disable no-shadow */
 enum APIEndpoints {
   ROOT = '/',
+
   ORDER = '/order',
+
   REGISTRATION = '/auth/registration',
   REGISTRATION_ACTIVATION = '/auth/activation',
   LOGIN = '/auth/login',
   LOGOUT = '/auth/logout',
   REFRESH = '/auth/refresh',
+
+  ADMIN = '/admin',
+  ADMIN_ANALITICS = '/admin/analitics',
 }
 
 export const baseURL = isProd

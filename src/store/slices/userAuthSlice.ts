@@ -1,7 +1,6 @@
 /* eslint-disable import/no-cycle */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable no-param-reassign */
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { toast } from 'react-toastify';
 import { RootState } from '..';
@@ -85,7 +84,7 @@ export const checkAuth = createAsyncThunk('userAuth/checkAuth', async (_: undefi
 
 export const logout = createAsyncThunk('userAuth/logout', async (_: undefined, _thunkAPI) => {
   try {
-    const response = await AuthService.logout();
+    await AuthService.logout();
 
     removeFromLocalStorage(KeysOfLocalStorage.ACCESS_TOKEN);
 
@@ -146,12 +145,12 @@ const userAuthSlice = createSlice({
     builder.addCase(checkAuth.pending, (state) => {
       state.isCheckingAuth = true;
     });
-    builder.addCase(checkAuth.rejected, (state, _action) => {
+    builder.addCase(checkAuth.rejected, (state) => {
       state.isCheckingAuth = false;
     });
     builder.addCase(checkAuth.fulfilled, (state, _action) => {
       state.isCheckingAuth = false;
-      const { userDTO, accessToken, refreshToken } = _action.payload as unknown as AuthResponse;
+      const { userDTO, accessToken } = _action.payload as unknown as AuthResponse;
 
       writeToLocalStorage(KeysOfLocalStorage.ACCESS_TOKEN, accessToken);
       state.user = userDTO;

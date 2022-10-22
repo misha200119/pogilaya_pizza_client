@@ -5,6 +5,8 @@ import { Provider } from 'react-redux';
 import { App } from './App';
 import GlobalStyles from './utils/styles/global';
 import { store } from './store';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import '@ant-design/flowchart/dist/index.css';
 
 ReactDOM.render(
   <React.StrictMode>

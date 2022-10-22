@@ -32,6 +32,7 @@ interface Props {
 export const ResponsiveSidebar: FC<Props> = memo(({
   sidebarWidth,
   tabs,
+  children,
 }) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
@@ -104,7 +105,10 @@ export const ResponsiveSidebar: FC<Props> = memo(({
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: sidebarWidth },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: sidebarWidth,
+            },
           }}
         >
           {drawer}
@@ -113,12 +117,34 @@ export const ResponsiveSidebar: FC<Props> = memo(({
           variant="permanent"
           sx={{
             display: { xs: 'none', sm: 'block' },
-            '& .MuiDrawer-paper': { boxSizing: 'border-box', width: sidebarWidth },
+            '& .MuiDrawer-paper': {
+              boxSizing: 'border-box',
+              width: sidebarWidth,
+            },
           }}
           open
         >
           {drawer}
         </Drawer>
+      </Box>
+      <Box
+        component="main"
+        sx={{
+          flexGrow: 1,
+          width: { sm: `calc(100% - ${sidebarWidth}px)` },
+          height: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
+        <Toolbar />
+        <Box
+          sx={{
+            flexGrow: 1,
+          }}
+        >
+          {children}
+        </Box>
       </Box>
     </Box>
   );
