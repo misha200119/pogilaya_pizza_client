@@ -1,6 +1,7 @@
 /* eslint-disable import/no-cycle */
 import React, { ReactElement } from 'react';
 import { Navigate, Route } from 'react-router-dom';
+import { DasboardOrdersTable } from '../../ui/components/molecules/DasboardOrdersTable';
 import { DashBoardGraphic } from '../../ui/components/molecules/DashBoardGraphic';
 import Header from '../../ui/components/organisms/Header';
 import { LoginForm } from '../../ui/components/organisms/LoginForm';
@@ -89,7 +90,7 @@ export const adminDashboardRoutes = [
   {
     link: Routes.ADMIN_ORDERS,
     linkText: 'ORDERS',
-    describedComponent: <div>orders</div>,
+    describedComponent: <DasboardOrdersTable />,
     isPrivate: true,
     onlyFor: Roles.ADMIN,
   },
