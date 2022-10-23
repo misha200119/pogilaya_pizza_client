@@ -1,5 +1,5 @@
 import React, {
-  FC, memo, useCallback, Fragment,
+  FC, memo, useCallback, Fragment, useMemo,
 } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -15,7 +15,7 @@ import ListItemText from '@mui/material/ListItemText';
 import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Routes } from '../../../../utils/constants/routes';
 
 export type sidebarTabDataModel = {
@@ -36,6 +36,7 @@ export const ResponsiveSidebar: FC<Props> = memo(({
 }) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSidebarToggle = useCallback(() => {
     setMobileOpen((prev) => !prev);
@@ -44,6 +45,12 @@ export const ResponsiveSidebar: FC<Props> = memo(({
   const tabClickHandler = useCallback((route: Routes) => {
     navigate(route);
   }, []);
+
+  const headerTitle = useMemo(() => {
+    const path = location.pathname.split('/');
+
+    return path[path.length - 1].toUpperCase();
+  }, [location]);
 
   const drawer = (
     <div>
@@ -87,7 +94,7 @@ export const ResponsiveSidebar: FC<Props> = memo(({
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            Responsive drawer
+            {headerTitle}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -135,6 +142,7 @@ export const ResponsiveSidebar: FC<Props> = memo(({
           height: '100vh',
           display: 'flex',
           flexDirection: 'column',
+          overflow: 'hidden',
         }}
       >
         <Toolbar />

@@ -1,3 +1,3 @@
 import IOrder from '../order/IOrder';
 
-export type AnaliticsData = Pick<IOrder, '_id' | 'date' | 'isPaid' | 'nameField' | 'paymentType' | 'totalCost' | 'coupon'>;
+export type AnaliticsData = Pick<IOrder, | 'date' | 'isPaid' | 'nameField' | 'paymentType' | 'totalCost' | 'coupon'>;

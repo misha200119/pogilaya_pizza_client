@@ -17,6 +17,6 @@ export default class OrderService {
       orderDetails,
     };
 
-    return api.postRequest(APIEndpoints.ORDER, data);
+    return api.postRequest(APIEndpoints.ORDER, { data });
   }
 }

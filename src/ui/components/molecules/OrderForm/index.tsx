@@ -124,8 +124,9 @@ export const OrderForm: FC<{}> = memo(() => {
   const _isLoadingOrderRequest = useAppSelector(isLoadingOrderRequest);
 
   const dispatch = useAppDispatch();
-  const confirmOrder = useCallback(async () => {
-    await dispatch(
+  const confirmOrder = useCallback((event) => {
+    event.preventDefault();
+    dispatch(
       doOrder({
         selectedDeliveryType,
         nameField,

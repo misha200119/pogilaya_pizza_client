@@ -27,7 +27,7 @@ export const fetchOrers = createAsyncThunk('admin/fetchOrders', async (_, _thunk
   try {
     const response = await OrderService.fetchOrders();
 
-    return _thunkAPI.fulfillWithValue(response);
+    return _thunkAPI.fulfillWithValue(response.data);
   } catch (error) {
     const typedError = error as AxiosError;
 

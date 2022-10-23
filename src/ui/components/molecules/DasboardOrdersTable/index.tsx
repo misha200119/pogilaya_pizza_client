@@ -2,14 +2,11 @@ import React, { memo, useEffect } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../../utils/hooks/reduxHooks';
 import { isLoadingData, fetchOrers, orders as _orders } from '../../../../store/slices/adminSlice';
-import { Container } from '../../helpers/responsive';
 import { Loading } from '../../../pages/Loading';
+import { OrdersTable } from '../OrdersTable';
 
-const StyledResponsiveContainer = memo(styled(Container)`
-  padding: 30px;
+const StyledResponsiveContainer = memo(styled.div`
   height: 100%;
-  display: flex;
-  flex-direction: column;
 `);
 
 export const DasboardOrdersTable = memo(() => {
@@ -30,6 +27,8 @@ export const DasboardOrdersTable = memo(() => {
   }
 
   return (
-    <StyledResponsiveContainer>DasboardOrdersTable</StyledResponsiveContainer>
+    <StyledResponsiveContainer>
+      <OrdersTable orders={orders} />
+    </StyledResponsiveContainer>
   );
 });

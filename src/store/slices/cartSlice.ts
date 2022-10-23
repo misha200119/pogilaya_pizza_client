@@ -8,6 +8,7 @@ import Good from '../../utils/types/good';
 import PizzaInCart from '../../utils/types/pizzaInCart';
 import { writeToLocalStorage, readFromLocalStorage } from '../../utils/helpers/localStorageHelper';
 import OrderDetails from '../../utils/types/orderDetails';
+import OrderService from '../../utils/services/order';
 
 interface MapOfSelectedProducts {
   [key: string]: number;
@@ -58,7 +59,7 @@ export const countGoodsInCartAndCost = (state: RootState) => {
 
 export const doOrder = createAsyncThunk(
   'cart/doOrder',
-  async (orderDetails: OrderDetails, _thunkAPI) => {
+  async (orderDetails: Omit<OrderDetails, 'totalCost'>, _thunkAPI) => {
     try {
       const rootState = _thunkAPI.getState() as RootState;
       const { cart } = rootState;
@@ -75,7 +76,7 @@ export const doOrder = createAsyncThunk(
 
       // eslint-disable-next-line no-restricted-syntax
       for (const key of fields) {
-        if (!orderDetails[key as keyof OrderDetails]) {
+        if (!orderDetails[key as keyof Omit<OrderDetails, 'totalCost'>]) {
           emptyFields.push(key);
         }
       }
@@ -84,12 +85,7 @@ export const doOrder = createAsyncThunk(
         return _thunkAPI.rejectWithValue(`Firstly fill that fields: [${emptyFields.join(', ')}]`);
       }
 
-      // await Order.newOrder({
-      //   data: {
-      //     cart: cart.mapOfProducts,
-      //     orderDetails: { ...orderDetails, totalCost },
-      //   },
-      // });
+      await OrderService.newOrder(cart.mapOfProducts, { ...orderDetails, totalCost });
 
       return _thunkAPI.fulfillWithValue(true);
     } catch (error) {
