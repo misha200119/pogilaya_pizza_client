@@ -15,7 +15,7 @@ interface OrderDetails {
   date: Moment;
   coupon: string;
   paymentType: string;
-  totalCost?: string;
+  totalCost: string;
 }
 
 export default OrderDetails;

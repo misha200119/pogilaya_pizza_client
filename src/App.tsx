@@ -23,7 +23,7 @@ export const App: React.FC<{}> = memo(() => {
   }, []);
 
   return isCheckingAuth ? (
-    <Loading />
+    <Loading width="100vw" height="100vh" />
   ) : (
     <>
       <ThemeProvider theme={currentTheme}>

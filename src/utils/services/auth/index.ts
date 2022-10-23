@@ -1,4 +1,5 @@
 import axios from 'axios';
+// eslint-disable-next-line import/no-cycle
 import api, { baseRequestConfig } from '../../api';
 import { AuthResponse } from '../../models/auth/authResponse';
 import APIEndpoints from '../../constants/APIEndpoints';

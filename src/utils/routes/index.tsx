@@ -1,27 +1,16 @@
 /* eslint-disable import/no-cycle */
 import React, { ReactElement } from 'react';
 import { Navigate, Route } from 'react-router-dom';
+import { DasboardOrdersTable } from '../../ui/components/molecules/DasboardOrdersTable';
+import { DashBoardGraphic } from '../../ui/components/molecules/DashBoardGraphic';
 import Header from '../../ui/components/organisms/Header';
 import { LoginForm } from '../../ui/components/organisms/LoginForm';
 import { PrivateRoute } from '../../ui/components/utils/privateRoute';
 import { AdminPage } from '../../ui/pages/Admin';
 import { Catalog as CatalogPage } from '../../ui/pages/Catalog';
 import { Checkout as CheckoutPage } from '../../ui/pages/Checkout';
+import { Routes } from '../constants/routes';
 import Roles from '../types/roles';
-
-// eslint-disable-next-line no-shadow
-export enum Routes {
-  Index = '/',
-  Catalog = '/catalog',
-  AboutUs = '/about-us',
-  Checkout = '/checkout',
-
-  LOGIN = '/login',
-  ADMIN = '/admin',
-  ADMIN_DASHBOARD = '/admin/dashboard',
-
-  Wrong = '*',
-}
 
 interface MappableRoute {
   link: Routes;
@@ -90,12 +79,29 @@ export const mappableUtilRoutes: Array<MappableRoute> = [
   },
 ];
 
+export const adminDashboardRoutes = [
+  {
+    link: Routes.ADMIN_DASHBOARD,
+    linkText: 'DASHBOARD',
+    describedComponent: <DashBoardGraphic />,
+    isPrivate: true,
+    onlyFor: Roles.ADMIN,
+  },
+  {
+    link: Routes.ADMIN_ORDERS,
+    linkText: 'ORDERS',
+    describedComponent: <DasboardOrdersTable />,
+    isPrivate: true,
+    onlyFor: Roles.ADMIN,
+  },
+];
+
 /**
  * @param routes array of mappable objects that describes routes
  * @returns array of react elements (Routes)
  */
 // eslint-disable-next-line max-len
-export const mapRoutes = (routes: Array<MappableRoute>): Array<ReactElement | null> => routes.map((route) => {
+export const mapRoutes = (routes: Array<MappableRoute>): Array<ReactElement> => routes.map((route) => {
   const isPrivateRoute = route.isPrivate && route.onlyFor;
 
   return (
