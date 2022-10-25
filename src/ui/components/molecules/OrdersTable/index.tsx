@@ -95,15 +95,15 @@ export const OrdersTable: FC<Props> = memo(({ orders }) => {
 
   const handleOnDeleteEditing = useCallback(async () => {
     if (editableObject) {
-      await dispatch(deleteOrder(editableObject._id));
       setEditableObject(null);
       setIsEditablePopupOpen(false);
+      await dispatch(deleteOrder(editableObject._id));
     }
   }, [editableObject, setEditableObject]);
 
-  const handleOnSaveEditing = useCallback((editedObject: PartialIOrder) => {
+  const handleOnSaveEditing = useCallback(async (editedObject: PartialIOrder) => {
     if (editableObject) {
-      dispatch(patchOrder({ id: editableObject._id, fields: editedObject }));
+      await dispatch(patchOrder({ id: editableObject._id, fields: editedObject }));
     }
   }, [editableObject]);
 
