@@ -6,10 +6,14 @@ import React, {
 } from 'react';
 import {
   Checkbox,
-  Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow,
+  // eslint-disable-next-line max-len
+  Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Theme, useMediaQuery, useTheme,
 } from '@mui/material';
 import IOrder from '../../../../utils/models/order/IOrder';
 import { EditOrderDialog } from '../EditOrderDialog';
+import PartialIOrder from '../../../../utils/types/partialIOrder';
+import { useAppDispatch } from '../../../../utils/hooks/reduxHooks';
+import { deleteOrder, patchOrder } from '../../../../store/slices/adminSlice';
 
 interface Column {
   id: 'number' | 'paymentType' | 'cost' | 'isPaid';
@@ -57,6 +61,8 @@ export const OrdersTable: FC<Props> = memo(({ orders }) => {
     _object: order,
   }));
 
+  const dispatch = useAppDispatch();
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [editableObject, setEditableObject] = useState<null | IOrder>(null);
@@ -83,27 +89,39 @@ export const OrdersTable: FC<Props> = memo(({ orders }) => {
   }, [setEditableObject, setIsEditablePopupOpen]);
 
   const handleEditDialogClose = useCallback(() => {
+    setEditableObject(null);
     setIsEditablePopupOpen(false);
   }, [setIsEditablePopupOpen]);
 
-  const handleOnDeleteEditing = useCallback(() => {}, []);
+  const handleOnDeleteEditing = useCallback(async () => {
+    if (editableObject) {
+      await dispatch(deleteOrder(editableObject._id));
+      setEditableObject(null);
+      setIsEditablePopupOpen(false);
+    }
+  }, [editableObject, setEditableObject]);
 
-  const handleOnSaveEditing = useCallback((editedObject: IOrder) => {
+  const handleOnSaveEditing = useCallback((editedObject: PartialIOrder) => {
+    if (editableObject) {
+      dispatch(patchOrder({ id: editableObject._id, fields: editedObject }));
+    }
+  }, [editableObject]);
 
-  }, []);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
     <>
       <Paper
         sx={{
           width: '100%',
-          overflow: 'hidden',
-          height: '100%',
           display: 'flex',
           flexDirection: 'column',
+          justifyContent: 'space-between',
+          height: `calc(100vh - ${matches ? '64px' : '56px'})`,
         }}
       >
-        <TableContainer sx={{ height: '75%' }}>
+        <TableContainer sx={{ flexGrow: 1 }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
               <TableRow>
@@ -158,6 +176,7 @@ export const OrdersTable: FC<Props> = memo(({ orders }) => {
           </Table>
         </TableContainer>
         <TablePagination
+          sx={{ overflow: 'hidden' }}
           rowsPerPageOptions={[10, 25, 100]}
           component="div"
           count={rows.length}
