@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/no-cycle */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
@@ -47,7 +48,7 @@ export const patchOrder = createAsyncThunk('admin/patchOrder', async (data: {id:
 
     await OrderService.patchOrder(id, fields);
 
-    return _thunkAPI.fulfillWithValue(true);
+    return _thunkAPI.fulfillWithValue(data);
   } catch (error) {
     const typedError = error as AxiosError;
 
@@ -62,7 +63,7 @@ export const deleteOrder = createAsyncThunk('admin/deleteOrder', async (id: stri
   try {
     await OrderService.deleteOrder(id);
 
-    return _thunkAPI.fulfillWithValue(true);
+    return _thunkAPI.fulfillWithValue(id);
   } catch (error) {
     const typedError = error as AxiosError;
 
@@ -125,21 +126,44 @@ export const adminSLice = createSlice({
       state.isLoadingData = false;
       toast.error(_action.payload as string);
     });
-    builder.addCase(patchOrder.fulfilled, (state) => {
-      state.isLoadingData = false;
-      toast('Order succesfully patched');
+    builder.addCase(patchOrder.fulfilled, (state, _action) => {
+      if (state.orders) {
+        const { id, fields } = _action.payload as unknown as {
+          id: string;
+          fields: Partial<IOrder>;
+        };
+
+        const orderById = state.orders.find((order) => order._id === id);
+
+        if (orderById) {
+          const keys = Object.keys(fields) as Array<keyof Partial<IOrder>>;
+
+          // eslint-disable-next-line no-restricted-syntax
+          for (const key of keys) {
+            orderById[key] = fields[key] as never;
+          }
+
+          state.isLoadingData = false;
+          toast.success('Order succesfully patched');
+        }
+      }
     });
 
-    builder.addCase(patchOrder.pending, (state) => {
+    builder.addCase(deleteOrder.pending, (state) => {
       state.isLoadingData = true;
     });
-    builder.addCase(patchOrder.rejected, (state, _action) => {
+    builder.addCase(deleteOrder.rejected, (state, _action) => {
       state.isLoadingData = false;
       toast.error(_action.payload as string);
     });
-    builder.addCase(patchOrder.fulfilled, (state) => {
-      state.isLoadingData = false;
-      toast('Order succesfully patched');
+    builder.addCase(deleteOrder.fulfilled, (state, _action) => {
+      if (state.orders) {
+        const orderId = _action.payload as unknown as string;
+
+        state.orders = state.orders.filter((order) => order._id !== orderId);
+        state.isLoadingData = false;
+        toast.success('Order succesfully deleted');
+      }
     });
   },
 });
