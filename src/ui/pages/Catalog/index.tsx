@@ -20,7 +20,7 @@ const mockDataAvaliblePizza: Array<Section> = [
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
-        cost: 1337,
+        cost: 220,
         toppings: 'some toppings',
         name: 'Name',
       },
@@ -29,7 +29,7 @@ const mockDataAvaliblePizza: Array<Section> = [
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
-        cost: 1337,
+        cost: 220,
         toppings: 'some toppings',
         name: 'Name2',
       },
@@ -38,7 +38,7 @@ const mockDataAvaliblePizza: Array<Section> = [
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
-        cost: 1337,
+        cost: 220,
         toppings: 'some toppings',
         name: 'Namefdfhwkhf',
       },
@@ -47,7 +47,7 @@ const mockDataAvaliblePizza: Array<Section> = [
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
-        cost: 1337,
+        cost: 220,
         toppings: 'some toppings',
         name: 'Nameasdhdsj',
       },
@@ -56,7 +56,7 @@ const mockDataAvaliblePizza: Array<Section> = [
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
-        cost: 1337,
+        cost: 220,
         toppings: 'some toppings',
         name: 'Namefdfhwkhf',
       },
@@ -65,12 +65,12 @@ const mockDataAvaliblePizza: Array<Section> = [
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
-        cost: 1337,
+        cost: 220,
         toppings: 'some toppings',
         name: 'Nameasdhdsj',
       },
     ],
-    sectionName: 'SECTION NAME 0',
+    sectionName: 'Pizza: Best price',
   },
   {
     products: [
@@ -129,7 +129,7 @@ const mockDataAvaliblePizza: Array<Section> = [
         name: 'Nameasdhdsj',
       },
     ],
-    sectionName: 'SECTION NAME 1',
+    sectionName: 'Pizza: Exotic',
   },
 ];
 
@@ -142,8 +142,8 @@ const Container = memo(styled.main`
 
 const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
 
-  background-color: ${(props) => props.theme.primary};
-  color: ${(props) => props.theme.background};
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.primary};
 `);
 
 export const Catalog = memo(() => {

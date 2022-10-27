@@ -17,7 +17,7 @@ import ThemeSwitcher from '../../molecules/ThemeSwitcher';
 const logoImage = '/images/Logo.webp';
 
 const Container = memo(styled.header`
-  background-color: #222;
+  background-color: ${(props) => props.theme.secondary};;
   color: ${(props) => props.theme.primary};
 
   position: sticky;

@@ -10,15 +10,13 @@ const NavContainer = memo(styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  border: 1px solid ${(props) => props.theme.text};
-  border-radius: 10px;
   padding: 5px 0;
 `);
 
 const StyledNavLink = memo(styled(NavLink)`
   color: ${(props) => props.theme.primary};
   &.active {
-    color: ${(props) => props.theme.secondary};
+    opacity: 0.7;
   }
   text-decoration: none;
 `);
