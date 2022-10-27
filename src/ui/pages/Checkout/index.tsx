@@ -13,8 +13,8 @@ const Container = memo(styled.main`
 `);
 
 const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
-  background-color: ${(props) => props.theme.primary};
-  color: ${(props) => props.theme.background};
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.primary};
 `);
 
 export const Checkout: FC<{}> = memo(() => {

@@ -26,11 +26,11 @@ const ProductItemContainer = memo(styled.div`
   flex-direction: column;
   justify-content: center;
 
-  background-color: ${(props) => props.theme.primary};
+  background-color: ${(props) => (props.theme.mode === 'light' ? '#fff' : '#000')};
 
   &:hover{
-    -webkit-box-shadow:0 0 15px rgba(0,0,0,.5);
-    box-shadow:0 0 15px rgba(0,0,0,.5);
+    -webkit-box-shadow:0 0 15px ${(props) => (props.theme.mode === 'light' ? 'rgba(0,0,0,.5)' : 'rgba(255,255,255,.5)')};
+    box-shadow:0 0 15px ${(props) => (props.theme.mode === 'light' ? 'rgba(0,0,0,.5)' : 'rgba(255,255,255,.5)')};
   }
 
   &:hover img{

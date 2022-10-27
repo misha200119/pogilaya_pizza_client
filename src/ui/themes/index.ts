@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-shadow
 export enum Themes {
-  DARK,
-  LIGHT,
+  DARK = 'dark',
+  LIGHT = 'light',
 }
 
 export interface Theme {
@@ -14,14 +14,14 @@ export interface Theme {
 export const themes: {[key: string]: Theme} = {
   [Themes.DARK]: {
     primary: '#fff',
-    secondary: '#999',
-    background: '#000',
+    secondary: '#222',
+    background: '#111',
     mode: 'dark',
   },
   [Themes.LIGHT]: {
     primary: '#000',
-    secondary: '#999',
-    background: '#fff',
+    secondary: '#222',
+    background: 'rgb(248, 248, 248)',
     mode: 'light',
   },
 };

@@ -12,7 +12,13 @@ interface ThemeState {
 const isCurrentSystemThemeDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
 // eslint-disable-next-line max-len
-const initialTheme = themes[readFromLocalStorage(KeysOfLocalStorage.THEME) || isCurrentSystemThemeDark ? Themes.DARK : Themes.LIGHT];
+const initialTheme
+  = themes[
+    `${
+      readFromLocalStorage(KeysOfLocalStorage.THEME)
+      || (isCurrentSystemThemeDark ? Themes.DARK : Themes.LIGHT)
+    }`
+  ];
 
 const initialState: ThemeState = {
   currentTheme: initialTheme,

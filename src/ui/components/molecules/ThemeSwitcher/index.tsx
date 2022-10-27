@@ -25,12 +25,12 @@ const StyledSwitcher = memo(
           },
           '& + .MuiSwitch-track': {
             opacity: 1,
-            backgroundColor: theme.mode === 'dark' ? '#8796A5' : '#aab4be',
+            backgroundColor: theme.mode === 'light' ? '#8796A5' : '#aab4be',
           },
         },
       },
       '& .MuiSwitch-thumb': {
-        backgroundColor: theme.mode === 'dark' ? '#003892' : '#001e3c',
+        backgroundColor: theme.mode === 'light' ? '#003892' : '#001e3c',
         width: 32,
         height: 32,
         '&:before': {
@@ -49,7 +49,7 @@ const StyledSwitcher = memo(
       },
       '& .MuiSwitch-track': {
         opacity: 1,
-        backgroundColor: theme.mode === 'dark' ? '#8796A5' : '#aab4be',
+        backgroundColor: theme.mode === 'light' ? '#8796A5' : '#aab4be',
         borderRadius: 20 / 2,
       },
     };
@@ -64,7 +64,7 @@ const Wrapper: FC<{[key: string]: string | number | Object}> = memo((props) => {
     dispatch(_switchTheme());
   }, [dispatch, _switchTheme]);
 
-  return <StyledSwitcher {...props} onClick={switchTheme} checked={currentTheme.mode !== 'dark'} />;
+  return <StyledSwitcher {...props} onClick={switchTheme} checked={currentTheme.mode !== 'light'} />;
 });
 
 export default Wrapper;
