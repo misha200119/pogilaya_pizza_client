@@ -8,7 +8,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import {
   Autocomplete,
   CircularProgress,
-  FormControl, Input, InputLabel, MenuItem, Select, TextField,
+  FormControl, InputLabel, MenuItem, Select, TextField,
 } from '@mui/material';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import moment from 'moment-timezone';
@@ -103,6 +103,36 @@ const ToCartButton = memo(styled(Button)`
   transition: all 0.3s ease;
 `);
 
+const StyledInput = styled(TextField)(({ theme }) => ({
+  '& label.Mui-focused': {
+    color: theme.primary,
+  },
+  '& label': {
+    color: theme.primary,
+  },
+  '& .MuiInput-underline::after': {
+    borderBottomColor: theme.primary,
+  },
+  '& .MuiInput-root::before': {
+    borderBottomColor: theme.primary,
+  },
+  '& .MuiInput-root': {
+    '&:hover:not(.Mui-disabled):before': {
+      borderColor: theme.primary,
+    },
+    '& .MuiInput-input': {
+      borderColor: theme.primary,
+      color: theme.primary,
+      '&::after': {
+        backgroundColor: theme.primary,
+      },
+      '&::before': {
+        backgroundColor: theme.primary,
+      },
+    },
+  },
+}));
+
 export const OrderForm: FC<{}> = memo(() => {
   const [selectedDeliveryType, setSelectedDeliveryType] = useState(deliveryTypes[0].value);
   const [nameField, setNameField] = useState('');
@@ -195,42 +225,37 @@ export const OrderForm: FC<{}> = memo(() => {
             desktopGridGap="10px"
           >
             <GridItem>
-              <FormControl variant="standard" fullWidth>
-                <InputLabel htmlFor="name-field">Name</InputLabel>
-                <Input
-                  id="name-field"
-                  value={nameField}
-                  onChange={({ target }) => {
-                    setNameField(target.value);
-                  }}
-                />
-              </FormControl>
+              <StyledInput
+                variant="standard"
+                label="Name"
+                value={nameField}
+                onChange={({ target }) => {
+                  setNameField(target.value);
+                }}
+                fullWidth
+              />
             </GridItem>
             <GridItem>
-              <FormControl variant="standard" fullWidth>
-                <InputLabel htmlFor="phone-number-field">
-                  Phone number
-                </InputLabel>
-                <Input
-                  id="phone-number-field"
-                  value={phoneNumberField}
-                  onChange={({ target }) => {
-                    setPhoneNumberField(target.value);
-                  }}
-                />
-              </FormControl>
+              <StyledInput
+                variant="standard"
+                label="Phone number"
+                value={phoneNumberField}
+                onChange={({ target }) => {
+                  setPhoneNumberField(target.value);
+                }}
+                fullWidth
+              />
             </GridItem>
             <GridItem>
-              <FormControl variant="standard" fullWidth>
-                <InputLabel htmlFor="email-field">E-mail</InputLabel>
-                <Input
-                  id="email-field"
-                  value={email}
-                  onChange={({ target }) => {
-                    setEmail(target.value);
-                  }}
-                />
-              </FormControl>
+              <StyledInput
+                variant="standard"
+                label="E-mail"
+                value={email}
+                onChange={({ target }) => {
+                  setEmail(target.value);
+                }}
+                fullWidth
+              />
             </GridItem>
           </Grid>
         </FormSection>
@@ -275,68 +300,59 @@ export const OrderForm: FC<{}> = memo(() => {
               />
             </GridItemArea>
             <GridItemArea areaName="house">
-              <FormControl variant="standard" fullWidth>
-                <InputLabel htmlFor="house-number-field">House №</InputLabel>
-                <Input
-                  id="house-number-field"
-                  value={house}
-                  onChange={({ target }) => {
-                    setHouse(target.value);
-                  }}
-                />
-              </FormControl>
+              <StyledInput
+                variant="standard"
+                label="House №"
+                value={house}
+                onChange={({ target }) => {
+                  setHouse(target.value);
+                }}
+                fullWidth
+              />
             </GridItemArea>
             <GridItemArea areaName="flat">
-              <FormControl variant="standard" fullWidth>
-                <InputLabel htmlFor="flat-number-field">Flat №</InputLabel>
-                <Input
-                  id="flat-number-field"
-                  value={flat}
-                  onChange={({ target }) => {
-                    setFlat(target.value);
-                  }}
-                />
-              </FormControl>
+              <StyledInput
+                variant="standard"
+                label="Flat №"
+                value={flat}
+                onChange={({ target }) => {
+                  setFlat(target.value);
+                }}
+                fullWidth
+              />
             </GridItemArea>
             <GridItemArea areaName="front-door">
-              <FormControl variant="standard" fullWidth>
-                <InputLabel htmlFor="entrance-number-field">
-                  Entrance №
-                </InputLabel>
-                <Input
-                  id="entrance-number-field"
-                  value={entrance}
-                  onChange={({ target }) => {
-                    setEntrance(target.value);
-                  }}
-                />
-              </FormControl>
+              <StyledInput
+                variant="standard"
+                label="Entrance №"
+                value={entrance}
+                onChange={({ target }) => {
+                  setEntrance(target.value);
+                }}
+                fullWidth
+              />
             </GridItemArea>
             <GridItemArea areaName="intercom-code">
-              <FormControl variant="standard" fullWidth>
-                <InputLabel htmlFor="intercom-code-field">
-                  Intercom code
-                </InputLabel>
-                <Input
-                  id="intercom-code-field"
-                  value={intercomCode}
-                  onChange={({ target }) => {
-                    setIntercomCode(target.value);
-                  }}
-                />
-              </FormControl>
+              <StyledInput
+                variant="standard"
+                label="Intercom code"
+                value={intercomCode}
+                onChange={({ target }) => {
+                  setIntercomCode(target.value);
+                }}
+                fullWidth
+              />
             </GridItemArea>
             <GridItemArea areaName="floor">
-              <FormControl variant="standard" fullWidth>
-                <InputLabel htmlFor="floor-field">Floor №</InputLabel>
-                <Input
-                  id="floor-field"
-                  value={floor}
-                  onChange={({ target }) => {
-                    setFloor(target.value);
-                  }}
-                />
-              </FormControl>
+              <StyledInput
+                variant="standard"
+                label="Floor №"
+                value={floor}
+                onChange={({ target }) => {
+                  setFloor(target.value);
+                }}
+                fullWidth
+              />
             </GridItemArea>
             <GridItemArea areaName="comment">
               <FormControl variant="standard" fullWidth>
