@@ -123,13 +123,78 @@ const StyledInput = styled(TextField)(({ theme }) => ({
     '& .MuiInput-input': {
       borderColor: theme.primary,
       color: theme.primary,
-      '&::after': {
-        backgroundColor: theme.primary,
-      },
-      '&::before': {
-        backgroundColor: theme.primary,
-      },
     },
+  },
+  fieldset: {
+    borderColor: `${theme.primary} !important`,
+  },
+  textarea: {
+    color: theme.primary,
+  },
+}));
+
+const StyledAutocomplete = styled(Autocomplete)(({ theme }) => ({
+  '.MuiInputLabel-root': {
+    color: theme.primary,
+  },
+  '.MuiIconButton-root': {
+    color: theme.primary,
+  },
+  input: {
+    color: theme.primary,
+  },
+  fieldset: {
+    borderColor: `${theme.primary} !important`,
+  },
+}));
+
+const StyledDesktopDatePicker
+  = styled(DesktopDatePicker)(({ theme }) => ({
+    label: {
+      color: `${theme.primary} !important`,
+    },
+    input: {
+      color: `${theme.primary} !important`,
+    },
+    fieldset: {
+      borderColor: `${theme.primary} !important`,
+    },
+    button: {
+      color: `${theme.primary} !important`,
+    },
+  }));
+
+const StyledTimePicker = styled(TimePicker)(({ theme }) => ({
+  label: {
+    color: `${theme.primary} !important`,
+  },
+  input: {
+    color: `${theme.primary} !important`,
+  },
+  fieldset: {
+    borderColor: `${theme.primary} !important`,
+  },
+  button: {
+    color: `${theme.primary} !important`,
+  },
+}));
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const StyledFormControl = styled(FormControl)(({ theme }) => ({
+  label: {
+    color: `${theme.primary} !important`,
+  },
+  '.MuiInputBase-root::after': {
+    borderColor: `${theme.primary} !important`,
+  },
+  '.MuiInputBase-root::before': {
+    borderColor: `${theme.primary} !important`,
+  },
+  '.MuiSelect-select': {
+    color: `${theme.primary} !important`,
+  },
+  '.MuiSvgIcon-root': {
+    color: `${theme.primary} !important`,
   },
 }));
 
@@ -284,7 +349,7 @@ export const OrderForm: FC<{}> = memo(() => {
             </GridItemArea>
             <GridItemArea areaName="street">
               {/* in future will need async request to get streets of city https://mui.com/material-ui/react-autocomplete/ */}
-              <Autocomplete
+              <StyledAutocomplete
                 disablePortal
                 options={streets}
                 fullWidth
@@ -294,8 +359,8 @@ export const OrderForm: FC<{}> = memo(() => {
                 id="blur-on-select"
                 value={_street}
                 onChange={(_, value) => {
-                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                  _setStreet(value!);
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  _setStreet((value as any) ?? '');
                 }}
               />
             </GridItemArea>
@@ -355,17 +420,17 @@ export const OrderForm: FC<{}> = memo(() => {
               />
             </GridItemArea>
             <GridItemArea areaName="comment">
-              <FormControl variant="standard" fullWidth>
-                <TextField
-                  label="Comment"
-                  value={comment}
-                  onChange={({ target }) => {
-                    setComment(target.value);
-                  }}
-                  multiline
-                  maxRows={2}
-                />
-              </FormControl>
+              <StyledInput
+                variant="outlined"
+                label="Comment"
+                value={comment}
+                onChange={({ target }) => {
+                  setComment(target.value);
+                }}
+                fullWidth
+                multiline
+                maxRows={2}
+              />
             </GridItemArea>
           </GridWithTemplate>
         </FormSection>
@@ -383,25 +448,25 @@ export const OrderForm: FC<{}> = memo(() => {
             templateAreasDesktop={'"date time ."'}
           >
             <GridItemArea areaName="date">
-              <DesktopDatePicker
+              <StyledDesktopDatePicker
                 label="Date"
                 inputFormat="DD/MM/YYYY"
                 value={date}
                 onChange={(selectedDate) => {
-                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                  setDate(selectedDate!);
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  setDate(selectedDate as any);
                 }}
                 renderInput={(params) => <TextField {...params} />}
                 disablePast
               />
             </GridItemArea>
             <GridItemArea areaName="time">
-              <TimePicker
+              <StyledTimePicker
                 label="Time"
                 value={date}
                 onChange={(selectedTime) => {
-                  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                  setDate(selectedTime!);
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  setDate(selectedTime as any);
                 }}
                 renderInput={(params) => <TextField {...params} />}
               />
@@ -426,13 +491,13 @@ export const OrderForm: FC<{}> = memo(() => {
             }
           >
             <GridItemArea areaName="coupon">
-              <FormControl variant="standard" fullWidth>
+              <StyledFormControl variant="standard" fullWidth>
                 <InputLabel id="coupon-field">Coupon</InputLabel>
                 <Select
                   labelId="coupon-field"
                   value={coupon}
                   onChange={({ target }) => {
-                    setCoupon(target.value);
+                    setCoupon(target.value as string);
                   }}
                   label="Coupon"
                 >
@@ -443,16 +508,16 @@ export const OrderForm: FC<{}> = memo(() => {
                   <MenuItem value="20">Twenty</MenuItem>
                   <MenuItem value="30">Thirty</MenuItem>
                 </Select>
-              </FormControl>
+              </StyledFormControl>
             </GridItemArea>
             <GridItemArea areaName="payment-type">
-              <FormControl variant="standard" fullWidth>
+              <StyledFormControl variant="standard" fullWidth>
                 <InputLabel id="payment-type-field">Payment type</InputLabel>
                 <Select
                   labelId="payment-type-field"
                   value={paymentType}
                   onChange={({ target }) => {
-                    setPaymentType(target.value);
+                    setPaymentType(target.value as string);
                   }}
                   label="Payment type"
                 >
@@ -462,7 +527,7 @@ export const OrderForm: FC<{}> = memo(() => {
                     </MenuItem>
                   ))}
                 </Select>
-              </FormControl>
+              </StyledFormControl>
             </GridItemArea>
           </GridWithTemplate>
         </FormSection>
