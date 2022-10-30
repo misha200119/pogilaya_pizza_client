@@ -21,7 +21,7 @@ const IncrementDecrementButtonsContainer = memo(styled.div`
 const ToCartButton = memo(styled(Button)`
   height: 100%;
   width: 100%;
-  border-radius: 30px;
+  border-radius: 15px;
 
   color: #fff;
   background-color: #e31837;

@@ -24,7 +24,8 @@ const ProductItemContainer = memo(styled.div`
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  grid-gap: 15px;
 
   background-color: ${(props) => (props.theme.mode === 'light' ? '#fff' : '#000')};
 
@@ -46,16 +47,16 @@ const ProductItemContainer = memo(styled.div`
 `);
 
 const DescriptionContainer = memo(styled.div`
-  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 15px;
 `);
 
 const PizzaName = memo(styled.h2`
-  margin-bottom: 15px;
 `);
 
 const PizzaToppings = memo(styled.span`
   display: block;
-  margin-bottom: 15px;
 `);
 
 const PriceContainer = memo(styled.div`
@@ -109,30 +110,23 @@ export const ProductItem: FC<{}> = memo(() => {
 
   return (
     <ProductItemContainer>
-      <Image
-        image={image}
-        maxHeight="300px"
-      />
       <DescriptionContainer>
-        <PizzaName>
-          {name}
-        </PizzaName>
-        <PizzaToppings>
-          {toppings}
-        </PizzaToppings>
+        <Image image={image} maxHeight="176px" height="176px" />
+        <PizzaName>{name}</PizzaName>
+        <PizzaToppings>{toppings}</PizzaToppings>
+      </DescriptionContainer>
 
+      <DescriptionContainer>
         <PizzaSizes
           currentSize={currentPizzaSize}
           setCurrentSize={setCurrentPizzaSize}
           sizes={sizes}
         />
-
         <DoughtSizes
           sizes={doughSizes}
           currentSize={selectedDoughSizes}
           setCurrentSize={setSelectedDoughSizes}
         />
-
         <PriceContainer>
           <div>
             <p>
@@ -142,8 +136,12 @@ export const ProductItem: FC<{}> = memo(() => {
           </div>
           <ToCartSmartButton
             cartMap={cartProductsMap}
-            curentGoodBySelectedParamsAsString={currentPizzaBySelectedParamsAsString}
-            curentGoodBySelectedParamsAsObject={currentPizzaBySelectedParamsAsObject}
+            curentGoodBySelectedParamsAsString={
+              currentPizzaBySelectedParamsAsString
+            }
+            curentGoodBySelectedParamsAsObject={
+              currentPizzaBySelectedParamsAsObject
+            }
           />
         </PriceContainer>
       </DescriptionContainer>

@@ -7,7 +7,6 @@ import SwitchButtonSelector from '../SwitchButtonSelector';
 
 const Container = memo(styled.div`
   display: flex;
-  margin-bottom: 15px;
 `);
 
 interface Props {
@@ -31,6 +30,7 @@ const PizzaSizes: FC<Props> = memo(({
         display="flex"
         flexDirection="row"
         buttonsBorderRadius="20px"
+        buttonsHeight="30px"
         gap="5px"
         values={mappedSizes}
         currentValue={currentSize}

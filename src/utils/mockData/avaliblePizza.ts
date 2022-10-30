@@ -16,7 +16,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '2',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://thumbs.dreamstime.com/b/pizza-rustic-italian-mozzarella-cheese-basil-leaves-35669930.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 220,
@@ -25,7 +25,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '3',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MTh8fHxlbnwwfHx8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 220,
@@ -34,7 +34,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '4',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://images.unsplash.com/photo-1593246049226-ded77bf90326?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 220,
@@ -48,7 +48,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
     products: [
       {
         id: '5',
-        image: 'https://kingpizza.kh.ua/resources/products/20211123202045_366bb8053.jpg',
+        image: 'https://ychef.files.bbci.co.uk/976x549/p0ctz0wr.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 255,
@@ -57,7 +57,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '6',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://img.onmanorama.com/content/dam/mm/en/food/features/images/2021/10/17/pizza.jpg.transform/schema-16x9/image.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 255,
@@ -66,7 +66,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '7',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://eda.ru/img/eda/c620x415/s1.eda.ru/StaticContent/Photos/120131085053/171027192707/p_O.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 260,
@@ -75,7 +75,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '8',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHXYFaPS1E6IBR_QhsdvcW2jWkmu6-STtZdg&usqp=CAU',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 255,
@@ -84,7 +84,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '9',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://vilki-palki.od.ua/storage/img-cache/500_500_1622465704%D0%92%D0%B5%D0%B3%D0%B0%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%D0%BF%D0%B8%D1%86%D1%86%D0%B0%D1%81%D0%B3%D1%80%D0%B8%D0%B1%D0%B0%D0%BC%D0%B8.png.webp',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 271,
@@ -93,7 +93,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '10',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://kingpizza.kh.ua/resources/products/400_20210810115720_65ff804886.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 275,
@@ -107,7 +107,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
     products: [
       {
         id: '11',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://i.ytimg.com/vi/PCAwJs51D0k/maxresdefault.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 294,
@@ -116,7 +116,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '12',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://st2.depositphotos.com/1692343/5636/i/600/depositphotos_56360353-stock-photo-hot-homemade-pepperoni-pizza.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 290,
@@ -125,7 +125,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '13',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://uploads-ssl.webflow.com/5eb58007728d3b72f3cd53d2/5eb59b2877eda54438ab8941_DSC07877-web.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 295,
@@ -134,7 +134,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '14',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://asset2.cxnmarksandspencer.com/is/image/mands/1049_18052022_SB-29260_610x438?wid=610',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 286,
@@ -143,7 +143,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '15',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://storage.pizza-kvartal.com/storage/8e/22/8e22797a61203b78cdffe0d1cf6c09bf.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 285,
@@ -152,7 +152,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '16',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://www.kremenchuk.pizza-nys.com.ua/wp-content/uploads/2020/05/IMG_0696-600x400.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 249,
@@ -166,7 +166,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
     products: [
       {
         id: '17',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://instafood.com.ua/images/full_blog/106970-5dd79d434bdbd.jpg?1609925656',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 294,
@@ -175,7 +175,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '18',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://static.1000.menu/img/content-v2/a1/64/13461/picca-s-moreproduktami-v-duxovke_1603034140_14_max.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 286,
@@ -184,7 +184,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '19',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://tomato.com.ua/files/slides/357914.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 315,
@@ -193,7 +193,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '20',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://starwood.vn.ua/wp-content/uploads/2019/02/Pitsa-Nino-Belissimo..jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 310,
@@ -202,7 +202,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '21',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://i.ytimg.com/vi/jZgorkhEbNI/maxresdefault.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 310,
@@ -216,7 +216,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
     products: [
       {
         id: '22',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://daddys.pizza/wp-content/uploads/2021/11/hem.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 266,
@@ -225,7 +225,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '23',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://trustpizza.com.ua/wp-content/uploads/2020/10/Veheterianska-scaled.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 272,
@@ -234,7 +234,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '24',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5_PSmJc1rhPjczDuqSJ-Cvxu3-hldxK8elA&usqp=CAU',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 310,
@@ -243,7 +243,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '25',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://obaldini.com.ua/image/cache/catalog/p2g-800x534.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 300,
@@ -252,7 +252,7 @@ export const mockDataAvaliblePizza: Array<Section> = [
       },
       {
         id: '26',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/800px-Eq_it-na_pizza-margherita_sep2005_sml.jpg',
+        image: 'https://media-cdn.tripadvisor.com/media/photo-s/0e/ee/9c/18/4.jpg',
         sizes: Object.values(Size),
         doughSizes: [DoughSize.BOARD_HOT_DOG, DoughSize.PHILADELPHY, DoughSize.STANDART, DoughSize.THIN],
         cost: 320,
