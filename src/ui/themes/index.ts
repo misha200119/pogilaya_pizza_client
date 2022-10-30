@@ -13,13 +13,13 @@ export interface Theme {
 
 export const themes: {[key: string]: Theme} = {
   [Themes.DARK]: {
-    primary: '#fff',
+    primary: '#ffffff',
     secondary: '#222',
     background: '#111',
     mode: 'dark',
   },
   [Themes.LIGHT]: {
-    primary: '#000',
+    primary: '#000000',
     secondary: '#222',
     background: 'rgb(248, 248, 248)',
     mode: 'light',

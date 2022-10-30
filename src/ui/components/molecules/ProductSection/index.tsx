@@ -37,7 +37,7 @@ export const ProductSection: FC<Props> = memo(({
       <Grid
         mobileColumnsCount="1"
         tabletColumnsCount="2"
-        desktopColumnsCount="3"
+        desktopColumnsCount="4"
         mobileColumnsSize="minmax(250px,768px)"
         tabletColumnsSize="minmax(250px,1fr)"
         desktopColumnsSize="minmax(250px,1fr)"
