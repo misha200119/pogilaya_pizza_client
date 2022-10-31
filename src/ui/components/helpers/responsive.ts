@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { memo } from 'react';
 
-const config = {
+export const config = {
   desktop: 1200,
   tablet: 768,
   mobile: 320,
@@ -14,9 +14,9 @@ export const tablet = (styles: string) => `@media only screen and (min-width: ${
 export const mobile = (styles: string) => `@media only screen and (min-width: ${config.mobile}px) { ${styles} }`;
 
 export const Container = memo(styled.div`
-  padding: 0 30px;
+  padding: 0 10px;
 
-  ${tablet('padding: 0 50px')}
+  ${tablet('padding: 0 10px')}
 
-  ${desktop('padding: 0 70px')}
+  ${desktop('padding: 0 10px')}
 `);
