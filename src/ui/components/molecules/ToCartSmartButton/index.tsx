@@ -1,5 +1,6 @@
 import React, { memo, FC } from 'react';
 import styled from 'styled-components';
+import hexToRgba from 'hex-to-rgba';
 import { useAppDispatch } from '../../../../utils/hooks/reduxHooks';
 import { addGood, removeGood } from '../../../../store/slices/cartSlice';
 import PizzaInCart from '../../../../utils/types/pizzaInCart';
@@ -14,7 +15,7 @@ const IncrementDecrementButtonsContainer = memo(styled.div`
   justify-content: space-between;
   gap: 10px;
 
-  border: 1px solid rgba(0,0,0,.08);
+  border: 1px solid ${({ theme }) => hexToRgba(theme.primary, 0.2)};
   border-radius: 15px;
 `);
 
@@ -37,7 +38,8 @@ const IncrementDecrementButton = memo(styled(Button)`
   height: 100%;
   min-width: 50px;
 
-  border: 1px solid rgba(0,0,0,.08);
+  border: 1px solid ${({ theme }) => hexToRgba(theme.primary, 0.1)};
+
   border-radius: 15px;
 
   background-color: #f8f8f8;
