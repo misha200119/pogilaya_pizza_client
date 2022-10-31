@@ -15,8 +15,14 @@ const NavContainer = memo(styled.nav`
 
 const StyledNavLink = memo(styled(NavLink)`
   color: inherit;
-  &.active {
-    opacity: 0.7;
+  font-weight: 400;
+  opacity: 0.7;
+  letter-spacing: .05em;
+
+  &.active, &:hover {
+    opacity: 1;
+    color: #f8f8f8;
+    font-weight: 700;
   }
   text-decoration: none;
 `);

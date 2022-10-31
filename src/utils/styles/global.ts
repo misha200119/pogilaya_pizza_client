@@ -50,7 +50,7 @@ const GlobalStyles = createGlobalStyle`
     border-spacing: 0;
   }
   html {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Rubik', 'Roboto', sans-serif;
   }
 
   * {
