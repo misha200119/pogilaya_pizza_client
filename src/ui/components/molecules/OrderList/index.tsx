@@ -61,6 +61,8 @@ export const OrderList = memo(() => {
 
 const MinifiedOrderListWrapper = memo(styled(OrderListWrapper)`
   color: ${({ theme }) => theme.primary};
+  padding: 20px 10px 10px 20px;
+  box-shadow: 0 0 40px rgb(0 0 0 / 50%);
 `);
 
 export const MinifiedOrderList = memo(() => {

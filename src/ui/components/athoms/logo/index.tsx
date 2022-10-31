@@ -6,8 +6,8 @@ const LogoContainer = memo(styled.a`
   align-items: center;
   gap: 15px;
 
-  font-size: 22px;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: 800;
   color: inherit;
   text-decoration: none;
 `);

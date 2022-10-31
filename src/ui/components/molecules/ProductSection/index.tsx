@@ -14,10 +14,13 @@ interface ProductItemContextType {
 // eslint-disable-next-line max-len
 export const ProductItemContext = createContext<ProductItemContextType>({} as ProductItemContextType);
 
-const StyledTitle = memo(styled.h1`
+const StyledTitle = memo(styled.h2`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  font-size: 30px;
+  font-weight: 700;
 
   margin-bottom: 40px;
 `);
