@@ -58,3 +58,17 @@ export const OrderList = memo(() => {
     </OrderListContainer>
   );
 });
+
+const MinifiedOrderListWrapper = memo(styled(OrderListWrapper)`
+  color: ${({ theme }) => theme.primary};
+`);
+
+export const MinifiedOrderList = memo(() => {
+  // eslint-disable-next-line no-underscore-dangle
+
+  return (
+    <MinifiedOrderListWrapper>
+      <OrderGoodsList isMinified />
+    </MinifiedOrderListWrapper>
+  );
+});

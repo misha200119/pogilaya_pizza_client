@@ -1,5 +1,5 @@
 import React, {
-  memo, FC, useMemo, useCallback,
+  memo, FC, useMemo, useCallback, useState,
 } from 'react';
 import styled from 'styled-components';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
@@ -12,6 +12,7 @@ import { Routes } from '../../../../utils/constants/routes';
 import { tablet, config } from '../../helpers/responsive';
 import { Portal } from '../Portal';
 import { PortalContainersIDs } from '../../../../utils/constants/portalContainersIDs';
+import { MinifiedOrderList } from '../OrderList';
 
 const CartContainer = memo(styled.div`
   padding: 2px;
@@ -39,6 +40,9 @@ const CartContainer = memo(styled.div`
 
   ${tablet(`
     position: static;
+    left: 0;
+    bottom: 0;
+
     box-shadow: none;
     color: #4f4f4f;
 
@@ -49,6 +53,36 @@ const CartContainer = memo(styled.div`
   `)}
 
   z-index: 10;
+`);
+
+const CollapsedOrderListContainer = styled.div`
+  position: absolute;
+  width: 100%;
+  margin-top: 1px;
+
+  transform-origin: top;  
+  transform-style: flat;
+`;
+
+const WrapperForCollapse = memo(styled.div`
+  position: relative;
+
+  ${CollapsedOrderListContainer} {
+    animation-name: rotate;
+    animation-duration: 0.8s;
+    animation-delay: 0s;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: scaleY(0);
+      /* transform: rotate(0); */
+    }
+    100% {
+      transform: scaleY(1);
+      /* transform: rotate(360deg); */
+    }
+  }
 `);
 
 const CartButton = memo(styled(Button)`
@@ -116,40 +150,56 @@ const Cart: FC<{}> = memo(() => {
   const navigateToCart = useCallback(() => {
     navigate(Routes.Checkout);
   }, [navigate]);
+  const [isCartListOpen, setIsCartListOpen] = useState(false);
+  const switchOpenCloseCartList = useCallback(() => {
+    setIsCartListOpen((prev) => !prev);
+  }, []);
 
   const component = useMemo(() => {
     return (
-      <CartContainer
-        onClick={() => {
-          if (matches) {
-            navigateToCart();
-          }
-        }}
-      >
-        <CartButton borderRadius="50%" width="44px" height="44px">
-          <CartButtonContentContainer>
-            <span>{_countGoodsInCartAndCost.countGoods}</span>
-            <AiOutlineShoppingCart />
-          </CartButtonContentContainer>
-        </CartButton>
-
-        <CartInfoPrice>
-          {`${_countGoodsInCartAndCost.totalCost} `}
-          UAH
-        </CartInfoPrice>
-
-        {!matches && (
-          <CheckoutButton
-            borderRadius="25px"
-            height="50px"
-            onClick={navigateToCart}
+      <WrapperForCollapse>
+        <CartContainer
+          onClick={() => {
+            if (matches) {
+              navigateToCart();
+            }
+          }}
+        >
+          <CartButton
+            borderRadius="50%"
+            width="44px"
+            height="44px"
+            onClick={switchOpenCloseCartList}
           >
-            Checkout
-          </CheckoutButton>
+            <CartButtonContentContainer>
+              <span>{_countGoodsInCartAndCost.countGoods}</span>
+              <AiOutlineShoppingCart />
+            </CartButtonContentContainer>
+          </CartButton>
+
+          <CartInfoPrice>
+            {`${_countGoodsInCartAndCost.totalCost} `}
+            UAH
+          </CartInfoPrice>
+
+          {!matches && (
+            <CheckoutButton
+              borderRadius="25px"
+              height="50px"
+              onClick={navigateToCart}
+            >
+              Checkout
+            </CheckoutButton>
+          )}
+        </CartContainer>
+        {isCartListOpen && (
+          <CollapsedOrderListContainer className="123">
+            <MinifiedOrderList />
+          </CollapsedOrderListContainer>
         )}
-      </CartContainer>
+      </WrapperForCollapse>
     );
-  }, [_countGoodsInCartAndCost, navigate, matches]);
+  }, [_countGoodsInCartAndCost, navigate, matches, isCartListOpen]);
 
   if (matches) {
     return (
