@@ -54,11 +54,16 @@ const DescriptionContainer = memo(styled.div`
   grid-gap: 15px;
 `);
 
-const PizzaName = memo(styled.h2`
+const PizzaName = memo(styled.h3`
+  font-weight: 600;
+  font-size: 14px;
 `);
 
 const PizzaToppings = memo(styled.span`
   display: block;
+
+  font-size: 11px;
+  color: #4f4f4f;
 `);
 
 const PriceContainer = memo(styled.div`
@@ -69,6 +74,17 @@ const PriceContainer = memo(styled.div`
   grid-template-columns: repeat(2, 1fr);
   justify-content: space-between;
   align-items: center;
+`);
+
+const CostWrapper = memo(styled.div`
+  font-weight: 700;
+  font-size: 18px;
+`);
+
+const CurrencySuffix = memo(styled.span`
+  margin-left: 5px;
+
+  font-size: 11px;
 `);
 
 export const ProductItem: FC<{}> = memo(() => {
@@ -130,12 +146,10 @@ export const ProductItem: FC<{}> = memo(() => {
           setCurrentSize={setSelectedDoughSizes}
         />
         <PriceContainer>
-          <div>
-            <p>
-              {calculatedPizzaCost}
-              UAH
-            </p>
-          </div>
+          <CostWrapper>
+            {calculatedPizzaCost}
+            <CurrencySuffix>UAH</CurrencySuffix>
+          </CostWrapper>
           <ToCartSmartButton
             cartMap={cartProductsMap}
             curentGoodBySelectedParamsAsString={

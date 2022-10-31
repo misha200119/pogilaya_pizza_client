@@ -40,22 +40,29 @@ const DescriptionContainer = memo(styled.div`
 `);
 
 const GoodDescriptionTitle = memo(styled.h2`
-  font-size: 14px;
+  max-width: 85%;
   color: #222;
+  font-size: 14px;
+  font-weight: 600;
 `);
 
 const GoodToppingsContainer = memo(styled.div`
+  max-width: 85%;
+
   display: flex;
   flex-direction: column;
   grid-gap: 5px;
+
+  color: #4f4f4f;
   font-size: 11px;
+  line-height: 1.3;
 `);
 
 const Toppings = memo(styled.p`
-  color: #4f4f4f;
 `);
 
 const DoughSizeAndPizzaSize = memo(styled.span`
+  font-weight: 700;
 `);
 
 const GoodDescriptionFooter = memo(styled.div`
@@ -67,6 +74,13 @@ const GoodDescriptionFooter = memo(styled.div`
 
 const GoodTotalCost = memo(styled.p`
   font-size: 18px;
+  font-weight: 700;
+  letter-spacing: .03em;
+`);
+
+const CostCurrencySuffix = memo(styled.span`
+  margin-left: 5px;
+  font-size: 11px;
 `);
 
 const RemoveGoodButton = memo(styled(Button)`
@@ -132,13 +146,9 @@ export const OrderGoodsListItem: FC<Props> = memo(({
         <GoodDescriptionFooter>
           <GoodTotalCost>
             {totalCostOfProduct}
-            <span
-              style={{
-                fontSize: '11px',
-              }}
-            >
+            <CostCurrencySuffix>
               UAH
-            </span>
+            </CostCurrencySuffix>
           </GoodTotalCost>
 
           <GoodListItemCountButton
@@ -190,13 +200,9 @@ export const MinifiedOrderGoodsListItem: FC<Props> = memo(({
         <GoodDescriptionFooter>
           <GoodTotalCost>
             {totalCostOfProduct}
-            <span
-              style={{
-                fontSize: '11px',
-              }}
-            >
+            <CostCurrencySuffix>
               UAH
-            </span>
+            </CostCurrencySuffix>
           </GoodTotalCost>
 
           <GoodListItemCountButton

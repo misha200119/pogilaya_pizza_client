@@ -14,13 +14,17 @@ interface SwitchButtonsSelectorContainerProps {
 }
 
 const SwitchButtonsSelectorContainer = memo(styled.div<SwitchButtonsSelectorContainerProps>`
+  width: 100%;
+
+  font-weight: 600;
+  font-size: 14px;
+
   display: ${({ display }) => display};
   justify-content: space-between;
   align-items: center;
   flex-direction: ${({ flexDirection }) => flexDirection};
   grid-template-columns: ${({ gridColumnsCount }) => `repeat(${gridColumnsCount}, 1fr)`};
   grid-gap: ${({ gap }) => gap};
-  width: 100%;
   `);
 
 interface SwitchButtonProps {
@@ -52,6 +56,9 @@ const SwitchButton = memo(styled(Button)<SwitchButtonProps>`
   border-radius: ${({ borderRadius }) => borderRadius};
 
   color: ${({ selected, colorOnSelected, color }) => (selected ? colorOnSelected : color)};
+  font-weight: inherit;
+  font-size: inherit;
+
   background-color: ${({ selected, backgroundColorOnSelected, backgroundColor }) => (selected ? backgroundColorOnSelected : backgroundColor)};
 
   & svg {

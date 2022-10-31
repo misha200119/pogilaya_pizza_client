@@ -117,6 +117,8 @@ const CheckoutButton = memo(styled(Button)`
   height: 45px;
   padding: 0 25px;
   color: #fff;
+  font-weight: 600;
+  font-size: 17px;
 
   background-color: #e31837;
   
@@ -128,6 +130,8 @@ const CheckoutButton = memo(styled(Button)`
 `);
 
 const CartButtonContentContainer = memo(styled.div`
+  font-size: 15px;
+  font-weight: 800;
   display: flex;
   flex-direction: column;
   justify-content: center;
