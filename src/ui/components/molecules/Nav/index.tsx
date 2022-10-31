@@ -14,7 +14,7 @@ const NavContainer = memo(styled.nav`
 `);
 
 const StyledNavLink = memo(styled(NavLink)`
-  color: ${(props) => props.theme.primary};
+  color: inherit;
   &.active {
     opacity: 0.7;
   }

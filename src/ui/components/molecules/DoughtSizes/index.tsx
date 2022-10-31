@@ -7,7 +7,6 @@ import SwitchButtonSelector from '../SwitchButtonSelector';
 
 const Container = memo(styled.div`
   display: flex;
-  margin-bottom: 15px;
 `);
 
 interface Props {
@@ -30,6 +29,7 @@ const DoughtSizes: FC<Props> = memo(({
       <SwitchButtonSelector
         display="grid"
         gridColumnsCount="2"
+        buttonsHeight="30px"
         gap="10px"
         values={mappedDought}
         currentValue={currentSize}

@@ -29,6 +29,7 @@ const GlobalStyles = createGlobalStyle`
   }
   html {
     height: 100%;
+    scroll-behavior: smooth;
   }
   body {
     line-height: 1;

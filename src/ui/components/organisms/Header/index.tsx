@@ -17,12 +17,14 @@ import ThemeSwitcher from '../../molecules/ThemeSwitcher';
 const logoImage = '/images/Logo.webp';
 
 const Container = memo(styled.header`
-  background-color: ${(props) => props.theme.secondary};;
-  color: ${(props) => props.theme.primary};
+  background-color: #222;
+  color: #fff;
 
   position: sticky;
   top: 0;
-  z-index: 1;
+  left: 0;
+  right: 0;
+  z-index: 999;
 `);
 
 const Header: FC<{}> = memo(() => {
@@ -36,7 +38,7 @@ const Header: FC<{}> = memo(() => {
           mobileGridGap="25px"
           tabletGridGap="20px"
           desktopGridGap="15px"
-          templateAreasMobile={'"logo cart"'}
+          templateAreasMobile={'"logo cart" "nav nav"'}
           templateAreasTablet={'"logo cart" "nav nav"'}
           templateAreasDesktop={'"logo nav cart"'}
           style={{
@@ -45,7 +47,7 @@ const Header: FC<{}> = memo(() => {
         >
           <GridItemArea areaName="logo">
             <Logo size="50px" imgUrl={logoImage} linkHref="#">
-              <Visible mobileVisible={false}>
+              <Visible>
                 <p>My pizza</p>
               </Visible>
             </Logo>
@@ -63,7 +65,7 @@ const Header: FC<{}> = memo(() => {
             <Cart />
           </GridItemArea>
 
-          <GridItemArea mobileVisible={false} areaName="nav">
+          <GridItemArea areaName="nav">
             <Nav />
           </GridItemArea>
         </GridWithTemplate>

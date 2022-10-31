@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import styled from 'styled-components';
+import hexToRgba from 'hex-to-rgba';
 import { countGoodsInCartAndCost } from '../../../../store/slices/cartSlice';
 import { useAppSelector } from '../../../../utils/hooks/reduxHooks';
 import { OrderGoodsList } from '../OrderGoodsList';
@@ -18,10 +19,11 @@ const OrderListContainer = memo(styled.div`
 
 const OrderListWrapper = memo(styled.div`
   width: 100%;
-  border: 1px solid rgba(0,0,0,.08);
+  border: 1px solid ${({ theme }) => hexToRgba(theme.primary, 0.08)};
   border-radius: 25px;
+  background-color: ${({ theme }) => theme.background};
 
-  z-index: 1;
+  opacity: 1;
   overflow: auto;
 `);
 
@@ -44,9 +46,7 @@ export const OrderList = memo(() => {
 
   return (
     <OrderListContainer>
-      <OrderListTitle>
-        Your order
-      </OrderListTitle>
+      <OrderListTitle>Your order</OrderListTitle>
 
       <OrderListWrapper>
         <OrderGoodsList />
@@ -56,5 +56,19 @@ export const OrderList = memo(() => {
         </OrderListFooter>
       </OrderListWrapper>
     </OrderListContainer>
+  );
+});
+
+const MinifiedOrderListWrapper = memo(styled(OrderListWrapper)`
+  color: ${({ theme }) => theme.primary};
+`);
+
+export const MinifiedOrderList = memo(() => {
+  // eslint-disable-next-line no-underscore-dangle
+
+  return (
+    <MinifiedOrderListWrapper>
+      <OrderGoodsList isMinified />
+    </MinifiedOrderListWrapper>
   );
 });

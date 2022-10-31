@@ -24,13 +24,16 @@ const ProductItemContainer = memo(styled.div`
 
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  grid-gap: 15px;
 
-  background-color: ${(props) => (props.theme.mode === 'light' ? '#fff' : '#000')};
+  background-color: ${(props) => (props.theme.mode === 'light' ? '#fff' : '#DDDDDD')};
 
   &:hover{
-    -webkit-box-shadow:0 0 15px ${(props) => (props.theme.mode === 'light' ? 'rgba(0,0,0,.5)' : 'rgba(255,255,255,.5)')};
-    box-shadow:0 0 15px ${(props) => (props.theme.mode === 'light' ? 'rgba(0,0,0,.5)' : 'rgba(255,255,255,.5)')};
+    -webkit-box-shadow: 0 0 15px rgba(0,0,0,.5);
+    box-shadow: 0 0 15px rgba(0,0,0,.5);
+    /* -webkit-box-shadow:0 0 15px ${(props) => (props.theme.mode === 'light' ? 'rgba(0,0,0,.5)' : 'rgba(255,255,255,.5)')};
+    box-shadow:0 0 15px ${(props) => (props.theme.mode === 'light' ? 'rgba(0,0,0,.5)' : 'rgba(255,255,255,.5)')}; */
   }
 
   &:hover img{
@@ -41,21 +44,21 @@ const ProductItemContainer = memo(styled.div`
 
   transition: all .3s ease;
 
-  border: 1px solid #e0e0e0;
+  border: 1px solid ${(props) => (props.theme.mode === 'light' ? '#e0e0e0' : '#888888')};
   border-radius: 25px;
 `);
 
 const DescriptionContainer = memo(styled.div`
-  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  grid-gap: 15px;
 `);
 
 const PizzaName = memo(styled.h2`
-  margin-bottom: 15px;
 `);
 
 const PizzaToppings = memo(styled.span`
   display: block;
-  margin-bottom: 15px;
 `);
 
 const PriceContainer = memo(styled.div`
@@ -109,30 +112,23 @@ export const ProductItem: FC<{}> = memo(() => {
 
   return (
     <ProductItemContainer>
-      <Image
-        image={image}
-        maxHeight="300px"
-      />
       <DescriptionContainer>
-        <PizzaName>
-          {name}
-        </PizzaName>
-        <PizzaToppings>
-          {toppings}
-        </PizzaToppings>
+        <Image image={image} maxHeight="176px" height="176px" />
+        <PizzaName>{name}</PizzaName>
+        <PizzaToppings>{toppings}</PizzaToppings>
+      </DescriptionContainer>
 
+      <DescriptionContainer>
         <PizzaSizes
           currentSize={currentPizzaSize}
           setCurrentSize={setCurrentPizzaSize}
           sizes={sizes}
         />
-
         <DoughtSizes
           sizes={doughSizes}
           currentSize={selectedDoughSizes}
           setCurrentSize={setSelectedDoughSizes}
         />
-
         <PriceContainer>
           <div>
             <p>
@@ -142,8 +138,12 @@ export const ProductItem: FC<{}> = memo(() => {
           </div>
           <ToCartSmartButton
             cartMap={cartProductsMap}
-            curentGoodBySelectedParamsAsString={currentPizzaBySelectedParamsAsString}
-            curentGoodBySelectedParamsAsObject={currentPizzaBySelectedParamsAsObject}
+            curentGoodBySelectedParamsAsString={
+              currentPizzaBySelectedParamsAsString
+            }
+            curentGoodBySelectedParamsAsObject={
+              currentPizzaBySelectedParamsAsObject
+            }
           />
         </PriceContainer>
       </DescriptionContainer>

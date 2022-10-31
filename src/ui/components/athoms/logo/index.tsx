@@ -8,7 +8,7 @@ const LogoContainer = memo(styled.a`
 
   font-size: 22px;
   font-weight: 700;
-  color: ${(props) => props.theme.primary};
+  color: inherit;
   text-decoration: none;
 `);
 

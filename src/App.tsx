@@ -1,6 +1,6 @@
 import React, { memo, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
-import { Routes } from 'react-router-dom';
+import { Routes, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { mapRoutes, mappableUtilRoutes, mappableRoutes } from './utils/routes';
 import { useAppDispatch, useAppSelector } from './utils/hooks/reduxHooks';
@@ -17,10 +17,15 @@ export const App: React.FC<{}> = memo(() => {
   const dispatch = useAppDispatch();
   const currentTheme = useAppSelector(_currentTheme);
   const isCheckingAuth = useAppSelector(_isCheckingAuth);
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(checkAuth());
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
 
   return isCheckingAuth ? (
     <Loading width="100vw" height="100vh" />
@@ -31,6 +36,7 @@ export const App: React.FC<{}> = memo(() => {
           {mapRoutes(mappableRoutes)}
           {mapRoutes(mappableUtilRoutes)}
         </Routes>
+        <div id="cart-mobile"></div>
       </ThemeProvider>
       <ToastContainer
         position="bottom-right"
