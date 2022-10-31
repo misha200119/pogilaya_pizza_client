@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {
   memo, FC, useMemo, useCallback, useState,
 } from 'react';
 import styled from 'styled-components';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Button from '../../athoms/Button';
 import { useAppSelector } from '../../../../utils/hooks/reduxHooks';
@@ -55,34 +56,26 @@ const CartContainer = memo(styled.div`
   z-index: 10;
 `);
 
-const CollapsedOrderListContainer = styled.div`
+interface CollapsedOrderListContainerProps {
+  isOpened: boolean;
+}
+
+const CollapsedOrderListContainer = styled.div<CollapsedOrderListContainerProps>`
   position: absolute;
   width: 100%;
   margin-top: 1px;
 
-  transform-origin: top;  
+  transform-origin: top;
   transform-style: flat;
+
+
+  transform: ${({ isOpened }) => (isOpened ? 'scaleY(1)' : 'scaleY(0)')};
+
+  transition: transform 0.3s;
 `;
 
 const WrapperForCollapse = memo(styled.div`
   position: relative;
-
-  ${CollapsedOrderListContainer} {
-    animation-name: rotate;
-    animation-duration: 0.8s;
-    animation-delay: 0s;
-  }
-
-  @keyframes rotate {
-    0% {
-      transform: scaleY(0);
-      /* transform: rotate(0); */
-    }
-    100% {
-      transform: scaleY(1);
-      /* transform: rotate(360deg); */
-    }
-  }
 `);
 
 const CartButton = memo(styled(Button)`
@@ -143,6 +136,7 @@ const CartButtonContentContainer = memo(styled.div`
 
 const Cart: FC<{}> = memo(() => {
   const navigate = useNavigate();
+  const location = useLocation();
 
   // eslint-disable-next-line no-underscore-dangle
   const _countGoodsInCartAndCost = useAppSelector(countGoodsInCartAndCost);
@@ -152,8 +146,14 @@ const Cart: FC<{}> = memo(() => {
   }, [navigate]);
   const [isCartListOpen, setIsCartListOpen] = useState(false);
   const switchOpenCloseCartList = useCallback(() => {
+    if (location.pathname === Routes.Checkout) {
+      setIsCartListOpen(false);
+
+      return;
+    }
+
     setIsCartListOpen((prev) => !prev);
-  }, []);
+  }, [location, setIsCartListOpen]);
 
   const component = useMemo(() => {
     return (
@@ -192,11 +192,9 @@ const Cart: FC<{}> = memo(() => {
             </CheckoutButton>
           )}
         </CartContainer>
-        {isCartListOpen && (
-          <CollapsedOrderListContainer className="123">
-            <MinifiedOrderList />
-          </CollapsedOrderListContainer>
-        )}
+        <CollapsedOrderListContainer isOpened={isCartListOpen}>
+          <MinifiedOrderList />
+        </CollapsedOrderListContainer>
       </WrapperForCollapse>
     );
   }, [_countGoodsInCartAndCost, navigate, matches, isCartListOpen]);
@@ -211,5 +209,7 @@ const Cart: FC<{}> = memo(() => {
 
   return component;
 });
+
+Cart.displayName = 'Cart';
 
 export default Cart;
