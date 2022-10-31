@@ -27,11 +27,13 @@ const ProductItemContainer = memo(styled.div`
   justify-content: space-between;
   grid-gap: 15px;
 
-  background-color: ${(props) => (props.theme.mode === 'light' ? '#fff' : '#000')};
+  background-color: ${(props) => (props.theme.mode === 'light' ? '#fff' : '#DDDDDD')};
 
   &:hover{
-    -webkit-box-shadow:0 0 15px ${(props) => (props.theme.mode === 'light' ? 'rgba(0,0,0,.5)' : 'rgba(255,255,255,.5)')};
-    box-shadow:0 0 15px ${(props) => (props.theme.mode === 'light' ? 'rgba(0,0,0,.5)' : 'rgba(255,255,255,.5)')};
+    -webkit-box-shadow: 0 0 15px rgba(0,0,0,.5);
+    box-shadow: 0 0 15px rgba(0,0,0,.5);
+    /* -webkit-box-shadow:0 0 15px ${(props) => (props.theme.mode === 'light' ? 'rgba(0,0,0,.5)' : 'rgba(255,255,255,.5)')};
+    box-shadow:0 0 15px ${(props) => (props.theme.mode === 'light' ? 'rgba(0,0,0,.5)' : 'rgba(255,255,255,.5)')}; */
   }
 
   &:hover img{
@@ -42,7 +44,7 @@ const ProductItemContainer = memo(styled.div`
 
   transition: all .3s ease;
 
-  border: 1px solid #e0e0e0;
+  border: 1px solid ${(props) => (props.theme.mode === 'light' ? '#e0e0e0' : '#888888')};
   border-radius: 25px;
 `);
 
