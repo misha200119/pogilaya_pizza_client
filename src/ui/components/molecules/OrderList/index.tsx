@@ -8,10 +8,10 @@ import { desktop } from '../../helpers/responsive';
 
 const OrderListContainer = memo(styled.div`
   position: sticky;
-  top: 160px;
+  top: 145px;
   width: 100%;
 
-  ${desktop('top: 110px')};
+  ${desktop('top: 100px')};
 
   display: flex;
   flex-direction: column;
@@ -29,6 +29,8 @@ const OrderListWrapper = memo(styled.div`
 
 const OrderListTitle = memo(styled.h1`
   margin: 0 0 30px 20px;
+  font-weight: 600;
+  font-size: 18px;
 `);
 
 const OrderListFooter = memo(styled.div`
