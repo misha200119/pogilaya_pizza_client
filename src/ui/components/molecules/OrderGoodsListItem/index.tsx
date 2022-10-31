@@ -117,7 +117,7 @@ export const OrderGoodsListItem: FC<Props> = memo(({
   const productAsObject: PizzaInCart = JSON.parse(productJSON);
 
   const totalCostOfProduct = useMemo(() => {
-    return productsMap[productJSON] * productAsObject.cost;
+    return (productsMap[productJSON] * productAsObject.cost).toFixed(2);
   }, [productsMap, productAsObject]);
 
   return (
@@ -177,7 +177,7 @@ export const MinifiedOrderGoodsListItem: FC<Props> = memo(({
   const productAsObject: PizzaInCart = JSON.parse(productJSON);
 
   const totalCostOfProduct = useMemo(() => {
-    return productsMap[productJSON] * productAsObject.cost;
+    return (productsMap[productJSON] * productAsObject.cost).toFixed(2);
   }, [productsMap, productAsObject]);
 
   return (
