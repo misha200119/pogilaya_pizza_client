@@ -3,7 +3,6 @@ import {
   REACT_APP_API_DEV_DOMAIN,
   REACT_APP_API_DEV_PORT,
   REACT_APP_API_DOMAIN,
-  REACT_APP_API_PORT,
 } from './dotenv';
 
 /* eslint-disable no-shadow */
@@ -23,7 +22,7 @@ enum APIEndpoints {
 }
 
 export const baseURL = isProd
-  ? `${REACT_APP_API_DOMAIN}${REACT_APP_API_PORT}`
+  ? `${REACT_APP_API_DOMAIN}`
   : `${REACT_APP_API_DEV_DOMAIN}${REACT_APP_API_DEV_PORT}`;
 
 export default APIEndpoints;
