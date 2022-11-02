@@ -14,7 +14,7 @@ import Cart from '../../molecules/Cart';
 import Nav from '../../molecules/Nav';
 import ThemeSwitcher from '../../molecules/ThemeSwitcher';
 
-const logoImage = '/images/Logo.webp';
+const logoImage = './images/Logo.webp';
 
 const Container = memo(styled.header`
   background-color: #222;
