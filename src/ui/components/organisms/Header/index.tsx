@@ -1,5 +1,4 @@
 /* eslint-disable import/no-cycle */
-/* eslint-disable max-len */
 import React, { FC, memo } from 'react';
 import styled from 'styled-components';
 import Logo from '../../athoms/Logo';
