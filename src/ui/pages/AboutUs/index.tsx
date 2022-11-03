@@ -5,6 +5,15 @@ import { gsap } from 'gsap';
 // eslint-disable-next-line import/no-cycle
 import Header from '../../components/organisms/Header';
 import { Container as ResponsiveContainer } from '../../components/helpers/responsive';
+import { BackgroundVideo } from '../../components/athoms/BackgroundVideo';
+
+const Section = memo(styled.section`
+
+`);
+
+const HeaderSection = memo(styled(Section)`
+  height: 100vh;
+`);
 
 const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
   height: 50vh;
@@ -23,8 +32,12 @@ export const AboutUs = memo(() => {
   return (
     <>
       <Header />
-      <StyledResponsiveContainer ref={contentContainer}>
-        <div>about us page</div>
+      <HeaderSection>
+        <BackgroundVideo />
+      </HeaderSection>
+      <StyledResponsiveContainer
+        ref={contentContainer}
+      >
       </StyledResponsiveContainer>
     </>
   );
