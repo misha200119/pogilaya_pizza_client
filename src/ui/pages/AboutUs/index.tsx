@@ -7,6 +7,7 @@ import Header from '../../components/organisms/Header';
 import { Container as ResponsiveContainer } from '../../components/helpers/responsive';
 
 const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
+  height: 50vh;
 
   background-color: ${(props) => props.theme.background};
   color: ${(props) => props.theme.primary};

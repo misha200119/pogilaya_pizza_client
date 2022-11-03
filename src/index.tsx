@@ -7,12 +7,14 @@ import GlobalStyles from './utils/styles/global';
 import { store } from './store';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import '@ant-design/flowchart/dist/index.css';
+import { CursorAfterEffect } from './ui/components/organisms/CursorAfterEffect';
 
 ReactDOM.render(
   <React.StrictMode>
     <HashRouter>
       <Provider store={store}>
         <GlobalStyles />
+        <CursorAfterEffect />
         <App />
       </Provider>
     </HashRouter>
