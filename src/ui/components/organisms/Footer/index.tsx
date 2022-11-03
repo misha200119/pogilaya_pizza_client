@@ -9,7 +9,7 @@ import Logo from '../../athoms/Logo';
 import { Grid, GridItem } from '../../helpers/grid';
 import { Container as ResponsiveContainer } from '../../helpers/responsive';
 
-const logoImage = '/images/Logo.webp';
+const logoImage = './images/Logo.webp';
 
 const FooterContainer = memo(styled.footer`
 `);
