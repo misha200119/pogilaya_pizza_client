@@ -3,7 +3,7 @@ Simple pizza shop
 Node version: v14.18.2
 
 Scripts:
-dev: npm run start
+dev: npm run dev
 build: npm run build
 
 You can go to '/admin' route and manage/check analitics with simple interface
