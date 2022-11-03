@@ -3,8 +3,9 @@ Simple pizza shop
 Node version: v14.18.2
 
 Important:
-1 when you deploy add that env variable to use styles in styled components:
-https://stackoverflow.com/questions/53486470/react-styled-components-stripped-out-from-production-build
+1 - when you deploy add that env variable to use styles in styled components:
+[Issue](https://stackoverflow.com/questions/53486470/react-styled-components-stripped-out-from-production-build)
+
 
 Scripts:
 dev: npm run dev
