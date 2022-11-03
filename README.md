@@ -1,5 +1,7 @@
 Simple pizza shop
 
+[BE for it](https://github.com/misha200119/pogilaya_pizza_server)
+
 Node version: v14.18.2
 
 Important:
