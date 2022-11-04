@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/media-has-caption */
-import React, { memo } from 'react';
+import React, { FC, memo } from 'react';
 import styled from 'styled-components';
-
-const videoBg = '/assets/nigger_eats_pizza.mp4';
 
 const VideoBgContainer = memo(styled.div`
   width: 100%;
@@ -15,10 +13,14 @@ const Videoplayer = memo(styled.video`
   object-fit: cover;
 `);
 
-export const BackgroundVideo = memo(() => {
+interface Props {
+  src: string;
+}
+
+export const BackgroundVideo: FC<Props> = memo(({ src }) => {
   return (
     <VideoBgContainer>
-      <Videoplayer src={videoBg} autoPlay loop muted />
+      <Videoplayer src={src} autoPlay loop muted />
     </VideoBgContainer>
   );
 });
