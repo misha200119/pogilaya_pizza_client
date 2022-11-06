@@ -22,7 +22,7 @@ const StyledNavLink = memo(styled(NavLink)`
   &.active, &:hover {
     letter-spacing: .03em;
     opacity: 1;
-    color: #f8f8f8;
+    color: inherit;
     font-weight: 700;
   }
   text-decoration: none;

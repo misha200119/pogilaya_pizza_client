@@ -1,7 +1,9 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useLayoutEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Routes, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { mapRoutes, mappableUtilRoutes, mappableRoutes } from './utils/routes';
 import { useAppDispatch, useAppSelector } from './utils/hooks/reduxHooks';
 import { isCheckingAuth as _isCheckingAuth, checkAuth } from './store/slices/userAuthSlice';
@@ -26,6 +28,10 @@ export const App: React.FC<{}> = memo(() => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
+
+  useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+  }, []);
 
   return isCheckingAuth ? (
     <Loading width="100vw" height="100vh" />

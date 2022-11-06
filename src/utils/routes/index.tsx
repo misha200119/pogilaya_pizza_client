@@ -6,7 +6,7 @@ import { DashBoardGraphic } from '../../ui/components/molecules/DashBoardGraphic
 import Header from '../../ui/components/organisms/Header';
 import { LoginForm } from '../../ui/components/organisms/LoginForm';
 import { PrivateRoute } from '../../ui/components/utils/privateRoute';
-import { AboutUs } from '../../ui/pages/AboutUs';
+import { Landing } from '../../ui/pages/Landing';
 import { AdminPage } from '../../ui/pages/Admin';
 import { Catalog as CatalogPage } from '../../ui/pages/Catalog';
 import { Checkout as CheckoutPage } from '../../ui/pages/Checkout';
@@ -31,7 +31,7 @@ export const mappableRoutes: Array<MappableRoute> = [
   {
     link: Routes.AboutUs,
     linkText: 'ABOUT US',
-    describedComponent: <AboutUs />,
+    describedComponent: <Landing />,
     isPrivate: false,
   },
 ];
