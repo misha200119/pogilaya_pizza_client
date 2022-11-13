@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { FC, memo } from 'react';
 import styled from 'styled-components';
 import Logo from '../../athoms/Logo';
 import Visible from '../../helpers/mediaVisible';
@@ -8,11 +8,16 @@ import Nav from '../../molecules/Nav';
 
 const logoImage = './images/Logo.webp';
 
-// for that component we use custom theme provider from styled component in Landing page
-const Container = memo(styled.header`
-  height: auto;
+interface ContainerProps {
+  position?: string;
+  visible?: boolean;
+}
 
-  position: fixed;
+// for that component we use custom theme provider from styled component in Landing page
+const Container = memo(styled.header<ContainerProps>`
+
+  position: ${({ position }) => position ?? 'static'};
+  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
   top: 0;
   left: 0;
   right: 0;
@@ -37,9 +42,14 @@ const Container = memo(styled.header`
   transition: all 0.3s;
 `);
 
-export const LandingHeader = memo(() => {
+interface Props {
+  position?: string;
+  isVisible?: boolean;
+}
+
+export const LandingHeader: FC<Props> = memo(({ position, isVisible }) => {
   return (
-    <Container>
+    <Container position={position} visible={isVisible}>
       <Logo size="50px" imgUrl={logoImage} linkHref="#">
         <Visible>
           <p>My pizza</p>

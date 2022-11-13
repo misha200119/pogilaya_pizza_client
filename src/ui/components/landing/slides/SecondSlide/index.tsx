@@ -2,6 +2,8 @@ import React, {
   memo, Dispatch, SetStateAction, FC, useRef, useLayoutEffect,
 } from 'react';
 import { gsap } from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+// eslint-disable-next-line import/no-cycle
 import { Section } from '../../Section';
 
 const image1 = './images/1.jpg';
@@ -15,24 +17,34 @@ interface Props {
 }
 
 export const SecondSlide: FC<Props> = memo(() => {
-  const container = useRef(null);
+  const container = useRef<HTMLElement| null>(null);
 
   useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
     const gsapContext = gsap.context(() => {
-      gsap.fromTo(
-        '.appear-left',
-        { opacity: 0, y: -300 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 2,
-          scrollTrigger: {
-            trigger: container.current,
-            start: 'top top',
-          },
-        },
-      );
+
     }, container);
+
+    gsap.fromTo(
+      '.appear-left',
+      { opacity: 0, y: -300 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 2,
+        scrollTrigger: {
+          trigger: container.current,
+          start: 'top top',
+        },
+      },
+    );
+
+    gsap.to('.orange p', {
+      scrollTrigger: '.orange',
+      duration: 2,
+      rotation: 360,
+    });
 
     return () => {
       gsapContext.revert();
@@ -40,28 +52,16 @@ export const SecondSlide: FC<Props> = memo(() => {
   }, [container]);
 
   return (
-    <Section ref={container} backgroundImage={image1}>
-      <div
-        style={{
-          display: 'flex',
-          height: '100vh',
-          width: '100%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: '70px',
-          fontWeight: 700,
-        }}
-      >
-        <div className="appear-left" style={{ color: '#fff' }}>
-          FirstSlide
-        </div>
-        <div className="appear-left" style={{ color: '#fff' }}>
-          12321312
-        </div>
-        <div className="appear-left" style={{ color: '#fff' }}>
-          gfdhjbjskfbdjas
-        </div>
-      </div>
+    <Section HTMLElementRef={container} backgroundImage={image1}>
+      <p className="appear-left paralaxEffect" style={{ color: '#fff' }}>
+        FirstSlide
+      </p>
+      <p className="appear-left paralaxEffect" style={{ color: '#fff' }}>
+        12321312
+      </p>
+      <p className="appear-left paralaxEffect" style={{ color: '#fff' }}>
+        gfdhjbjskfbdjas
+      </p>
     </Section>
   );
 });

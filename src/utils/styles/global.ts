@@ -28,8 +28,7 @@ const GlobalStyles = createGlobalStyle`
     display: block;
   }
   html {
-    height: 100%;
-    scroll-behavior: smooth;
+    min-height: 100vh;
   }
   body {
     line-height: 1;

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable import/no-cycle */
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -6,71 +7,51 @@ import React, {
 } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-// import { gsap } from 'gsap';
-import { LandingHeader } from '../../components/landing/Header';
+import { gsap } from 'gsap';
+import ScrollTrigger from 'gsap/ScrollTrigger';
+import createScrollSnap from 'scroll-snap';
+import { LandingHeader } from '../../components/landing/LandingHeader';
 import { Section } from '../../components/landing/Section';
 import { FirstSlide } from '../../components/landing/slides/FirstSlide';
 import { SecondSlide } from '../../components/landing/slides/SecondSlide';
 
 const SlidesContainer = memo(styled.div`
-  max-height: 100vh;
-  max-width: 100%;
-  overflow-x: hidden;
+  width: 100%;
+  height: 100vh;
   overflow-y: auto;
   scroll-snap-type: y mandatory;
+  overflow-x: hidden;
 `);
 
 const image2 = './images/2.jpg';
 const image3 = './images/3.jpg';
 
 export const Landing = memo(() => {
-  const container = useRef(null);
+  const container = useRef<null | HTMLElement>(null);
   const currentSection = useRef(null);
   const [headerTextColor, setHeaderTextColor] = useState({ color: '#fff' });
+
+  useLayoutEffect(() => {
+    ScrollTrigger.defaults({
+      toggleActions: 'restart pause resume pause',
+      scroller: container.current,
+    });
+  }, [container]);
 
   const setHeaderTextColor_ = useCallback((color: string) => {
     setHeaderTextColor({ color });
   }, [setHeaderTextColor]);
 
   return (
-    <SlidesContainer>
-      <ThemeProvider theme={headerTextColor}>
-        <LandingHeader />
+    <ThemeProvider theme={headerTextColor}>
+      <LandingHeader position="fixed" isVisible />
+      <SlidesContainer ref={container}>
         <FirstSlide setHeaderColor={setHeaderTextColor} />
-
-        <SecondSlide setHeaderColor={setHeaderTextColor} />
-
-        <Section backgroundImage={image2}>
-          <div
-            style={{
-              display: 'flex',
-              height: '100vh',
-              width: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-              fontSize: '70px',
-              fontWeight: 700,
-            }}
-          >
-            hello world
-          </div>
-        </Section>
-        <Section backgroundImage={image3}>
-          <div
-            style={{
-              display: 'flex',
-              height: '100vh',
-              width: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-              fontSize: '70px',
-              fontWeight: 700,
-            }}
-          >
-            hello world
-          </div>
-        </Section>
-      </ThemeProvider>
-    </SlidesContainer>
+        <FirstSlide setHeaderColor={setHeaderTextColor} />
+        <FirstSlide setHeaderColor={setHeaderTextColor} />
+        {/* <SecondSlide setHeaderColor={setHeaderTextColor} />
+        <SecondSlide setHeaderColor={setHeaderTextColor} /> */}
+      </SlidesContainer>
+    </ThemeProvider>
   );
 });
