@@ -1,4 +1,6 @@
-import React, { FC, memo, RefObject } from 'react';
+import React, {
+  FC, memo, ReactNode, RefObject,
+} from 'react';
 import styled from 'styled-components';
 import { desktop, tablet } from '../../helpers/responsive';
 // eslint-disable-next-line import/no-cycle
@@ -30,13 +32,16 @@ export const Container = styled.section<ContainerProps>`
 interface Props {
   HTMLElementRef: RefObject<HTMLElement>;
   backgroundImage?: string;
+  children: ReactNode;
 }
 
-export const Section: FC<Props> = memo(({ children, HTMLElementRef, backgroundImage }) => {
-  return (
-    <Container ref={HTMLElementRef} backgroundImage={backgroundImage}>
-      <LandingHeader />
-      {children}
-    </Container>
-  );
-});
+export const Section: FC<Props> = memo(
+  ({ HTMLElementRef, backgroundImage, children }) => {
+    return (
+      <Container ref={HTMLElementRef} backgroundImage={backgroundImage}>
+        <LandingHeader />
+        {children}
+      </Container>
+    );
+  },
+);

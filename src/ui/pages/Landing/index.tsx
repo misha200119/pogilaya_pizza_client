@@ -1,17 +1,12 @@
-/* eslint-disable no-console */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable import/no-cycle */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {
-  memo, useCallback, useEffect, useLayoutEffect, useRef, useState,
+  memo, useCallback, useLayoutEffect, useRef, useState,
 } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { gsap } from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-import createScrollSnap from 'scroll-snap';
 import { LandingHeader } from '../../components/landing/LandingHeader';
-import { Section } from '../../components/landing/Section';
 import { FirstSlide } from '../../components/landing/slides/FirstSlide';
 import { SecondSlide } from '../../components/landing/slides/SecondSlide';
 
@@ -47,10 +42,7 @@ export const Landing = memo(() => {
       <LandingHeader position="fixed" isVisible />
       <SlidesContainer ref={container}>
         <FirstSlide setHeaderColor={setHeaderTextColor} />
-        <FirstSlide setHeaderColor={setHeaderTextColor} />
-        <FirstSlide setHeaderColor={setHeaderTextColor} />
-        {/* <SecondSlide setHeaderColor={setHeaderTextColor} />
-        <SecondSlide setHeaderColor={setHeaderTextColor} /> */}
+        <SecondSlide setHeaderColor={setHeaderTextColor} />
       </SlidesContainer>
     </ThemeProvider>
   );

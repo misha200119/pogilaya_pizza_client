@@ -1,12 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {
-  memo, Dispatch, SetStateAction, FC, useRef, useLayoutEffect,
+  memo, Dispatch, SetStateAction, FC, useRef, useEffect, useCallback,
 } from 'react';
 import { gsap } from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
+import styled from 'styled-components';
 // eslint-disable-next-line import/no-cycle
 import { Section } from '../../Section';
+import { applyAnimations } from '../../../../animations/landingPage/reveal';
+import { tablet } from '../../../helpers/responsive';
+import { triggerCallbackOnEnterInViewport } from '../../../../animations/helpers/triggerOnViewport';
 
-const image1 = './images/1.jpg';
+const backgroundImage = './images/2.jpg';
 
 interface Props {
   setHeaderColor: Dispatch<
@@ -16,35 +20,40 @@ interface Props {
   >;
 }
 
-export const SecondSlide: FC<Props> = memo(() => {
-  const container = useRef<HTMLElement| null>(null);
+const Title = styled.h1`
+  font-size: 50px;
 
-  useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+  color: #000;
 
+  max-width: 100%;
+
+  ${tablet(`
+    max-width: 50%;
+  `)}
+`;
+
+const ContantContainer = styled.div`
+  padding: 75px 0 0 0;
+
+  ${tablet(`
+    padding: 150px 0 0 0;
+  `)}
+`;
+
+const currentSlideHeaderTextColor = '#000';
+
+export const SecondSlide: FC<Props> = memo(({ setHeaderColor }) => {
+  const container = useRef(null);
+
+  const headerColorSetter = useCallback(() => {
+    setHeaderColor({ color: currentSlideHeaderTextColor });
+  }, []);
+
+  useEffect(() => {
     const gsapContext = gsap.context(() => {
-
+      applyAnimations();
+      triggerCallbackOnEnterInViewport([headerColorSetter], container);
     }, container);
-
-    gsap.fromTo(
-      '.appear-left',
-      { opacity: 0, y: -300 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 2,
-        scrollTrigger: {
-          trigger: container.current,
-          start: 'top top',
-        },
-      },
-    );
-
-    gsap.to('.orange p', {
-      scrollTrigger: '.orange',
-      duration: 2,
-      rotation: 360,
-    });
 
     return () => {
       gsapContext.revert();
@@ -52,16 +61,21 @@ export const SecondSlide: FC<Props> = memo(() => {
   }, [container]);
 
   return (
-    <Section HTMLElementRef={container} backgroundImage={image1}>
-      <p className="appear-left paralaxEffect" style={{ color: '#fff' }}>
-        FirstSlide
-      </p>
-      <p className="appear-left paralaxEffect" style={{ color: '#fff' }}>
-        12321312
-      </p>
-      <p className="appear-left paralaxEffect" style={{ color: '#fff' }}>
-        gfdhjbjskfbdjas
-      </p>
+    <Section HTMLElementRef={container} backgroundImage={backgroundImage}>
+      <ContantContainer>
+        <Title className="gs_reveal gs_duration-2 gs_delay-0.1">Why we?</Title>
+        <Title>
+          <p className="gs_reveal gs_duration-2 gs_delay-0.5">
+            We make an amazing thing!
+          </p>
+          <p
+            style={{ paddingTop: '70px' }}
+            className="gs_reveal gs_duration-2 gs_delay-0.9"
+          >
+            Just look!
+          </p>
+        </Title>
+      </ContantContainer>
     </Section>
   );
 });

@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react';
+import React, { FC, memo, ReactNode } from 'react';
 import styled from 'styled-components';
 
 const LogoContainer = memo(styled.a`
@@ -16,6 +16,7 @@ interface Props {
   size: string;
   imgUrl: string;
   linkHref: string;
+  children: ReactNode;
 }
 
 const Logo: FC<Props> = memo(({

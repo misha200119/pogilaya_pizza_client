@@ -1,25 +1,16 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {
-  memo, Dispatch, SetStateAction, FC, useRef, useLayoutEffect, useEffect,
+  memo, Dispatch, SetStateAction, FC, useRef, useEffect, useCallback,
 } from 'react';
 import { gsap } from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
 import styled from 'styled-components';
 import { BackgroundVideo } from '../../../athoms/BackgroundVideo';
 // eslint-disable-next-line import/no-cycle
 import { Section } from '../../Section';
 import { applyAnimations } from '../../../../animations/landingPage/reveal';
 import { tablet } from '../../../helpers/responsive';
+import { triggerCallbackOnEnterInViewport } from '../../../../animations/helpers/triggerOnViewport';
 
 const videoBg = './assets/first_slide_background_video.mp4';
-
-interface Props {
-  setHeaderColor: Dispatch<
-  SetStateAction<{
-    color: string;
-  }>
-  >;
-}
 
 const Title = styled.h1`
   font-size: 50px;
@@ -41,12 +32,27 @@ const ContantContainer = styled.div`
   `)}
 `;
 
-export const FirstSlide: FC<Props> = memo(() => {
+interface Props {
+  setHeaderColor: Dispatch<
+  SetStateAction<{
+    color: string;
+  }>
+  >;
+}
+
+const currentSlideHeaderTextColor = '#fff';
+
+export const FirstSlide: FC<Props> = memo(({ setHeaderColor }) => {
   const container = useRef(null);
+
+  const headerColorSetter = useCallback(() => {
+    setHeaderColor({ color: currentSlideHeaderTextColor });
+  }, []);
 
   useEffect(() => {
     const gsapContext = gsap.context(() => {
       applyAnimations();
+      triggerCallbackOnEnterInViewport([headerColorSetter], container);
     }, container);
 
     return () => {
@@ -59,9 +65,16 @@ export const FirstSlide: FC<Props> = memo(() => {
       <BackgroundVideo src={videoBg} />
 
       <ContantContainer>
-        <Title className="gs_reveal gs_reveal_fromLeft gs_duration-2 gs_delay-0.5">
-          <p>We make an amazing thing!</p>
-          <p>Just look!</p>
+        <Title>
+          <p className="gs_reveal gs_reveal_fromLeft gs_duration-2 gs_delay-0.1">
+            I make an amazing things!
+          </p>
+          <p
+            style={{ paddingTop: '70px' }}
+            className="gs_reveal gs_reveal_fromLeft gs_duration-2 gs_delay-0.5"
+          >
+            Just look!
+          </p>
         </Title>
       </ContantContainer>
     </Section>

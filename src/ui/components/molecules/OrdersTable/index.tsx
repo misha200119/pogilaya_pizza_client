@@ -69,7 +69,8 @@ export const OrdersTable: FC<Props> = memo(({ orders }) => {
   const [isEditablePopupOpen, setIsEditablePopupOpen] = useState(false);
 
   const handleChangePage = useCallback(
-    (_, newPage: number) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (_: any, newPage: number) => {
       setPage(newPage);
     },
     [setPage],

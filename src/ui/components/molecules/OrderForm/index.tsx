@@ -249,42 +249,45 @@ export const OrderForm: FC<{}> = memo(() => {
   const _isLoadingOrderRequest = useAppSelector(isLoadingOrderRequest);
 
   const dispatch = useAppDispatch();
-  const confirmOrder = useCallback((event) => {
-    event.preventDefault();
-    dispatch(
-      doOrder({
-        selectedDeliveryType,
-        nameField,
-        phoneNumberField,
-        email,
-        street,
-        house,
-        flat,
-        entrance,
-        intercomCode,
-        floor,
-        comment,
-        date,
-        coupon,
-        paymentType,
-      }),
-    );
-  }, [
-    dispatch,
-    selectedDeliveryType,
-    nameField,
-    phoneNumberField,
-    email,
-    house,
-    flat,
-    entrance,
-    intercomCode,
-    floor,
-    comment,
-    date,
-    coupon,
-    paymentType,
-  ]);
+  const confirmOrder = useCallback(
+    (event: Event) => {
+      event.preventDefault();
+      dispatch(
+        doOrder({
+          selectedDeliveryType,
+          nameField,
+          phoneNumberField,
+          email,
+          street,
+          house,
+          flat,
+          entrance,
+          intercomCode,
+          floor,
+          comment,
+          date,
+          coupon,
+          paymentType,
+        }),
+      );
+    },
+    [
+      dispatch,
+      selectedDeliveryType,
+      nameField,
+      phoneNumberField,
+      email,
+      house,
+      flat,
+      entrance,
+      intercomCode,
+      floor,
+      comment,
+      date,
+      coupon,
+      paymentType,
+    ],
+  );
 
   return (
     <LocalizationProvider dateAdapter={AdapterMoment}>

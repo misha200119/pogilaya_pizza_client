@@ -1,9 +1,10 @@
-import { FC, memo } from 'react';
+import { FC, memo, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import { PortalContainersIDs } from '../../../../utils/constants/portalContainersIDs';
 
 interface Props {
   mountTo: PortalContainersIDs;
+  children: ReactNode;
 }
 export const Portal: FC<Props> = memo(({ mountTo, children }) => {
   const container = document.getElementById(mountTo);
