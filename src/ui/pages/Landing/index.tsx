@@ -2,13 +2,16 @@
 /* eslint-disable import/no-cycle */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {
-  memo, useCallback, useLayoutEffect, useRef, useState,
+  memo, useCallback, useEffect, useLayoutEffect, useRef, useState,
 } from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 import { LandingHeader } from '../../components/landing/LandingHeader';
 import { FirstSlide } from '../../components/landing/slides/FirstSlide';
 import { SecondSlide } from '../../components/landing/slides/SecondSlide';
+import { parallax } from '../../animations/landingPage/parallax';
+import { ThirdSlide } from '../../components/landing/slides/ThirdSlide';
+import { FourthSlide } from '../../components/landing/slides/FourthSlide';
 
 const SlidesContainer = memo(styled.div`
   width: 100%;
@@ -33,6 +36,10 @@ export const Landing = memo(() => {
     });
   }, [container]);
 
+  useEffect(() => {
+    parallax();
+  }, []);
+
   const setHeaderTextColor_ = useCallback((color: string) => {
     setHeaderTextColor({ color });
   }, [setHeaderTextColor]);
@@ -43,6 +50,8 @@ export const Landing = memo(() => {
       <SlidesContainer ref={container}>
         <FirstSlide setHeaderColor={setHeaderTextColor} />
         <SecondSlide setHeaderColor={setHeaderTextColor} />
+        <ThirdSlide setHeaderColor={setHeaderTextColor} />
+        <FourthSlide setHeaderColor={setHeaderTextColor} />
       </SlidesContainer>
     </ThemeProvider>
   );

@@ -24,7 +24,7 @@ const Title = styled.h1`
   `)}
 `;
 
-const ContantContainer = styled.div`
+const ContentContainer = styled.div`
   padding: 75px 0 0 0;
 
   ${tablet(`
@@ -63,8 +63,8 @@ export const FirstSlide: FC<Props> = memo(({ setHeaderColor }) => {
   return (
     <Section HTMLElementRef={container}>
       <BackgroundVideo src={videoBg} />
-
-      <ContantContainer>
+      <div className="bg"></div>
+      <ContentContainer>
         <Title>
           <p className="gs_reveal gs_reveal_fromLeft gs_duration-2 gs_delay-0.1">
             I make an amazing things!
@@ -76,7 +76,7 @@ export const FirstSlide: FC<Props> = memo(({ setHeaderColor }) => {
             Just look!
           </p>
         </Title>
-      </ContantContainer>
+      </ContentContainer>
     </Section>
   );
 });

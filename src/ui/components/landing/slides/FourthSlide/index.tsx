@@ -1,36 +1,15 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {
-  memo, Dispatch, SetStateAction, FC, useRef, useEffect, useCallback,
+  Dispatch, FC, memo, SetStateAction, useCallback, useEffect, useRef,
 } from 'react';
-import { gsap } from 'gsap';
 import styled from 'styled-components';
-// eslint-disable-next-line import/no-cycle
-import { Section } from '../../Section';
+import { gsap } from 'gsap';
+import { triggerCallbackOnEnterInViewport } from '../../../../animations/helpers/triggerOnViewport';
 import { applyAnimations } from '../../../../animations/landingPage/reveal';
 import { tablet } from '../../../helpers/responsive';
-import { triggerCallbackOnEnterInViewport } from '../../../../animations/helpers/triggerOnViewport';
+// eslint-disable-next-line import/no-cycle
+import { Section } from '../../Section';
 
-const backgroundImage = './images/1.jpg';
-
-interface Props {
-  setHeaderColor: Dispatch<
-  SetStateAction<{
-    color: string;
-  }>
-  >;
-}
-
-const Title = styled.h1`
-  font-size: 50px;
-
-  color: #000;
-
-  max-width: 100%;
-
-  ${tablet(`
-    max-width: 50%;
-  `)}
-`;
+// const backgroundImage = './images/3.jpg';
 
 const ContentContainer = styled.div`
   padding: 75px 0 0 0;
@@ -40,9 +19,29 @@ const ContentContainer = styled.div`
   `)}
 `;
 
+const Title = styled.h1`
+  font-size: 50px;
+
+  color: #fff;
+
+  max-width: 100%;
+
+  ${tablet(`
+    max-width: 50%;
+  `)}
+`;
+
+interface Props {
+  setHeaderColor: Dispatch<
+  SetStateAction<{
+    color: string;
+  }>
+  >;
+}
+
 const currentSlideHeaderTextColor = '#000';
 
-export const SecondSlide: FC<Props> = memo(({ setHeaderColor }) => {
+export const FourthSlide: FC<Props> = memo(({ setHeaderColor }) => {
   const container = useRef(null);
 
   const headerColorSetter = useCallback(() => {
@@ -61,7 +60,7 @@ export const SecondSlide: FC<Props> = memo(({ setHeaderColor }) => {
   }, [container]);
 
   return (
-    <Section HTMLElementRef={container} backgroundImage={backgroundImage}>
+    <Section HTMLElementRef={container}>
       <div className="bg"></div>
       <ContentContainer>
         <Title className="gs_reveal gs_duration-2 gs_delay-0.1">Why we?</Title>
