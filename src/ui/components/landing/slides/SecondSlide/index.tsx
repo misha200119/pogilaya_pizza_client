@@ -7,8 +7,10 @@ import styled from 'styled-components';
 // eslint-disable-next-line import/no-cycle
 import { Section } from '../../Section';
 import { applyAnimations } from '../../../../animations/landingPage/reveal';
+import { Background } from '../../../athoms/Background';
 import { tablet } from '../../../helpers/responsive';
 import { triggerCallbackOnEnterInViewport } from '../../../../animations/helpers/triggerOnViewport';
+import { Image } from '../../../molecules/Image';
 
 const backgroundImage = './images/1.jpg';
 
@@ -40,6 +42,16 @@ const ContentContainer = styled.div`
   `)}
 `;
 
+const ImageContainer = styled.div`
+  width: 100%;
+  height: 200%;
+  transform: translateY(calc(-50% / 2));
+
+  border-radius: 15px;
+  overflow: hidden;
+`;
+const puzatiyIhorImage = './images/puzatiy_ihor.jpg';
+
 const currentSlideHeaderTextColor = '#000';
 
 export const SecondSlide: FC<Props> = memo(({ setHeaderColor }) => {
@@ -61,17 +73,17 @@ export const SecondSlide: FC<Props> = memo(({ setHeaderColor }) => {
   }, [container]);
 
   return (
-    <Section HTMLElementRef={container} backgroundImage={backgroundImage}>
-      <div className="bg"></div>
+    <Section HTMLElementRef={container}>
+      <Background src={backgroundImage} />
       <ContentContainer>
-        <Title className="gs_reveal gs_duration-2 gs_delay-0.1">Why we?</Title>
+        <Title className="gs_reveal gs_duration-2">Why we?</Title>
         <Title>
-          <p className="gs_reveal gs_duration-2 gs_delay-0.5">
+          <p className="gs_reveal gs_duration-2">
             We make an amazing thing!
           </p>
           <p
             style={{ paddingTop: '70px' }}
-            className="gs_reveal gs_duration-2 gs_delay-0.9"
+            className="gs_reveal gs_duration-2"
           >
             Just look!
           </p>

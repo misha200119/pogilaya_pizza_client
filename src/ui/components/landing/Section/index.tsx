@@ -15,8 +15,8 @@ export const Container = styled.section<ContainerProps>`
   width: 100%;
   height: 100vh;
   max-height: 100vh;
-  background-image: url(${({ backgroundImage }) => backgroundImage});
-  scroll-snap-align: start;
+  background-image: url(${({ backgroundImage }) => backgroundImage ?? 'none'});
+  /* scroll-snap-align: start; */
 
   padding: 0 15px;
 
@@ -38,7 +38,7 @@ interface Props {
 export const Section: FC<Props> = memo(
   ({ HTMLElementRef, backgroundImage, children }) => {
     return (
-      <Container ref={HTMLElementRef} backgroundImage={backgroundImage}>
+      <Container ref={HTMLElementRef} backgroundImage={backgroundImage} className="section">
         <LandingHeader />
         {children}
       </Container>

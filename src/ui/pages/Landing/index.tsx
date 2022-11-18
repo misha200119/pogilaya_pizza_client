@@ -9,7 +9,7 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import { LandingHeader } from '../../components/landing/LandingHeader';
 import { FirstSlide } from '../../components/landing/slides/FirstSlide';
 import { SecondSlide } from '../../components/landing/slides/SecondSlide';
-import { parallax } from '../../animations/landingPage/parallax';
+import { parallax, parallaxContent } from '../../animations/landingPage/parallax';
 import { ThirdSlide } from '../../components/landing/slides/ThirdSlide';
 import { FourthSlide } from '../../components/landing/slides/FourthSlide';
 
@@ -17,7 +17,7 @@ const SlidesContainer = memo(styled.div`
   width: 100%;
   height: 100vh;
   overflow-y: auto;
-  scroll-snap-type: y mandatory;
+  /* scroll-snap-type: y mandatory; */
   overflow-x: hidden;
 `);
 
@@ -34,11 +34,9 @@ export const Landing = memo(() => {
       toggleActions: 'restart pause resume pause',
       scroller: container.current,
     });
-  }, [container]);
-
-  useEffect(() => {
     parallax();
-  }, []);
+    // parallaxContent();
+  }, [container]);
 
   const setHeaderTextColor_ = useCallback((color: string) => {
     setHeaderTextColor({ color });
@@ -50,8 +48,8 @@ export const Landing = memo(() => {
       <SlidesContainer ref={container}>
         <FirstSlide setHeaderColor={setHeaderTextColor} />
         <SecondSlide setHeaderColor={setHeaderTextColor} />
-        <ThirdSlide setHeaderColor={setHeaderTextColor} />
-        <FourthSlide setHeaderColor={setHeaderTextColor} />
+        {/* <ThirdSlide setHeaderColor={setHeaderTextColor} />
+        <FourthSlide setHeaderColor={setHeaderTextColor} /> */}
       </SlidesContainer>
     </ThemeProvider>
   );

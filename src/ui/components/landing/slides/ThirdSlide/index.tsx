@@ -61,7 +61,17 @@ export const ThirdSlide: FC<Props> = memo(({ setHeaderColor }) => {
 
   return (
     <Section HTMLElementRef={container}>
-      <div className="bg"></div>
+      <div
+        className="bg"
+        style={{
+          position: 'absolute',
+          top: '0',
+          bottom: '0',
+          left: '0',
+          right: '0',
+        }}
+      >
+      </div>
       <ContentContainer>
         <Title className="gs_reveal gs_duration-2 gs_delay-0.1">Why we?</Title>
         <Title>
