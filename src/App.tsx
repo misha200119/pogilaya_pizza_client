@@ -7,10 +7,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { mapRoutes, mappableUtilRoutes, mappableRoutes } from './utils/routes';
 import { useAppDispatch, useAppSelector } from './utils/hooks/reduxHooks';
 import { isCheckingAuth as _isCheckingAuth, checkAuth } from './store/slices/userAuthSlice';
+import { Loading } from './ui/pages/Loading';
+import { currentTheme as _currentTheme } from './store/slices/themeSlice';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { Animations } from './ui/animations/global';
 
 import 'react-toastify/dist/ReactToastify.css';
-import { currentTheme as _currentTheme } from './store/slices/themeSlice';
-import { Loading } from './ui/pages/Loading';
 
 // minified version is also included
 // import 'react-toastify/dist/ReactToastify.min.css';
@@ -37,6 +39,7 @@ export const App: React.FC<{}> = memo(() => {
     <Loading width="100vw" height="100vh" />
   ) : (
     <>
+      <Animations />
       <ThemeProvider theme={currentTheme}>
         <Routes>
           {mapRoutes(mappableRoutes)}

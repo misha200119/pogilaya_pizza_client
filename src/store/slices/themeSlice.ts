@@ -1,12 +1,15 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable import/no-cycle */
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '..';
 import { Theme, themes, Themes } from '../../ui/themes';
 import KeysOfLocalStorage from '../../utils/constants/keysOfLocalstorage';
+import { CursorEffects } from '../../utils/constants/ui/cursorEffects';
 import { writeToLocalStorage, readFromLocalStorage } from '../../utils/helpers/localStorageHelper';
 
 interface ThemeState {
   currentTheme: Theme;
+  cursorEffect: CursorEffects;
 }
 
 const isCurrentSystemThemeDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -22,6 +25,7 @@ const initialTheme
 
 const initialState: ThemeState = {
   currentTheme: initialTheme,
+  cursorEffect: CursorEffects.PIZZA_AFTER_CURSOR_EFFECT,
 };
 
 export const themeSlice = createSlice({
@@ -35,11 +39,15 @@ export const themeSlice = createSlice({
       state.currentTheme = themes[settedTheme];
       writeToLocalStorage(KeysOfLocalStorage.THEME, settedTheme);
     },
+    setCursorEffect(state, action: PayloadAction<CursorEffects>) {
+      state.cursorEffect = action.payload;
+    },
   },
 });
 
 export const currentTheme = (state: RootState) => state.theme.currentTheme;
+export const currentCursorEffect = (state: RootState) => state.theme.cursorEffect;
 
-export const { switchTheme } = themeSlice.actions;
+export const { switchTheme, setCursorEffect } = themeSlice.actions;
 
 export default themeSlice.reducer;

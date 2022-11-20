@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { gsap } from 'gsap';
 
 /* eslint-disable no-param-reassign */

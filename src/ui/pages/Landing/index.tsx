@@ -12,6 +12,9 @@ import { SecondSlide } from '../../components/landing/slides/SecondSlide';
 import { parallax, parallaxContent } from '../../animations/landingPage/parallax';
 import { ThirdSlide } from '../../components/landing/slides/ThirdSlide';
 import { FourthSlide } from '../../components/landing/slides/FourthSlide';
+import { useAppDispatch } from '../../../utils/hooks/reduxHooks';
+import { setCursorEffect } from '../../../store/slices/themeSlice';
+import { CursorEffects } from '../../../utils/constants/ui/cursorEffects';
 
 const SlidesContainer = memo(styled.div`
   width: 100%;
@@ -25,9 +28,14 @@ const image2 = './images/2.jpg';
 const image3 = './images/3.jpg';
 
 export const Landing = memo(() => {
+  const dispatch = useAppDispatch();
   const container = useRef<null | HTMLElement>(null);
   const currentSection = useRef(null);
   const [headerTextColor, setHeaderTextColor] = useState({ color: '#fff' });
+
+  useEffect(() => {
+    dispatch(setCursorEffect(CursorEffects.PIZZA_AFTER_CURSOR_EFFECT));
+  }, []);
 
   useLayoutEffect(() => {
     ScrollTrigger.defaults({

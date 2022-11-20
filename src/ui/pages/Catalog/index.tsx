@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import styled from 'styled-components';
 import { v4 } from 'uuid';
 import { ProductSection } from '../../components/molecules/ProductSection';
@@ -7,6 +7,9 @@ import { Container as ResponsiveContainer } from '../../components/helpers/respo
 import Header from '../../components/organisms/Header';
 import Footer from '../../components/organisms/Footer';
 import { mockDataAvaliblePizza } from '../../../utils/mockData/avaliblePizza';
+import { useAppDispatch } from '../../../utils/hooks/reduxHooks';
+import { setCursorEffect } from '../../../store/slices/themeSlice';
+import { CursorEffects } from '../../../utils/constants/ui/cursorEffects';
 
 const Container = memo(styled.main`
   padding: 30px 0 30px 0;
@@ -22,6 +25,12 @@ const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
 `);
 
 export const Catalog = memo(() => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setCursorEffect(CursorEffects.PIZZA_WITH_CURSOR));
+  }, []);
+
   return (
     <>
       <Header />

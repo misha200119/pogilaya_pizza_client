@@ -135,6 +135,12 @@ export const CursorAfterEffect = memo(() => {
     document.addEventListener('touchstart', onTouchMove);
 
     loop();
+
+    return () => {
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('touchmove', onTouchMove);
+      document.removeEventListener('touchstart', onTouchMove);
+    };
   }, []);
 
   return null;

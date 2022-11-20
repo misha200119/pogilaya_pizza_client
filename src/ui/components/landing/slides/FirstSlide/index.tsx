@@ -1,7 +1,16 @@
 /* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {
-  memo, Dispatch, SetStateAction, FC, useRef, useEffect, useCallback, Ref,
+  memo,
+  Dispatch,
+  SetStateAction,
+  FC,
+  useRef,
+  useEffect,
+  useCallback,
+  Ref,
+  useState,
+  ForwardRefExoticComponent,
 } from 'react';
 import { gsap } from 'gsap';
 import styled from 'styled-components';
@@ -13,7 +22,6 @@ import { applyAnimations } from '../../../../animations/landingPage/reveal';
 import { tablet } from '../../../helpers/responsive';
 import { triggerCallbackOnEnterInViewport } from '../../../../animations/helpers/triggerOnViewport';
 import { Image } from '../../../molecules/Image';
-import { Circle } from '../../../../animations/landingPage/firstSlide/pizzaInsideBellyFollowsCursor';
 
 const videoBg = './assets/first_slide_background_video.mp4';
 const puzatiyIhorImage = './images/puzatiy_ihor.jpg';
@@ -68,28 +76,9 @@ const currentSlideHeaderTextColor = '#fff';
 
 export const FirstSlide: FC<Props> = memo(({ setHeaderColor }) => {
   const container = useRef<null | HTMLElement>(null);
-  const forwardCircles = useRef<Array<Ref<HTMLElement>>>([]);
-
-  const addRef = useCallback((ref: Ref<HTMLElement>) => {
-    if (ref) {
-      forwardCircles.current.push(ref);
-    }
-  }, [forwardCircles]);
 
   const headerColorSetter = useCallback(() => {
     setHeaderColor({ color: currentSlideHeaderTextColor });
-  }, []);
-
-  const createCircles = useCallback(() => {
-    for (let i = 0; i < 3; i += 1) {
-      container.current?.append(<Circle size={`${(i + 1) * 30}`} delay={i} ref={addRef} /> as unknown as Node);
-    }
-  }, [container]);
-
-  useEffect(() => {
-    createCircles();
-
-    return () => {};
   }, []);
 
   const customImageParallax = useCallback((tween: gsap.core.Tween) => {
@@ -147,7 +136,6 @@ export const FirstSlide: FC<Props> = memo(({ setHeaderColor }) => {
 
   return (
     <Section HTMLElementRef={container}>
-      <></>
       <Background isVideo src={videoBg} />
       <ContentContainer>
         <Title>
@@ -171,7 +159,12 @@ export const FirstSlide: FC<Props> = memo(({ setHeaderColor }) => {
               className="p-content pizza-inside-belly"
               src={pizzaInsideBelly}
               style={{
-                maxHeight: '80px', width: '70px', height: 'auto', position: 'absolute', bottom: '100px', left: 'calc(50% - 35px)',
+                maxHeight: '80px',
+                width: '70px',
+                height: 'auto',
+                position: 'absolute',
+                bottom: '100px',
+                left: 'calc(50% - 35px)',
               }}
               alt="pizza inside belly"
             />
