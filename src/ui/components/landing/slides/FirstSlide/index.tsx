@@ -22,6 +22,7 @@ import { applyAnimations } from '../../../../animations/landingPage/reveal';
 import { tablet } from '../../../helpers/responsive';
 import { triggerCallbackOnEnterInViewport } from '../../../../animations/helpers/triggerOnViewport';
 import { Image } from '../../../molecules/Image';
+import Visible from '../../../helpers/mediaVisible';
 
 const videoBg = './assets/first_slide_background_video.mp4';
 const puzatiyIhorImage = './images/puzatiy_ihor.jpg';
@@ -99,10 +100,16 @@ export const FirstSlide: FC<Props> = memo(({ setHeaderColor }) => {
           scrub: true,
         },
         onReverseComplete: () => {
-          tween.play();
+          gsap.to('.pizza-inside-belly', {
+            opacity: 1,
+            duration: 1,
+          }).then(() => tween.play());
         },
         onStart: () => {
-          tween.pause();
+          gsap.to('.pizza-inside-belly', {
+            opacity: 0,
+            duration: 1,
+          }).then(() => tween.pause());
         },
       },
     );
@@ -156,7 +163,7 @@ export const FirstSlide: FC<Props> = memo(({ setHeaderColor }) => {
             className="p-content"
           >
             <img
-              className="p-content pizza-inside-belly"
+              className="pizza-inside-belly"
               src={pizzaInsideBelly}
               style={{
                 maxHeight: '80px',

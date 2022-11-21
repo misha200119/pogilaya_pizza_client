@@ -1,5 +1,8 @@
-import React, { memo, FC } from 'react';
+import React, { memo, FC, useEffect } from 'react';
 import styled from 'styled-components';
+import { setCursorEffect } from '../../../store/slices/themeSlice';
+import { CursorEffects } from '../../../utils/constants/ui/cursorEffects';
+import { useAppDispatch } from '../../../utils/hooks/reduxHooks';
 import { GridWithTemplate, GridItemArea } from '../../components/helpers/grid';
 import { Container as ResponsiveContainer } from '../../components/helpers/responsive';
 import { OrderForm } from '../../components/molecules/OrderForm';
@@ -18,6 +21,12 @@ const StyledResponsiveContainer = memo(styled(ResponsiveContainer)`
 `);
 
 export const Checkout: FC<{}> = memo(() => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(setCursorEffect(CursorEffects.PIZZA_WITH_CURSOR));
+  }, []);
+
   return (
     <>
       <Header />

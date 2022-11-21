@@ -12,29 +12,34 @@ import React, {
   useCallback,
   useEffect,
   useImperativeHandle,
+  useLayoutEffect,
   useRef,
   useState,
 } from 'react';
 import { gsap } from 'gsap';
 import styled from 'styled-components';
 
+const pizzaImage = './images/pizza_carton_image.png';
+
 const _Circle = styled.div`
   position: fixed;
-  transform: translate(-50%, -50%);
+  transform: translate(-70%, -70%);
   top: 0;
   left: 0;
-  opacity: 0.3;
 
-  background-color: green;
+  background-image: url(${pizzaImage});
+  background-size: cover;
 
-  border-radius: 50%;
+  width: 40px;
+  height: 40px;
 
-  z-index: 999;
+  z-index: 9999;
 
   pointer-events: none;
 `;
 
 const Circle = forwardRef(
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   ({ size, delay }: { size: string; delay: number }, ref) => {
     const el = useRef<null | HTMLDivElement>(null);
 
@@ -51,7 +56,35 @@ const Circle = forwardRef(
       [delay],
     );
 
-    return <_Circle style={{ width: `${size}px`, height: `${size}px` }} ref={el}></_Circle>;
+    useLayoutEffect(() => {
+      const gsapContext = gsap.context(() => {
+        gsap.fromTo(
+          '.pizza-after-effect',
+          {
+            scale: 1,
+          },
+          {
+            scale: 1.5,
+            duration: 0.5,
+            ease: 'circ.in',
+            repeat: -1,
+            yoyo: true,
+          },
+        );
+      });
+
+      return () => {
+        gsapContext.revert();
+      };
+    }, [el]);
+
+    return (
+      <_Circle
+        className="pizza-after-effect"
+        /* style={{ width: `${size}px`, height: `${size}px` }} */ ref={el}
+      >
+      </_Circle>
+    );
   },
 );
 
@@ -78,13 +111,13 @@ export const PizzaWithCursor: FC<{}> = memo(() => {
   );
 
   const createCircles = useCallback(() => {
-    for (let i = 0; i < 3; i += 1) {
+    for (let i = 0; i < 1; i += 1) {
       setCircles((prev) => [
         ...prev,
         (
           <Circle
             size={`${(i + 1) * 30}`}
-            delay={i / 10}
+            delay={i / 100}
             ref={addRef}
             key={`e${i}`}
           />
@@ -110,7 +143,7 @@ export const PizzaWithCursor: FC<{}> = memo(() => {
     };
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     forwardCircles.current.forEach((ref) => (ref as any).moveTo(innerWidth / 2, innerHeight / 2));
 
     const onMove = ({

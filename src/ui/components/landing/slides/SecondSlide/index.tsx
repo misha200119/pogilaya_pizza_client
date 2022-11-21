@@ -12,7 +12,7 @@ import { tablet } from '../../../helpers/responsive';
 import { triggerCallbackOnEnterInViewport } from '../../../../animations/helpers/triggerOnViewport';
 import { Image } from '../../../molecules/Image';
 
-const backgroundImage = './images/1.jpg';
+const backgroundImage = './images/2.jpg';
 
 interface Props {
   setHeaderColor: Dispatch<
