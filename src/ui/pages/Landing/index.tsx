@@ -9,8 +9,8 @@ import ScrollTrigger from 'gsap/ScrollTrigger';
 import { LandingHeader } from '../../components/landing/LandingHeader';
 import { FirstSlide } from '../../components/landing/slides/FirstSlide';
 import { SecondSlide } from '../../components/landing/slides/SecondSlide';
-import { parallax, parallaxContent } from '../../animations/landingPage/parallax';
 import { ThirdSlide } from '../../components/landing/slides/ThirdSlide';
+import { parallax, parallaxContent } from '../../animations/landingPage/parallax';
 import { FourthSlide } from '../../components/landing/slides/FourthSlide';
 import { useAppDispatch } from '../../../utils/hooks/reduxHooks';
 import { setCursorEffect } from '../../../store/slices/themeSlice';
@@ -56,8 +56,8 @@ export const Landing = memo(() => {
       <SlidesContainer ref={container}>
         <FirstSlide setHeaderColor={setHeaderTextColor} />
         <SecondSlide setHeaderColor={setHeaderTextColor} />
-        {/* <ThirdSlide setHeaderColor={setHeaderTextColor} />
-        <FourthSlide setHeaderColor={setHeaderTextColor} /> */}
+        <ThirdSlide setHeaderColor={setHeaderTextColor} />
+        {/* <FourthSlide setHeaderColor={setHeaderTextColor} /> */}
       </SlidesContainer>
     </ThemeProvider>
   );

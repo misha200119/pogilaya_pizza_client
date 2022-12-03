@@ -1,15 +1,38 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, {
-  Dispatch, FC, memo, SetStateAction, useCallback, useEffect, useRef,
+  memo, Dispatch, SetStateAction, FC, useRef, useEffect, useCallback,
 } from 'react';
-import styled from 'styled-components';
 import { gsap } from 'gsap';
-import { triggerCallbackOnEnterInViewport } from '../../../../animations/helpers/triggerOnViewport';
-import { applyAnimations } from '../../../../animations/landingPage/reveal';
-import { tablet } from '../../../helpers/responsive';
+import styled from 'styled-components';
 // eslint-disable-next-line import/no-cycle
 import { Section } from '../../Section';
+import { applyAnimations } from '../../../../animations/landingPage/reveal';
+import { Background } from '../../../athoms/Background';
+import { tablet } from '../../../helpers/responsive';
+import { triggerCallbackOnEnterInViewport } from '../../../../animations/helpers/triggerOnViewport';
+import { Image } from '../../../molecules/Image';
 
-// const backgroundImage = './images/3.jpg';
+const backgroundImage = './images/2.jpg';
+
+interface Props {
+  setHeaderColor: Dispatch<
+  SetStateAction<{
+    color: string;
+  }>
+  >;
+}
+
+const Title = styled.h1`
+  font-size: 50px;
+
+  color: #000;
+
+  max-width: 100%;
+
+  ${tablet(`
+    max-width: 50%;
+  `)}
+`;
 
 const ContentContainer = styled.div`
   padding: 75px 0 0 0;
@@ -19,25 +42,15 @@ const ContentContainer = styled.div`
   `)}
 `;
 
-const Title = styled.h1`
-  font-size: 50px;
+const ImageContainer = styled.div`
+  width: 100%;
+  height: 200%;
+  transform: translateY(calc(-50% / 2));
 
-  color: #fff;
-
-  max-width: 100%;
-
-  ${tablet(`
-    max-width: 50%;
-  `)}
+  border-radius: 15px;
+  overflow: hidden;
 `;
-
-interface Props {
-  setHeaderColor: Dispatch<
-  SetStateAction<{
-    color: string;
-  }>
-  >;
-}
+const puzatiyIhorImage = './images/puzatiy_ihor.jpg';
 
 const currentSlideHeaderTextColor = '#000';
 
@@ -61,26 +74,16 @@ export const ThirdSlide: FC<Props> = memo(({ setHeaderColor }) => {
 
   return (
     <Section HTMLElementRef={container}>
-      <div
-        className="bg"
-        style={{
-          position: 'absolute',
-          top: '0',
-          bottom: '0',
-          left: '0',
-          right: '0',
-        }}
-      >
-      </div>
+      <Background src={backgroundImage} />
       <ContentContainer>
-        <Title className="gs_reveal gs_duration-2 gs_delay-0.1">Why we?</Title>
+        <Title className="gs_reveal gs_duration-2">Why we?</Title>
         <Title>
-          <p className="gs_reveal gs_duration-2 gs_delay-0.5">
+          <p className="gs_reveal gs_duration-2">
             We make an amazing thing!
           </p>
           <p
             style={{ paddingTop: '70px' }}
-            className="gs_reveal gs_duration-2 gs_delay-0.9"
+            className="gs_reveal gs_duration-2"
           >
             Just look!
           </p>
